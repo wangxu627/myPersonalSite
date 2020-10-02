@@ -1,0 +1,40 @@
+baseURL = "http://localhost:8013/"
+languageCode = "en-us"
+title = "Xu`s Blog"
+
+theme = "anatole"
+summarylength = 10
+enableEmoji = true
+enableRobotsTXT = true
+
+[params]
+  title = "Nothing"
+  author = "Xu"
+  description = "Code more, Word less"
+  profilePicture = "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3411665637,2349729301&fm=26&gp=0.jpg"
+  mainSections = ["post"]
+
+[[params.socialIcons]]
+icon = "fa-github"
+title = "GitHub"
+url = "https://github.com/lxndrblz/anatole/"
+
+[[params.socialIcons]]
+icon = "fa-envelope"
+title = "e-mail"
+url = "mailto:mail@alexbilz.com"
+
+
+[menu]
+
+  [[menu.main]]
+  name = "Home"
+  identifier = "home"
+  weight = 100
+  url = "/"
+
+  [[menu.main]]
+  name = "Posts"
+  weight = 200
+  identifier = "posts"
+  url = "/post/"

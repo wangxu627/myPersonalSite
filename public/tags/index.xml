@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Xu`s Blog</title>
+    <link>http://localhost:8013/tags/</link>
+    <description>Recent content in Tags on Xu`s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 02 Oct 2020 08:42:50 +0800</lastBuildDate><atom:link href="http://localhost:8013/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>css</title>
+      <link>http://localhost:8013/tags/css/</link>
+      <pubDate>Fri, 02 Oct 2020 08:42:50 +0800</pubDate>
+      
+      <guid>http://localhost:8013/tags/css/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>html</title>
+      <link>http://localhost:8013/tags/html/</link>
+      <pubDate>Fri, 02 Oct 2020 08:42:50 +0800</pubDate>
+      
+      <guid>http://localhost:8013/tags/html/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>markdown</title>
+      <link>http://localhost:8013/tags/markdown/</link>
+      <pubDate>Fri, 02 Oct 2020 08:42:50 +0800</pubDate>
+      
+      <guid>http://localhost:8013/tags/markdown/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>themes</title>
+      <link>http://localhost:8013/tags/themes/</link>
+      <pubDate>Fri, 02 Oct 2020 08:42:50 +0800</pubDate>
+      
+      <guid>http://localhost:8013/tags/themes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>text</title>
+      <link>http://localhost:8013/tags/text/</link>
+      <pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:8013/tags/text/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>emoji</title>
+      <link>http://localhost:8013/tags/emoji/</link>
+      <pubDate>Tue, 05 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:8013/tags/emoji/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>index</title>
+      <link>http://localhost:8013/tags/index/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:8013/tags/index/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
