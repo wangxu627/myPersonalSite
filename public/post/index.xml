@@ -6,7 +6,92 @@
     <description>Recent content in Posts on Xu`s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 02 Oct 2020 09:59:07 +0800</lastBuildDate><atom:link href="https://wangxu627.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 03 Oct 2020 17:20:30 +0800</lastBuildDate><atom:link href="https://wangxu627.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Aaaaaf Aaa Bbb</title>
+      <link>https://wangxu627.github.io/post/aaaaaf-aaa-bbb/</link>
+      <pubDate>Sat, 03 Oct 2020 17:20:30 +0800</pubDate>
+      
+      <guid>https://wangxu627.github.io/post/aaaaaf-aaa-bbb/</guid>
+      <description>Insert Lead paragraph here.
+New Cool Posts aaaaaf-aaa-bbb</description>
+    </item>
+    
+    <item>
+      <title>Aaaaaf</title>
+      <link>https://wangxu627.github.io/post/aaaaaf/</link>
+      <pubDate>Sat, 03 Oct 2020 17:20:11 +0800</pubDate>
+      
+      <guid>https://wangxu627.github.io/post/aaaaaf/</guid>
+      <description>Insert Lead paragraph here.
+New Cool Posts aaaaaf</description>
+    </item>
+    
+    <item>
+      <title>Aaaaae</title>
+      <link>https://wangxu627.github.io/post/aaaaae/</link>
+      <pubDate>Sat, 03 Oct 2020 17:18:46 +0800</pubDate>
+      
+      <guid>https://wangxu627.github.io/post/aaaaae/</guid>
+      <description>Insert Lead paragraph here.
+New Cool Posts </description>
+    </item>
+    
+    <item>
+      <title>Aaaaad</title>
+      <link>https://wangxu627.github.io/post/aaaaad/</link>
+      <pubDate>Sat, 03 Oct 2020 17:18:15 +0800</pubDate>
+      
+      <guid>https://wangxu627.github.io/post/aaaaad/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Aaaaac</title>
+      <link>https://wangxu627.github.io/post/aaaaac/</link>
+      <pubDate>Sat, 03 Oct 2020 17:06:06 +0800</pubDate>
+      
+      <guid>https://wangxu627.github.io/post/aaaaac/</guid>
+      <description>Insert Lead paragraph here.
+New Cool Posts {{ .Title }}</description>
+    </item>
+    
+    <item>
+      <title>Aaaaab</title>
+      <link>https://wangxu627.github.io/post/aaaaab/</link>
+      <pubDate>Sat, 03 Oct 2020 14:33:29 +0800</pubDate>
+      
+      <guid>https://wangxu627.github.io/post/aaaaab/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Aaaaa</title>
+      <link>https://wangxu627.github.io/post/aaaaa/</link>
+      <pubDate>Sat, 03 Oct 2020 14:32:34 +0800</pubDate>
+      
+      <guid>https://wangxu627.github.io/post/aaaaa/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Test</title>
+      <link>https://wangxu627.github.io/post/test/</link>
+      <pubDate>Sat, 03 Oct 2020 13:17:07 +0800</pubDate>
+      
+      <guid>https://wangxu627.github.io/post/test/</guid>
+      <description>
+11111111111
+&lt;ol&gt;
+    &lt;li&gt;11111111111&lt;/li&gt;
+    &lt;li&gt;11111111111&lt;/li&gt;
+    &lt;li&gt;11111111111&lt;/li&gt;
+    &lt;li&gt;11111111111&lt;/li&gt;
+    &lt;li&gt;11111111111&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
     <item>
       <title>Hello World 2</title>
       <link>https://wangxu627.github.io/post/hello-world-2/</link>

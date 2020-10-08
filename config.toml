@@ -36,13 +36,13 @@ url = "mailto:wangxu627@gmail.com"
   url = "/"
 
   [[menu.main]]
-  name = "Posts"
+  name = "Posts11111111"
   weight = 200
   identifier = "posts"
   url = "/post/"
 
   [[menu.main]]
   name = "Tools"
-  weight = 300
+  weight = 200
   identifier = "tools"
   url = "/tools/"
