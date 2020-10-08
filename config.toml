@@ -1,28 +1,30 @@
-baseURL = "http://localhost:8013/"
+baseURL = "https://wangxu627.github.io/"
 languageCode = "en-us"
 title = "Xu`s Blog"
+hasCJKLanguage = true
 
 theme = "anatole"
 summarylength = 10
 enableEmoji = true
 enableRobotsTXT = true
 
+
 [params]
   title = "Nothing"
   author = "Xu"
   description = "Code more, Word less"
-  profilePicture = "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3411665637,2349729301&fm=26&gp=0.jpg"
+  profilePicture = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1601655446596&di=c986d9fb7998db721d388b0ea6f62bb9&imgtype=0&src=http%3A%2F%2Fpic6.58cdn.com.cn%2Fzhuanzh%2Fn_v2ed4fc8bbfb3e4f5fa12ae084cb8a7864.jpg%3Fw%3D750%26h%3D0"
   mainSections = ["post"]
 
 [[params.socialIcons]]
 icon = "fa-github"
 title = "GitHub"
-url = "https://github.com/lxndrblz/anatole/"
+url = "https://github.com/wxioi/"
 
 [[params.socialIcons]]
 icon = "fa-envelope"
 title = "e-mail"
-url = "mailto:mail@alexbilz.com"
+url = "mailto:wangxu627@gmail.com"
 
 
 [menu]
@@ -38,3 +40,9 @@ url = "mailto:mail@alexbilz.com"
   weight = 200
   identifier = "posts"
   url = "/post/"
+
+  [[menu.main]]
+  name = "Tools"
+  weight = 300
+  identifier = "tools"
+  url = "/tools/"
