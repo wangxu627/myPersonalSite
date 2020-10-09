@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en" data-theme=""><head>
+    <title> Xu | redis暴露公网导致被挖矿病毒感染 </title>
+
+    
+    <meta charset="utf-8"><meta name="generator" content="Hugo 0.76.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <meta name="description" content="Code more, Word less">
+    
+    <link rel="stylesheet"
+          href="https://wxioi.github.io/css/style.min.ec15cff0912041d0dce3a88999b9424990bd24473761645397583776684cdc3b.css"
+          integrity="sha256-7BXP8JEgQdDc46iJmblCSZC9JEc3YWRTl1g3dmhM3Ds="
+          crossorigin="anonymous"
+          type="text/css"><link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    
+    <link rel="shortcut icon" href="https://wxioi.github.io/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://wxioi.github.io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://wxioi.github.io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://wxioi.github.io/favicon-16x16.png">
+
+    <link rel="canonical" href="https://wxioi.github.io/post/article-96/">
+
+    
+    
+    
+    
+    <script type="text/javascript"
+            src="https://wxioi.github.io/js/anatole-header.min.e782db136ec18d105a4552702eac49f4620d6867da3fbf808bd53e806c96be6e.js"
+            integrity="sha256-54LbE27BjRBaRVJwLqxJ9GINaGfaP7&#43;Ai9U&#43;gGyWvm4="
+            crossorigin="anonymous"></script>
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="redis暴露公网导致被挖矿病毒感染"/>
+<meta name="twitter:description" content="原因： 1.redis"/>
+
+</head>
+<body><div class="sidebar animated fadeInDown">
+    <div class="logo-title">
+        <div class="title">
+            <img src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1601655446596&amp;di=c986d9fb7998db721d388b0ea6f62bb9&amp;imgtype=0&amp;src=http%3A%2F%2Fpic6.58cdn.com.cn%2Fzhuanzh%2Fn_v2ed4fc8bbfb3e4f5fa12ae084cb8a7864.jpg%3Fw%3D750%26h%3D0" alt="profile picture">
+            <h3 title=""><a href="/">Nothing</a></h3>
+            <div class="description">
+                <p>Code more, Word less</p>
+            </div>
+        </div>
+    </div>
+    <ul class="social-links">
+        
+            <li>
+                <a href="https://github.com/wxioi/" rel="me" aria-label="GitHub">
+                    <i class="fa fa-2x fa-github" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            <li>
+                <a href="mailto:wangxu627@gmail.com" rel="me" aria-label="e-mail">
+                    <i class="fa fa-2x fa-envelope" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+    </ul>
+    <div class="footer">
+        <div class="by_farbox">&copy; Xu 2020 </div>
+    </div>
+</div>
+<div class="main">
+    <div class="page-top animated fadeInDown">
+    <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+    </a>
+    <ul class="nav" id="navMenu">
+        
+        
+            
+            <li><a 
+                   href="/"
+                        
+                   title="">Home</a></li>
+        
+            
+            <li><a 
+                   href="/post/"
+                        
+                   title="">Posts</a></li>
+        
+            
+            <li><a 
+                   href="/tools/"
+                        
+                   title="">Tools</a></li>
+        
+        
+        <li class="theme-switch-item">
+            <a class="theme-switch" title="Switch Theme">
+                <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+    <div class="autopagerize_page_element">
+        <div class="content">
+    <div class="post animated fadeInDown">
+        <div class="post-content">
+
+            <div class="post-title">
+                <h3>redis暴露公网导致被挖矿病毒感染</h3>
+                
+                    <div class="info">
+                        <em class="fa fa-sun-o"></em>
+                        <span class="date">Sun, Dec 22, 2019</span>
+                        <em class="fa fa-clock-o"></em>
+                        <span class="reading-time">One-minute read</span>
+                    </div>
+                
+            </div>
+
+            <p>原因：</p>
+<p>1.redis暴露公网ip</p>
+<p>2.redis没有设置访问密码</p>
+<p>3.使用root用户启动redis</p>
+<p>现象：</p>
+<p>自己部署的服务会定期被取消，且ssh不上去，重启之后能ssh上，不过服务还是会被取消</p>
+<p>通过观察现象，发现规律是定时被取消，并且ps -elf后发现了crontab这个进程（是一个定时任务）</p>
+<p>crontab -l 发现一堆奇怪的东西，类似这种</p>
+<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20190904/62c48f0672784ffaac15862e01f0ffd5.jpeg" alt=""></p>
+<p>google后发现这很可能是挖矿病毒的定时任务，然后通过观察/.ssh/ authorized_keys 文件，发现里面有一个并不是我主机的公钥</p>
+<p>另外，netstat -anp | grep 80也发现连接到了一些奇奇怪怪的主机上</p>
+<p>解决步骤：</p>
+<p>1.删除crontab，使用systemctl stop crontab或 rm -rf /etc/cron.d/*；</p>
+<p>2.删除或修改authorized_hosts，在删除他的时候发现我root用户居然也删不掉，lsattr发现有个-i的属性，删除并重装apt-get
+install e2fsprogs或者yum install e2fsprogs，后使用chattr -i  authorized_keys 解决</p>
+<p>3.关闭crontab的开机启动， systemctl disable crontab</p>
+<p>4.重启机器</p>
+<p>原理：</p>
+<p><a href="https://www.cnblogs.com/evan-blog/p/10707087.html">https://www.cnblogs.com/evan-blog/p/10707087.html</a></p>
+<p>参考：</p>
+<p><a href="http://www.sohu.com/a/338718240_354899">http://www.sohu.com/a/338718240_354899</a></p>
+<p><a href="https://blog.csdn.net/lailaiquququ11/article/details/83510406">https://blog.csdn.net/lailaiquququ11/article/details/83510406</a></p>
+<p><a href="https://www.jianshu.com/p/93dc6f774b72">https://www.jianshu.com/p/93dc6f774b72</a></p>
+<p><a href="https://www.cnblogs.com/Sungeek/p/9084022.html">https://www.cnblogs.com/Sungeek/p/9084022.html</a></p>
+<p><a href="https://www.cnblogs.com/cpl9412290130/p/11592803.html">https://www.cnblogs.com/cpl9412290130/p/11592803.html</a></p>
+<p><a href="https://www.cnblogs.com/linjiqin/p/11720673.html">https://www.cnblogs.com/linjiqin/p/11720673.html</a></p>
+
+        </div>
+        <div class="post-footer">
+            <div class="info">
+                
+                
+            </div>
+        </div>
+
+        
+            
+        
+    </div>
+
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript"
+        src="https://wxioi.github.io/js/jquery.min.86b1e8f819ee2d9099a783e50b49dff24282545fc40773861f9126b921532e4c.js"
+        integrity="sha256-hrHo&#43;BnuLZCZp4PlC0nf8kKCVF/EB3OGH5EmuSFTLkw="
+        crossorigin="anonymous"></script>
+
+
+
+
+<script type="text/javascript"
+        src="https://wxioi.github.io/js/bundle.min.0f9c74cb78f13d1f15f33daff4037c70354f98acfbb97a6f61708966675c3cae.js"
+        integrity="sha256-D5x0y3jxPR8V8z2v9AN8cDVPmKz7uXpvYXCJZmdcPK4="
+        crossorigin="anonymous"></script>
+
+<script type="text/javascript"
+        src="https://wxioi.github.io/js/medium-zoom.min.92f21c856129f84aeb719459b3e6ac621a3032fd7b180a18c04e1d12083f8aba.js"
+        integrity="sha256-kvIchWEp&#43;ErrcZRZs&#43;asYhowMv17GAoYwE4dEgg/iro="
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

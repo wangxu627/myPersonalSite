@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en" data-theme=""><head>
+    <title> Xu | Python poll IO多路复用 </title>
+
+    
+    <meta charset="utf-8"><meta name="generator" content="Hugo 0.76.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <meta name="description" content="Code more, Word less">
+    
+    <link rel="stylesheet"
+          href="https://wxioi.github.io/css/style.min.ec15cff0912041d0dce3a88999b9424990bd24473761645397583776684cdc3b.css"
+          integrity="sha256-7BXP8JEgQdDc46iJmblCSZC9JEc3YWRTl1g3dmhM3Ds="
+          crossorigin="anonymous"
+          type="text/css"><link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    
+    <link rel="shortcut icon" href="https://wxioi.github.io/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://wxioi.github.io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://wxioi.github.io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://wxioi.github.io/favicon-16x16.png">
+
+    <link rel="canonical" href="https://wxioi.github.io/post/article-68/">
+
+    
+    
+    
+    
+    <script type="text/javascript"
+            src="https://wxioi.github.io/js/anatole-header.min.e782db136ec18d105a4552702eac49f4620d6867da3fbf808bd53e806c96be6e.js"
+            integrity="sha256-54LbE27BjRBaRVJwLqxJ9GINaGfaP7&#43;Ai9U&#43;gGyWvm4="
+            crossorigin="anonymous"></script>
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Python poll IO多路复用"/>
+<meta name="twitter:description" content="一、poll介绍 po"/>
+
+</head>
+<body><div class="sidebar animated fadeInDown">
+    <div class="logo-title">
+        <div class="title">
+            <img src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1601655446596&amp;di=c986d9fb7998db721d388b0ea6f62bb9&amp;imgtype=0&amp;src=http%3A%2F%2Fpic6.58cdn.com.cn%2Fzhuanzh%2Fn_v2ed4fc8bbfb3e4f5fa12ae084cb8a7864.jpg%3Fw%3D750%26h%3D0" alt="profile picture">
+            <h3 title=""><a href="/">Nothing</a></h3>
+            <div class="description">
+                <p>Code more, Word less</p>
+            </div>
+        </div>
+    </div>
+    <ul class="social-links">
+        
+            <li>
+                <a href="https://github.com/wxioi/" rel="me" aria-label="GitHub">
+                    <i class="fa fa-2x fa-github" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            <li>
+                <a href="mailto:wangxu627@gmail.com" rel="me" aria-label="e-mail">
+                    <i class="fa fa-2x fa-envelope" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+    </ul>
+    <div class="footer">
+        <div class="by_farbox">&copy; Xu 2020 </div>
+    </div>
+</div>
+<div class="main">
+    <div class="page-top animated fadeInDown">
+    <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+    </a>
+    <ul class="nav" id="navMenu">
+        
+        
+            
+            <li><a 
+                   href="/"
+                        
+                   title="">Home</a></li>
+        
+            
+            <li><a 
+                   href="/post/"
+                        
+                   title="">Posts</a></li>
+        
+            
+            <li><a 
+                   href="/tools/"
+                        
+                   title="">Tools</a></li>
+        
+        
+        <li class="theme-switch-item">
+            <a class="theme-switch" title="Switch Theme">
+                <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+    <div class="autopagerize_page_element">
+        <div class="content">
+    <div class="post animated fadeInDown">
+        <div class="post-content">
+
+            <div class="post-title">
+                <h3>Python poll IO多路复用</h3>
+                
+                    <div class="info">
+                        <em class="fa fa-sun-o"></em>
+                        <span class="date">Tue, Nov 12, 2019</span>
+                        <em class="fa fa-clock-o"></em>
+                        <span class="reading-time">4-minute read</span>
+                    </div>
+                
+            </div>
+
+            <h2 id="一poll介绍">一、poll介绍</h2>
+<p>poll本质上和select没有区别，只是没有了最大连接数(linux上默认1024个)的限制，原因是它基于链表存储的。</p>
+<h2 id="二使用poll编写socketserver本博客代码需要在linux下运行">二、使用poll编写SocketServer（本博客代码需要在linux下运行）</h2>
+<p>首先我们建立一个服务器端的socket</p>
+<pre><code>import select
+import socket
+import sys
+import queue
+from queue import Queue
+
+
+# 创建一个socket连接
+server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server.setblocking(False)
+
+# 绑定IP地址和端口号
+server_address = ('localhost', 8800)
+server.bind(server_address)
+print(&quot;服务器已启动http://localhost:8800/&quot;)
+
+# 监听连接数
+server.listen(5)
+
+# 消息队列 用于记录客户端发来的消息
+message_queues = {}
+</code></pre>
+<p>设置轮询的超时时间</p>
+<p>如果不设置timeout，方法将会阻塞直到对应的poll对象有一个事件发生。</p>
+<pre><code>TIMEOUT = 1000 # 设置为1秒
+</code></pre>
+<p>poll的事件类型</p>
+<pre><code>POLLIN    Input ready                  有数据读取
+POLLPRI    Priority input ready        有紧急数据读取
+POLLOUT    Able to receive output      准备输出
+POLLERR    Error                       某些错误
+POLLHUP    Channel closed              挂起
+POLLNVAL    Channel not open           无效请求，描述符无法打开  
+  
+
+
+
+READ_ONLY = select.POLLIN | select.POLLPRI | select.POLLHUP | select.POLLERR
+READ_WRITE = READ_ONLY | select.POLLOUT
+</code></pre>
+<p>注册要监听文件描述符</p>
+<p>首先需要实例化一个poll对象，对要监听的句柄进行注册</p>
+<pre><code>poller = select.poll()
+# 注册server端socket  要监听的事件类型为 读
+poller.register(server, READ_ONLY)
+</code></pre>
+<p>文件描述符映射具体的套接字对象</p>
+<pre><code>&quot;&quot;&quot;
+由于poll()返回包含套接字文件描述符和事件标志的元组列表，因此需要从文件描述符号到对象的映射才能从套接字中读取或写入该套接字。
+&quot;&quot;&quot;
+fd_to_socket = { server.fileno(): server,}
+</code></pre>
+<p>事件轮询</p>
+<pre><code>while True:
+
+    &quot;&quot;&quot;
+    去检测已经注册的文件描述符，会返回一个(fd,event)元祖列表
+    fd:文件描述符
+    event:描述符可能会发生的事件
+    如果返回为空的列表，则说明超时且没有文件描述符有事件发生
+    &quot;&quot;&quot;
+    events = poller.poll(TIMEOUT) # 如果timeout为None，将会阻塞，知道有事件发生
+    for fd, flag in events:
+        # 从文件描述符中检索实际的套接字
+        s = fd_to_socket[fd]
+</code></pre>
+<p>事件类型判断</p>
+<pre><code>        if flag &amp; (select.POLLIN | select.POLLPRI): # 有数据可以读取
+
+            if s is server: # 表示有新的连接
+                # 可以读取数据
+                connection, client_address = s.accept()
+                print(sys.stderr, '新的连接来自:', client_address)
+                connection.setblocking(0)
+                fd_to_socket[connection.fileno()] = connection # 往fd字典中添加一个新的 文件描述符
+                poller.register(connection, READ_ONLY)
+
+                message_queues[connection] = Queue() # 为了防止等待客户端发来数据期间发生阻塞，分配一个队列用于保存数据
+            else: # 表示客户端传来了消息
+
+                data = s.recv(1024)
+                if data: # 表明数据接受成功
+
+                    print(sys.stderr, '接受数据 &quot;%s&quot; 来自 %s' % (data, s.getpeername()))
+                    message_queues[s].put(data)
+                    # 修改一个已经存在的fd，修改事件为写。这里表示服务器向客户端要发送数据
+                    poller.modify(s, READ_WRITE)
+                else:
+                    # 如果没有接受到数据，表示要断开连接
+                    print(sys.stderr, '关闭', client_address, '并未读取到数据')
+                    # 停止监听连接上的输入
+                    poller.unregister(s)
+                    s.close()
+
+                    # 将此链接从队列中删除
+                    del message_queues[s]
+
+        elif flag &amp; select.POLLHUP:
+            print(sys.stderr, '关闭', client_address, '收到HUP后')
+            poller.unregister(s)
+            s.close()
+
+        elif flag &amp; select.POLLOUT:
+            try:
+                next_msg = message_queues[s].get_nowait()
+            except queue.Empty:
+                print(sys.stderr, '队列', s.getpeername(), '为空')
+                poller.modify(s, READ_ONLY)
+            else:
+                print(sys.stderr, '发送 &quot;%s&quot; 到 %s' % (next_msg, s.getpeername()))
+                s.send(next_msg)
+
+        elif flag &amp; select.POLLERR:
+            print(sys.stderr, '异常信息:', s.getpeername())
+            poller.unregister(s)
+            s.close()
+            del message_queues[s]
+</code></pre>
+<h2 id="三完整代码示例">三、完整代码示例</h2>
+<p>server端：</p>
+<pre><code>import select
+import socket
+import sys
+import queue
+from queue import Queue
+
+
+# 创建一个socket连接
+server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server.setblocking(False)
+
+# 绑定IP地址和端口号
+server_address = ('localhost', 8800)
+server.bind(server_address)
+print(&quot;服务器已启动http://localhost:8800/&quot;)
+
+# 监听连接数
+server.listen(5)
+
+# 消息队列
+message_queues = {}
+
+&quot;&quot;&quot;
+POLLIN    Input ready      有数据读取
+POLLPRI    Priority input ready   有紧急数据读取
+POLLOUT    Able to receive output  准备输出
+POLLERR    Error   某些错误
+POLLHUP    Channel closed   挂起
+POLLNVAL    Channel not open  无效请求，描述符无法打开
+&quot;&quot;&quot;
+# 常用的标识  代表你想检查的事件类型
+READ_ONLY = select.POLLIN | select.POLLPRI | select.POLLHUP | select.POLLERR
+READ_WRITE = READ_ONLY | select.POLLOUT
+
+TIMEOUT = 1000
+poller = select.poll() # 创建一个poll对象，该对象可以注册或注销文件描述符
+
+# 注册一个文件描述符，可以通过poll()方法来检查是否有对应的IO事件发生
+# 接受两个参数， fd  和  eventmask
+poller.register(server,READ_ONLY)
+fd_to_socket = { server.fileno(): server,}
+# 服务器的循环调用poll()，然后通过查找套接字并根据事件中的标志采取行动来处理返回的“事件”。
+while True:
+
+    &quot;&quot;&quot;
+    去检测已经注册的文件描述符，会返回一个(fd,event)元祖列表
+    fd:文件描述符
+    event:描述符可能会发生的事件
+    如果返回为空的列表，则说明超时且没有文件描述符有事件发生
+    &quot;&quot;&quot;
+    events = poller.poll(TIMEOUT) # 如果timeout为None，将会阻塞，知道有事件发生
+    for fd, flag in events:
+        # 从文件描述符中检索实际的套接字
+        s = fd_to_socket[fd]
+
+        if flag &amp; (select.POLLIN | select.POLLPRI): # 有数据可以读取
+
+            if s is server: # 表示有新的连接
+                # 可以读取数据
+                connection, client_address = s.accept()
+                print(sys.stderr, '新的连接来自:', client_address)
+                connection.setblocking(0)
+                fd_to_socket[connection.fileno()] = connection # 往fd字典中添加一个新的 文件描述符
+                poller.register(connection, READ_ONLY)
+
+                message_queues[connection] = Queue() # 为了防止等待客户端发来数据期间发生阻塞，分配一个队列用于保存数据
+            else: # 表示客户端传来了消息
+
+                data = s.recv(1024)
+                if data: # 表明数据接受成功
+
+                    print(sys.stderr, '接受数据 &quot;%s&quot; 来自 %s' % (data, s.getpeername()))
+                    message_queues[s].put(data)
+                    # 修改一个已经存在的fd，修改事件为写。这里表示服务器向客户端要发送数据
+                    poller.modify(s, READ_WRITE)
+                else:
+                    # 如果没有接受到数据，表示要断开连接
+                    print(sys.stderr, '关闭', client_address, '并未读取到数据')
+                    # 停止监听连接上的输入
+                    poller.unregister(s)
+                    s.close()
+
+                    # 将此链接从队列中删除
+                    del message_queues[s]
+
+        elif flag &amp; select.POLLHUP:
+            print(sys.stderr, '关闭', client_address, '收到HUP后')
+            poller.unregister(s)
+            s.close()
+
+        elif flag &amp; select.POLLOUT:
+            try:
+                next_msg = message_queues[s].get_nowait()
+            except queue.Empty:
+                print(sys.stderr, '队列', s.getpeername(), '为空')
+                poller.modify(s, READ_ONLY)
+            else:
+                print(sys.stderr, '发送 &quot;%s&quot; 到 %s' % (next_msg, s.getpeername()))
+                s.send(next_msg)
+
+        elif flag &amp; select.POLLERR:
+            print(sys.stderr, '异常信息:', s.getpeername())
+            poller.unregister(s)
+            s.close()
+            del message_queues[s]
+</code></pre>
+<p>client端：</p>
+<pre><code>import socket
+
+
+client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+client.connect(('localhost',8800))
+
+while True:
+    msg = bytes(input(&quot;&lt;&lt;&lt;&quot;),encoding='utf-8')
+    client.sendall(msg)
+
+    data = client.recv(1024)
+
+    print(&quot;{}&quot;.format(data))
+</code></pre>
+
+        </div>
+        <div class="post-footer">
+            <div class="info">
+                
+                
+            </div>
+        </div>
+
+        
+            
+        
+    </div>
+
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript"
+        src="https://wxioi.github.io/js/jquery.min.86b1e8f819ee2d9099a783e50b49dff24282545fc40773861f9126b921532e4c.js"
+        integrity="sha256-hrHo&#43;BnuLZCZp4PlC0nf8kKCVF/EB3OGH5EmuSFTLkw="
+        crossorigin="anonymous"></script>
+
+
+
+
+<script type="text/javascript"
+        src="https://wxioi.github.io/js/bundle.min.0f9c74cb78f13d1f15f33daff4037c70354f98acfbb97a6f61708966675c3cae.js"
+        integrity="sha256-D5x0y3jxPR8V8z2v9AN8cDVPmKz7uXpvYXCJZmdcPK4="
+        crossorigin="anonymous"></script>
+
+<script type="text/javascript"
+        src="https://wxioi.github.io/js/medium-zoom.min.92f21c856129f84aeb719459b3e6ac621a3032fd7b180a18c04e1d12083f8aba.js"
+        integrity="sha256-kvIchWEp&#43;ErrcZRZs&#43;asYhowMv17GAoYwE4dEgg/iro="
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

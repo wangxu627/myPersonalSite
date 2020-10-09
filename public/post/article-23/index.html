@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en" data-theme=""><head>
+    <title> Xu | redis和memcached的区别（总结） </title>
+
+    
+    <meta charset="utf-8"><meta name="generator" content="Hugo 0.76.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <meta name="description" content="Code more, Word less">
+    
+    <link rel="stylesheet"
+          href="https://wxioi.github.io/css/style.min.ec15cff0912041d0dce3a88999b9424990bd24473761645397583776684cdc3b.css"
+          integrity="sha256-7BXP8JEgQdDc46iJmblCSZC9JEc3YWRTl1g3dmhM3Ds="
+          crossorigin="anonymous"
+          type="text/css"><link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    
+    <link rel="shortcut icon" href="https://wxioi.github.io/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://wxioi.github.io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://wxioi.github.io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://wxioi.github.io/favicon-16x16.png">
+
+    <link rel="canonical" href="https://wxioi.github.io/post/article-23/">
+
+    
+    
+    
+    
+    <script type="text/javascript"
+            src="https://wxioi.github.io/js/anatole-header.min.e782db136ec18d105a4552702eac49f4620d6867da3fbf808bd53e806c96be6e.js"
+            integrity="sha256-54LbE27BjRBaRVJwLqxJ9GINaGfaP7&#43;Ai9U&#43;gGyWvm4="
+            crossorigin="anonymous"></script>
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="redis和memcached的区别（总结）"/>
+<meta name="twitter:description" content="转载:https:/"/>
+
+</head>
+<body><div class="sidebar animated fadeInDown">
+    <div class="logo-title">
+        <div class="title">
+            <img src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1601655446596&amp;di=c986d9fb7998db721d388b0ea6f62bb9&amp;imgtype=0&amp;src=http%3A%2F%2Fpic6.58cdn.com.cn%2Fzhuanzh%2Fn_v2ed4fc8bbfb3e4f5fa12ae084cb8a7864.jpg%3Fw%3D750%26h%3D0" alt="profile picture">
+            <h3 title=""><a href="/">Nothing</a></h3>
+            <div class="description">
+                <p>Code more, Word less</p>
+            </div>
+        </div>
+    </div>
+    <ul class="social-links">
+        
+            <li>
+                <a href="https://github.com/wxioi/" rel="me" aria-label="GitHub">
+                    <i class="fa fa-2x fa-github" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            <li>
+                <a href="mailto:wangxu627@gmail.com" rel="me" aria-label="e-mail">
+                    <i class="fa fa-2x fa-envelope" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+    </ul>
+    <div class="footer">
+        <div class="by_farbox">&copy; Xu 2020 </div>
+    </div>
+</div>
+<div class="main">
+    <div class="page-top animated fadeInDown">
+    <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+    </a>
+    <ul class="nav" id="navMenu">
+        
+        
+            
+            <li><a 
+                   href="/"
+                        
+                   title="">Home</a></li>
+        
+            
+            <li><a 
+                   href="/post/"
+                        
+                   title="">Posts</a></li>
+        
+            
+            <li><a 
+                   href="/tools/"
+                        
+                   title="">Tools</a></li>
+        
+        
+        <li class="theme-switch-item">
+            <a class="theme-switch" title="Switch Theme">
+                <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+    <div class="autopagerize_page_element">
+        <div class="content">
+    <div class="post animated fadeInDown">
+        <div class="post-content">
+
+            <div class="post-title">
+                <h3>redis和memcached的区别（总结）</h3>
+                
+                    <div class="info">
+                        <em class="fa fa-sun-o"></em>
+                        <span class="date">Wed, Jul 17, 2019</span>
+                        <em class="fa fa-clock-o"></em>
+                        <span class="reading-time">6-minute read</span>
+                    </div>
+                
+            </div>
+
+            <p>转载:<a href="https://www.cnblogs.com/457248499-qq-com/p/7392653.html">https://www.cnblogs.com/457248499-qq-com/p/7392653.html</a></p>
+<p>观点一：</p>
+<p>1、Redis和Memcache都是将数据存放在内存中，都是内存数据库。不过memcache还可用于缓存其他东西，例如图片、视频等等；</p>
+<p>2、Redis不仅仅支持简单的k/v类型的数据，同时还提供list，set，hash等数据结构的存储；</p>
+<p>3、[虚拟内存](<a href="https://www.baidu.com/s?wd=%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98&amp;tn=44039180_cpr&amp;fenlei=mv6quAkxTZn0IZRqIHcvrjTdrH00T1Y4rjDYnju-">https://www.baidu.com/s?wd=%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98&amp;tn=44039180_cpr&amp;fenlei=mv6quAkxTZn0IZRqIHcvrjTdrH00T1Y4rjDYnju-</a>
+njb1nycLmW-b0ZwV5Hcvrjm3rH6sPfKWUMw85HfYnjn4nH6sgvPsT6KdThsqpZwYTjCEQLGCpyw9Uz4Bmy-
+bIi4WUvYETgN-
+TLwGUv3EnHbzPHfYP10LPjDznWnkn1T3Ps)--Redis当物理内存用完时，可以将一些很久没用到的value 交换到磁盘；</p>
+<p>4、过期策略&ndash;memcache在set时就指定，例如set key1 0 0 8,即永不过期。Redis可以通过例如expire 设定，例如expire
+name 10；</p>
+<p>5、分布式&ndash;设定memcache集群，利用magent做一主多从;redis可以做一主多从。都可以一主一从；</p>
+<p>6、存储数据安全&ndash;memcache挂掉后，数据没了；redis可以定期保存到磁盘（持久化）；</p>
+<p>7、[灾难恢复](<a href="https://www.baidu.com/s?wd=%E7%81%BE%E9%9A%BE%E6%81%A2%E5%A4%8D&amp;tn=44039180_cpr&amp;fenlei=mv6quAkxTZn0IZRqIHcvrjTdrH00T1Y4rjDYnju-">https://www.baidu.com/s?wd=%E7%81%BE%E9%9A%BE%E6%81%A2%E5%A4%8D&amp;tn=44039180_cpr&amp;fenlei=mv6quAkxTZn0IZRqIHcvrjTdrH00T1Y4rjDYnju-</a>
+njb1nycLmW-b0ZwV5Hcvrjm3rH6sPfKWUMw85HfYnjn4nH6sgvPsT6KdThsqpZwYTjCEQLGCpyw9Uz4Bmy-
+bIi4WUvYETgN-TLwGUv3EnHbzPHfYP10LPjDznWnkn1T3Ps)--memcache挂掉后，数据不可恢复;
+redis数据丢失后可以通过aof恢复；</p>
+<p>8、Redis支持数据的备份，即master-slave模式的数据备份；</p>
+<p>观点二：</p>
+<h1 id="redis与memcached的区别httpwwwcnblogscomwangkai1990p5212404html"><a href="http://www.cnblogs.com/wangkai1990/p/5212404.html">Redis与Memcached的区别</a></h1>
+<p>如果简单地比较Redis与Memcached的区别，大多数都会得到以下观点：<br>
+1 Redis不仅仅支持简单的k/v类型的数据，同时还提供list，set，hash等数据结构的存储。<br>
+2 Redis支持数据的备份，即master-slave模式的数据备份。<br>
+3 Redis支持数据的持久化，可以将内存中的数据保持在磁盘中，重启的时候可以再次加载进行使用。</p>
+<p>在Redis中，并不是所有的数据都一直存储在内存中的。这是和Memcached相比一个最大的区别（我个人是这么认为的）。</p>
+<p>Redis 只会缓存所有的key的信息，如果Redis发现内存的使用量超过了某一个阀值，将触发swap的操作，Redis根据“swappability =
+age*log(size_in_memory)”计算出哪些key对应的value需要swap到磁盘。然后再将这些key对应的value持久化到磁
+盘中，同时在内存中清除。这种特性使得Redis可以保持超过其机器本身内存大小的数据。当然，机器本身的内存必须要能够保持所有的key，毕竟这些数据
+是不会进行swap操作的。</p>
+<p>同时由于Redis将内存中的数据swap到磁盘中的时候，提供服务的主线程和进行swap操作的子线程会共享这部分内存，所以如果更新需要swap的数据，Redis将阻塞这个操作，直到子线程完成swap操作后才可以进行修改。</p>
+<p>可以参考使用Redis特有内存模型前后的情况对比：</p>
+<p>VM off: 300k keys, 4096 bytes values: 1.3G used<br>
+VM on: 300k keys, 4096 bytes values: 73M used<br>
+VM off: 1 million keys, 256 bytes values: 430.12M used<br>
+VM on: 1 million keys, 256 bytes values: 160.09M used<br>
+VM on: 1 million keys, values as large as you want, still: 160.09M used</p>
+<p>当 从Redis中读取数据的时候，如果读取的key对应的value不在内存中，那么Redis就需要从swap文件中加载相应数据，然后再返回给请求方。
+这里就存在一个I/O线程池的问题。在默认的情况下，Redis会出现阻塞，即完成所有的swap文件加载后才会相应。这种策略在客户端的数量较小，进行
+批量操作的时候比较合适。但是如果将Redis应用在一个大型的网站应用程序中，这显然是无法满足大并发的情况的。所以Redis运行我们设置I/O线程
+池的大小，对需要从swap文件中加载相应数据的读取请求进行并发操作，减少阻塞的时间。</p>
+<p>redis、memcache、mongoDB 对比<br>
+从以下几个维度，对redis、memcache、mongoDB 做了对比，欢迎拍砖</p>
+<p>1、性能<br>
+都比较高，性能对我们来说应该都不是瓶颈<br>
+总体来讲，TPS方面redis和memcache差不多，要大于mongodb</p>
+<p>2、操作的便利性<br>
+memcache数据结构单一<br>
+redis丰富一些，数据操作方面，redis更好一些，较少的网络IO次数<br>
+mongodb支持丰富的数据表达，索引，最类似关系型数据库，支持的查询语言非常丰富</p>
+<p>3、内存空间的大小和数据量的大小<br>
+redis在2.0版本后增加了自己的VM特性，突破物理内存的限制；可以对key value设置过期时间（类似memcache）<br>
+memcache可以修改最大可用内存,采用LRU算法<br>
+mongoDB适合大数据量的存储，依赖操作系统VM做内存管理，吃内存也比较厉害，服务不要和别的服务在一起</p>
+<p>4、可用性（单点问题）</p>
+<p>对于单点问题，<br>
+redis，依赖客户端来实现分布式读写；主从复制时，每次从节点重新连接主节点都要依赖整个快照,无增量复制，因性能和效率问题，<br>
+所以单点问题比较复杂；不支持自动sharding,需要依赖程序设定一致hash 机制。<br>
+一种替代方案是，不用redis本身的复制机制，采用自己做主动复制（多份存储），或者改成增量复制的方式（需要自己实现），一致性问题和性能的权衡</p>
+<p>Memcache本身没有数据冗余机制，也没必要；对于故障预防，采用依赖成熟的hash或者环状的算法，解决单点故障引起的抖动问题。</p>
+<p>mongoDB支持master-slave,replicaset（内部采用paxos选举算法，自动故障恢复）,auto
+sharding机制，对客户端屏蔽了故障转移和切分机制。</p>
+<p>5、可靠性（持久化）</p>
+<p>对于数据持久化和数据恢复，</p>
+<p>redis支持（快照、AOF）：依赖快照进行持久化，aof增强了可靠性的同时，对性能有所影响</p>
+<p>memcache不支持，通常用在做缓存,提升性能；</p>
+<p>MongoDB从1.8版本开始采用binlog方式支持持久化的可靠性</p>
+<p>6、数据一致性（事务支持）</p>
+<p>Memcache 在并发场景下，用cas保证一致性</p>
+<p>redis事务支持比较弱，只能保证事务中的每个操作连续执行</p>
+<p>mongoDB不支持事务</p>
+<p>7、数据分析</p>
+<p>mongoDB内置了数据分析的功能(mapreduce),其他不支持</p>
+<p>8、应用场景<br>
+redis：数据量较小的更性能操作和运算上</p>
+<p>memcache：用于在动态系统中减少数据库负载，提升性能;做缓存，提高性能（适合读多写少，对于数据量比较大，可以采用sharding）</p>
+<p>MongoDB:主要解决海量数据的访问效率问题</p>
+
+        </div>
+        <div class="post-footer">
+            <div class="info">
+                
+                
+            </div>
+        </div>
+
+        
+            
+        
+    </div>
+
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript"
+        src="https://wxioi.github.io/js/jquery.min.86b1e8f819ee2d9099a783e50b49dff24282545fc40773861f9126b921532e4c.js"
+        integrity="sha256-hrHo&#43;BnuLZCZp4PlC0nf8kKCVF/EB3OGH5EmuSFTLkw="
+        crossorigin="anonymous"></script>
+
+
+
+
+<script type="text/javascript"
+        src="https://wxioi.github.io/js/bundle.min.0f9c74cb78f13d1f15f33daff4037c70354f98acfbb97a6f61708966675c3cae.js"
+        integrity="sha256-D5x0y3jxPR8V8z2v9AN8cDVPmKz7uXpvYXCJZmdcPK4="
+        crossorigin="anonymous"></script>
+
+<script type="text/javascript"
+        src="https://wxioi.github.io/js/medium-zoom.min.92f21c856129f84aeb719459b3e6ac621a3032fd7b180a18c04e1d12083f8aba.js"
+        integrity="sha256-kvIchWEp&#43;ErrcZRZs&#43;asYhowMv17GAoYwE4dEgg/iro="
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

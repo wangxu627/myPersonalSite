@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en" data-theme=""><head>
+    <title> Xu | git rebase 还是 merge的使用场景最通俗的解释 </title>
+
+    
+    <meta charset="utf-8"><meta name="generator" content="Hugo 0.76.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <meta name="description" content="Code more, Word less">
+    
+    <link rel="stylesheet"
+          href="https://wxioi.github.io/css/style.min.ec15cff0912041d0dce3a88999b9424990bd24473761645397583776684cdc3b.css"
+          integrity="sha256-7BXP8JEgQdDc46iJmblCSZC9JEc3YWRTl1g3dmhM3Ds="
+          crossorigin="anonymous"
+          type="text/css"><link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    
+    <link rel="shortcut icon" href="https://wxioi.github.io/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://wxioi.github.io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://wxioi.github.io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://wxioi.github.io/favicon-16x16.png">
+
+    <link rel="canonical" href="https://wxioi.github.io/post/article-70/">
+
+    
+    
+    
+    
+    <script type="text/javascript"
+            src="https://wxioi.github.io/js/anatole-header.min.e782db136ec18d105a4552702eac49f4620d6867da3fbf808bd53e806c96be6e.js"
+            integrity="sha256-54LbE27BjRBaRVJwLqxJ9GINaGfaP7&#43;Ai9U&#43;gGyWvm4="
+            crossorigin="anonymous"></script>
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="git rebase 还是 merge的使用场景最通俗的解释"/>
+<meta name="twitter:description" content="这篇文章说的更好， https://www.cnblogs.com/dieFreiheit/p/11603711.html"/>
+
+</head>
+<body><div class="sidebar animated fadeInDown">
+    <div class="logo-title">
+        <div class="title">
+            <img src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1601655446596&amp;di=c986d9fb7998db721d388b0ea6f62bb9&amp;imgtype=0&amp;src=http%3A%2F%2Fpic6.58cdn.com.cn%2Fzhuanzh%2Fn_v2ed4fc8bbfb3e4f5fa12ae084cb8a7864.jpg%3Fw%3D750%26h%3D0" alt="profile picture">
+            <h3 title=""><a href="/">Nothing</a></h3>
+            <div class="description">
+                <p>Code more, Word less</p>
+            </div>
+        </div>
+    </div>
+    <ul class="social-links">
+        
+            <li>
+                <a href="https://github.com/wxioi/" rel="me" aria-label="GitHub">
+                    <i class="fa fa-2x fa-github" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            <li>
+                <a href="mailto:wangxu627@gmail.com" rel="me" aria-label="e-mail">
+                    <i class="fa fa-2x fa-envelope" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+    </ul>
+    <div class="footer">
+        <div class="by_farbox">&copy; Xu 2020 </div>
+    </div>
+</div>
+<div class="main">
+    <div class="page-top animated fadeInDown">
+    <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+    </a>
+    <ul class="nav" id="navMenu">
+        
+        
+            
+            <li><a 
+                   href="/"
+                        
+                   title="">Home</a></li>
+        
+            
+            <li><a 
+                   href="/post/"
+                        
+                   title="">Posts</a></li>
+        
+            
+            <li><a 
+                   href="/tools/"
+                        
+                   title="">Tools</a></li>
+        
+        
+        <li class="theme-switch-item">
+            <a class="theme-switch" title="Switch Theme">
+                <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+    <div class="autopagerize_page_element">
+        <div class="content">
+    <div class="post animated fadeInDown">
+        <div class="post-content">
+
+            <div class="post-title">
+                <h3>git rebase 还是 merge的使用场景最通俗的解释</h3>
+                
+                    <div class="info">
+                        <em class="fa fa-sun-o"></em>
+                        <span class="date">Wed, Nov 13, 2019</span>
+                        <em class="fa fa-clock-o"></em>
+                        <span class="reading-time">3-minute read</span>
+                    </div>
+                
+            </div>
+
+            <h4 id="这篇文章说的更好">这篇文章说的更好，</h4>
+<p><a href="https://www.cnblogs.com/dieFreiheit/p/11603711.html">https://www.cnblogs.com/dieFreiheit/p/11603711.html</a></p>
+<p>总结一下，rebase可以给你更干净的代码树，基本上就是一根线</p>
+<p>merge可以保存所有的提交信息，多了一个merge commit</p>
+<h4 id="heading">****</h4>
+<h4 id="heading-1"></h4>
+<h4 id="什么是-rebase"><strong>什么是 rebase</strong>?</h4>
+<p><strong>git rebase</strong> 你其实可以把它理解成是“重新设置基线”，将你的当前分支重新设置开始点。这个时候才能知道你当前分支于你需要比较的分支之间的差异。<br>
+原理很简单：rebase需要基于一个分支来设置你当前的分支的基线，这基线就是当前分支的开始时间轴向后移动到最新的跟踪分支的最后面，这样你的当前分支就是最新的跟踪分支。这里的操作是基于文件事务处理的，所以你不用怕中间失败会影响文件的一致性。在中间的过程中你可以随时取消rebase
+事务。</p>
+<p>官方解释: [https://git-
+scm.com/book/zh/v2/Git-](<a href="https://links.jianshu.com/go?to=https%3A%2F%2Fgit-">https://links.jianshu.com/go?to=https%3A%2F%2Fgit-</a>
+scm.com%2Fbook%2Fzh%2Fv2%2FGit-)分支-变基</p>
+<h4 id="git-rebase-和-git-merge-有啥区别"><strong>git rebase 和 git merge 有啥区别？</strong></h4>
+<p><strong>rebase</strong> 会把你当前分支的 commit 放到公共分支的最后面,所以叫变基。就好像你从公共分支又重新拉出来这个分支一样。<br>
+举例:如果你从 master 拉了个feature分支出来,然后你提交了几个 commit,这个时候刚好有人把他开发的东西合并到 master 了,这个时候
+master 就比你拉分支的时候多了几个 commit,如果这个时候你 rebase master 的话，就会把你当前的几个 commit，放到那个人
+commit 的后面。</p>
+<p>![](//upload-
+images.jianshu.io/upload_images/1547393-a7e4e04dd5ee4c09.jpg?imageMogr2/auto-
+orient/strip|imageView2/2/w/332)</p>
+<p>rebase</p>
+<p><strong>merge</strong> 会把公共分支和你当前的commit 合并在一起，形成一个新的 commit 提交</p>
+<p>![](//upload-
+images.jianshu.io/upload_images/1547393-5f57703ff8b889d3.jpg?imageMogr2/auto-
+orient/strip|imageView2/2/w/584)</p>
+<p>merge</p>
+<h5 id="注意"><strong>注意:</strong></h5>
+<ul>
+<li>不要在公共分支使用rebase</li>
+<li>本地和远端对应同一条分支,优先使用rebase,而不是merge</li>
+</ul>
+<h6 id="抛出问题">抛出问题:</h6>
+<p><strong>为什么不要再公共分支使用rebase?</strong><br>
+因为往后放的这些 commit 都是新的,这样其他从这个公共分支拉出去的人，都需要再 rebase,相当于你 rebase 东西进来，就都是新的
+commit 了</p>
+<ul>
+<li>
+<p>1-2-3 是现在的分支状态</p>
+</li>
+<li>
+<p>这个时候从原来的master ,checkout出来一个prod分支</p>
+</li>
+<li>
+<p>然后master提交了4.5，prod提交了6.7</p>
+</li>
+<li>
+<p>这个时候master分支状态就是1-2-3-4-5，prod状态变成1-2-3-6-7</p>
+</li>
+<li>
+<p>如果在prod上用rebase master ,prod分支状态就成了1-2-3-4-5-6-7</p>
+</li>
+<li>
+<p>如果是merge<br>
+1-2-3-6-7-8<br>
+&hellip;&hellip;.. | <em>4-5</em> |</p>
+</li>
+<li>
+<p>会出来一个8，这个8的提交就是把4-5合进来的提交</p>
+</li>
+</ul>
+<p><strong>merge和rebase实际上只是用的场景不一样</strong><br>
+<strong>更通俗的解释一波.</strong><br>
+比如rebase,你自己开发分支一直在做,然后某一天，你想把主线的修改合到你的分支上,做一次集成,这种情况就用rebase比较好.把你的提交都放在主线修改的头上<br>
+如果用merge，脑袋上顶着一笔merge的8,你如果想回退你分支上的某个提交就很麻烦,还有一个重要的问题,rebase的话,本来我的分支是从3拉出来的,rebase完了之后,就不知道我当时是从哪儿拉出来的我的开发分支<br>
+同样的,如果你在主分支上用rebase,
+rebase其他分支的修改,是不是要是别人想看主分支上有什么历史,他看到的就不是完整的历史课,这个历史已经被你篡改了</p>
+<p><strong>常用指令</strong></p>
+<ul>
+<li>
+<p>git rebase -I dev 可以将dev分支合并到当前分支<br>
+这里的”-i“是指交互模式。就是说你可以干预rebase这个事务的过程，包括设置commit message，暂停commit等等。</p>
+</li>
+<li>
+<p>git rebase –abort 放弃一次合并</p>
+</li>
+<li>
+<p><strong>合并多次commit操作:</strong><br>
+1 git rebase -i dev<br>
+2 修改最后几次commit记录中的pick 为squash<br>
+3 保存退出,弹出修改文件,修改commit记录再次保存退出(删除多余的change-id 只保留一个)<br>
+4 git add .<br>
+5 git rebase &ndash;continue</p>
+</li>
+</ul>
+<p>作者：曹九朵_<br>
+链接：https://www.jianshu.com/p/4079284dd970<br>
+来源：简书</p>
+
+        </div>
+        <div class="post-footer">
+            <div class="info">
+                
+                
+            </div>
+        </div>
+
+        
+            
+        
+    </div>
+
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript"
+        src="https://wxioi.github.io/js/jquery.min.86b1e8f819ee2d9099a783e50b49dff24282545fc40773861f9126b921532e4c.js"
+        integrity="sha256-hrHo&#43;BnuLZCZp4PlC0nf8kKCVF/EB3OGH5EmuSFTLkw="
+        crossorigin="anonymous"></script>
+
+
+
+
+<script type="text/javascript"
+        src="https://wxioi.github.io/js/bundle.min.0f9c74cb78f13d1f15f33daff4037c70354f98acfbb97a6f61708966675c3cae.js"
+        integrity="sha256-D5x0y3jxPR8V8z2v9AN8cDVPmKz7uXpvYXCJZmdcPK4="
+        crossorigin="anonymous"></script>
+
+<script type="text/javascript"
+        src="https://wxioi.github.io/js/medium-zoom.min.92f21c856129f84aeb719459b3e6ac621a3032fd7b180a18c04e1d12083f8aba.js"
+        integrity="sha256-kvIchWEp&#43;ErrcZRZs&#43;asYhowMv17GAoYwE4dEgg/iro="
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

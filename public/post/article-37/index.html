@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en" data-theme=""><head>
+    <title> Xu | Guide on how to use static, class or abstract methods in Python </title>
+
+    
+    <meta charset="utf-8"><meta name="generator" content="Hugo 0.76.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <meta name="description" content="Code more, Word less">
+    
+    <link rel="stylesheet"
+          href="https://wxioi.github.io/css/style.min.ec15cff0912041d0dce3a88999b9424990bd24473761645397583776684cdc3b.css"
+          integrity="sha256-7BXP8JEgQdDc46iJmblCSZC9JEc3YWRTl1g3dmhM3Ds="
+          crossorigin="anonymous"
+          type="text/css"><link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    
+    <link rel="shortcut icon" href="https://wxioi.github.io/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://wxioi.github.io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://wxioi.github.io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://wxioi.github.io/favicon-16x16.png">
+
+    <link rel="canonical" href="https://wxioi.github.io/post/article-37/">
+
+    
+    
+    
+    
+    <script type="text/javascript"
+            src="https://wxioi.github.io/js/anatole-header.min.e782db136ec18d105a4552702eac49f4620d6867da3fbf808bd53e806c96be6e.js"
+            integrity="sha256-54LbE27BjRBaRVJwLqxJ9GINaGfaP7&#43;Ai9U&#43;gGyWvm4="
+            crossorigin="anonymous"></script>
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Guide on how to use static, class or abstract methods in Python"/>
+<meta name="twitter:description" content="Doing code reviews is a great way to discover things that people might struggle to comprehend."/>
+
+</head>
+<body><div class="sidebar animated fadeInDown">
+    <div class="logo-title">
+        <div class="title">
+            <img src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1601655446596&amp;di=c986d9fb7998db721d388b0ea6f62bb9&amp;imgtype=0&amp;src=http%3A%2F%2Fpic6.58cdn.com.cn%2Fzhuanzh%2Fn_v2ed4fc8bbfb3e4f5fa12ae084cb8a7864.jpg%3Fw%3D750%26h%3D0" alt="profile picture">
+            <h3 title=""><a href="/">Nothing</a></h3>
+            <div class="description">
+                <p>Code more, Word less</p>
+            </div>
+        </div>
+    </div>
+    <ul class="social-links">
+        
+            <li>
+                <a href="https://github.com/wxioi/" rel="me" aria-label="GitHub">
+                    <i class="fa fa-2x fa-github" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            <li>
+                <a href="mailto:wangxu627@gmail.com" rel="me" aria-label="e-mail">
+                    <i class="fa fa-2x fa-envelope" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+    </ul>
+    <div class="footer">
+        <div class="by_farbox">&copy; Xu 2020 </div>
+    </div>
+</div>
+<div class="main">
+    <div class="page-top animated fadeInDown">
+    <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+    </a>
+    <ul class="nav" id="navMenu">
+        
+        
+            
+            <li><a 
+                   href="/"
+                        
+                   title="">Home</a></li>
+        
+            
+            <li><a 
+                   href="/post/"
+                        
+                   title="">Posts</a></li>
+        
+            
+            <li><a 
+                   href="/tools/"
+                        
+                   title="">Tools</a></li>
+        
+        
+        <li class="theme-switch-item">
+            <a class="theme-switch" title="Switch Theme">
+                <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+    <div class="autopagerize_page_element">
+        <div class="content">
+    <div class="post animated fadeInDown">
+        <div class="post-content">
+
+            <div class="post-title">
+                <h3>Guide on how to use static, class or abstract methods in Python</h3>
+                
+                    <div class="info">
+                        <em class="fa fa-sun-o"></em>
+                        <span class="date">Tue, Aug 20, 2019</span>
+                        <em class="fa fa-clock-o"></em>
+                        <span class="reading-time">8-minute read</span>
+                    </div>
+                
+            </div>
+
+            <p>Doing code reviews is a great way to discover things that people might
+struggle to comprehend. While proof-reading <a href="http://review.openstack.org/">OpenStack
+patches</a> recently, I spotted that people were
+not using correctly the various decorators Python provides for methods. So
+here&rsquo;s my attempt at providing me a link to send them to in my next code
+reviews. :-)</p>
+<h1 id="how-methods-work-in-python">How methods work in Python</h1>
+<p>A method is a function that is stored as a class attribute. You can declare
+and access such a function this way:</p>
+<pre><code>&gt;&gt;&gt; class Pizza(object):
+...     def __init__(self, size):
+...         self.size = size
+...     def get_size(self):
+...         return self.size
+...
+&gt;&gt;&gt; Pizza.get_size
+&lt;unbound method Pizza.get_size&gt;
+</code></pre>
+<p>What Python tells you here, is that the attribute  <em>get_size</em>  of the class
+<em>Pizza</em>  is a method that is  <strong>unbound</strong>. What does this mean? We&rsquo;ll know as
+soon as we&rsquo;ll try to call it:</p>
+<pre><code>&gt;&gt;&gt; Pizza.get_size()
+Traceback (most recent call last):
+  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+TypeError: unbound method get_size() must be called with Pizza instance as first argument (got nothing instead)
+</code></pre>
+<p>We can&rsquo;t call it because it&rsquo;s not bound to any instance of  <em>Pizza</em>. And a
+method wants an instance as its first argument (in Python 2 it  <strong>must</strong>  be
+an instance of that class; in Python 3 it could be anything). Let&rsquo;s try to do
+that then:</p>
+<pre><code>&gt;&gt;&gt; Pizza.get_size(Pizza(42))
+42
+</code></pre>
+<p>It worked! We called the method with an instance as its first argument, so
+everything&rsquo;s fine. But you will agree with me if I say this is not a very
+handy way to call methods; we have to refer to the class each time we want to
+call a method. And if we don&rsquo;t know what class is our object, this is not
+going to work for very long.</p>
+<p>So what Python does for us, is that it binds all the methods from the class
+<code>Pizza</code> to any instance of this class. This means that the attribute
+<code>get_size</code> of an instance of <code>Pizza</code> is a bound method: a method for which the
+first argument will be the instance itself.</p>
+<pre><code>&gt;&gt;&gt; Pizza(42).get_size
+&lt;bound method Pizza.get_size of &lt;__main__.Pizza object at 0x7f3138827910&gt;&gt;
+&gt;&gt;&gt; Pizza(42).get_size()
+42
+</code></pre>
+<p>As expected, we don&rsquo;t have to provide any argument to <code>get_size</code>, since it&rsquo;s
+bound, its <code>self</code> argument is automatically set to our <code>Pizza</code> instance.
+Here&rsquo;s an even better proof of that:</p>
+<pre><code>&gt;&gt;&gt; m = Pizza(42).get_size
+&gt;&gt;&gt; m()
+42
+</code></pre>
+<p>Indeed, you don&rsquo;t even have to keep a reference to your <code>Pizza</code> object. Its
+method is bound to the object, so the method is sufficient to itself.</p>
+<p>But what if you wanted to know which object this bound method is bound to?
+Here&rsquo;s a little trick:</p>
+<pre><code>&gt;&gt;&gt; m = Pizza(42).get_size
+&gt;&gt;&gt; m.__self__
+&lt;__main__.Pizza object at 0x7f3138827910&gt;
+&gt;&gt;&gt; # You could guess, look at this:
+...
+&gt;&gt;&gt; m == m.__self__.get_size
+True
+</code></pre>
+<p>Obviously, we still have a reference to our object, and we can find it back if
+we want.</p>
+<p>In Python 3, the functions attached to a class are not considered as  <em>unbound
+method</em> anymore, but as simple functions, that are bound to an object if
+required. So the principle stays the same, the model is just simplified.</p>
+<pre><code>&gt;&gt;&gt; class Pizza(object):
+...     def __init__(self, size):
+...         self.size = size
+...     def get_size(self):
+...         return self.size
+...
+&gt;&gt;&gt; Pizza.get_size
+&lt;function Pizza.get_size at 0x7f307f984dd0&gt;
+</code></pre>
+<h1 id="static-methods">Static methods</h1>
+<p>Static methods are a special case of methods. Sometimes, you&rsquo;ll write code
+that belongs to a class, but that doesn&rsquo;t use the object itself at all. For
+example:</p>
+<pre><code>class Pizza(object):
+    @staticmethod
+    def mix_ingredients(x, y):
+        return x + y
+
+    def cook(self):
+        return self.mix_ingredients(self.cheese, self.vegetables)
+</code></pre>
+<p>In such a case, writing <code>mix_ingredients</code> as a non-static method would work
+too, but it would provide it with a <code>self</code> argument that would not be used.
+Here, the decorator <code>@staticmethod</code> buys us several things:</p>
+<ul>
+<li>
+<p>Python doesn&rsquo;t have to instantiate a bound-method for each <code>Pizza</code> object we instantiate. Bound methods are objects too, and creating them has a cost. Having a static method avoids that:</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>Pizza().cook is Pizza().cook
+False
+Pizza().mix_ingredients is Pizza.mix_ingredients
+True
+Pizza().mix_ingredients is Pizza().mix_ingredients
+True</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</li>
+<li>
+<p>It eases the readability of the code: seeing <code>@staticmethod</code>, we know that the method does not depend on the state of the object itself;</p>
+</li>
+<li>
+<p>It allows us to override the <code>mix_ingredients</code> method in a subclass. If we used a function <code>mix_ingredients</code> defined at the top-level of our module, a class inheriting from <code>Pizza</code> wouldn&rsquo;t be able to change the way we mix ingredients for our pizza without overriding <code>cook</code> itself.</p>
+</li>
+</ul>
+<h1 id="class-methods">Class methods</h1>
+<p>Having said that, what are class methods? Class methods are methods that are<br>
+not bound to an object, but to… a class!</p>
+<pre><code>&gt;&gt;&gt; class Pizza(object):
+...     radius = 42
+...     @classmethod
+...     def get_radius(cls):
+...         return cls.radius
+... 
+&gt;&gt;&gt; 
+&gt;&gt;&gt; Pizza.get_radius
+&lt;bound method type.get_radius of &lt;class '__main__.Pizza'&gt;&gt;
+&gt;&gt;&gt; Pizza().get_radius
+&lt;bound method type.get_radius of &lt;class '__main__.Pizza'&gt;&gt;
+&gt;&gt;&gt; Pizza.get_radius == Pizza().get_radius
+True
+&gt;&gt;&gt; Pizza.get_radius()
+42
+</code></pre>
+<p>Whatever the way you use to access this method, it will always be bound to the
+class it is attached to, and its first argument will be the class itself
+(remember that classes are objects too).</p>
+<p>When to use this kind of methods? Well class methods are mostly useful for two
+types of methods:</p>
+<ul>
+<li>
+<p>Factory methods, that are used to create an instance for a class using for example some sort of pre-processing. If we use a <code>@staticmethod</code> instead, we would have to hardcode the <code>Pizza</code> class name in our function, making any class inheriting from <code>Pizza</code> unable to use our factory for its own use.</p>
+<p>class Pizza(object):
+def <strong>init</strong>(self, ingredients):
+self.ingredients = ingredients</p>
+<pre><code>@classmethod
+def from_fridge(cls, fridge):
+    return cls(fridge.get_cheese() + fridge.get_vegetables())
+</code></pre>
+</li>
+<li>
+<p>Static methods calling static methods: if you split a static method in several static methods, you shouldn&rsquo;t hard-code the class name but use class methods. Using this way to declare our method, the <code>Pizza</code> name is never directly referenced and inheritance and method overriding will work flawlessly</p>
+<p>class Pizza(object):
+def <strong>init</strong>(self, radius, height):
+self.radius = radius
+self.height = height</p>
+<pre><code>@staticmethod
+def compute_area(radius):
+     return math.pi * (radius ** 2)
+
+@classmethod
+def compute_volume(cls, height, radius):
+     return height * cls.compute_area(radius)
+
+def get_volume(self):
+    return self.compute_volume(self.height, self.radius)
+</code></pre>
+</li>
+</ul>
+<h1 id="abstract-methods">Abstract methods</h1>
+<p>An abstract method is a method defined in a base class, but that may not
+provide any implementation. In Java, it would describe the methods of an
+interface.</p>
+<p>So the simplest way to write an abstract method in Python is:</p>
+<pre><code>class Pizza(object):
+    def get_radius(self):
+        raise NotImplementedError
+</code></pre>
+<p>Any class inheriting from <code>Pizza</code> should implement and override the
+<code>get_radius</code>method, otherwise an exception would be raised.</p>
+<p>This particular way of implementing abstract method has a drawback. If you
+write a class that inherits from <code>Pizza</code> and forget to implement <code>get_radius</code>,
+the error will only be raised when you&rsquo;ll try to use that method.</p>
+<pre><code>&gt;&gt;&gt; Pizza()
+&lt;__main__.Pizza object at 0x7fb747353d90&gt;
+&gt;&gt;&gt; Pizza().get_radius()
+Traceback (most recent call last):
+  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+  File &quot;&lt;stdin&gt;&quot;, line 3, in get_radius
+NotImplementedError
+</code></pre>
+<p>There&rsquo;s a way to trigger this way earlier, when the object is being
+instantiated, using the <a href="http://docs.python.org/2/library/abc.html">abc</a>
+module that&rsquo;s provided with Python.</p>
+<pre><code>import abc
+
+class BasePizza(object):
+    __metaclass__  = abc.ABCMeta
+
+    @abc.abstractmethod
+    def get_radius(self):
+         &quot;&quot;&quot;Method that should do something.&quot;&quot;&quot;
+</code></pre>
+<p>Using <code>abc</code> and its special class, as soon as you&rsquo;ll try to instantiate
+<code>BasePizza</code> or any class inheriting from it, you&rsquo;ll get a <code>TypeError</code>.</p>
+<pre><code>&gt;&gt;&gt; BasePizza()
+Traceback (most recent call last):
+  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+TypeError: Can't instantiate abstract class BasePizza with abstract methods get_radius
+</code></pre>
+<h1 id="mixing-static-class-and-abstract-methods">Mixing static, class and abstract methods</h1>
+<p>When building classes and inheritances, the time will come where you will have
+to mix all these methods decorators. So here&rsquo;s some tips about it.</p>
+<p>Keep in mind that declaring a method as being abstract, doesn&rsquo;t freeze the
+prototype of that method. That means that it must be implemented, but it can
+be implemented with any argument list.</p>
+<pre><code>import abc
+
+class BasePizza(object):
+    __metaclass__  = abc.ABCMeta
+
+    @abc.abstractmethod
+    def get_ingredients(self):
+         &quot;&quot;&quot;Returns the ingredient list.&quot;&quot;&quot;
+
+class Calzone(BasePizza):
+    def get_ingredients(self, with_egg=False):
+        egg = Egg() if with_egg else None
+        return self.ingredients + egg
+</code></pre>
+<p>This is valid, since <code>Calzone</code> fulfills the interface requirement we defined
+for <code>BasePizza</code>objects. That means that we could also implement it as being a
+class or a static method, for example:</p>
+<pre><code>import abc
+
+class BasePizza(object):
+    __metaclass__  = abc.ABCMeta
+
+    @abc.abstractmethod
+    def get_ingredients(self):
+         &quot;&quot;&quot;Returns the ingredient list.&quot;&quot;&quot;
+
+class DietPizza(BasePizza):
+    @staticmethod
+    def get_ingredients():
+        return None
+</code></pre>
+<p>This is also correct and fulfills the contract we have with our abstract
+<code>BasePizza</code> class. The fact that the <code>get_ingredients</code> method doesn&rsquo;t need to
+know about the object to return result is an implementation detail, not a
+criteria to have our contract fulfilled.</p>
+<p>Therefore, you can&rsquo;t force an implementation of your abstract method to be a
+regular, class or static method, and arguably you shouldn&rsquo;t. Starting with
+Python 3 (this won&rsquo;t work as you would expect in Python 2, see
+<a href="http://bugs.python.org/issue5867">issue5867</a>), it&rsquo;s now possible to use the
+<code>@staticmethod</code> and <code>@classmethod</code> decorators on top of <code>@abstractmethod</code>:</p>
+<pre><code>import abc
+
+class BasePizza(object):
+    __metaclass__  = abc.ABCMeta
+
+    ingredient = ['cheese']
+
+    @classmethod
+    @abc.abstractmethod
+    def get_ingredients(cls):
+         &quot;&quot;&quot;Returns the ingredient list.&quot;&quot;&quot;
+         return cls.ingredients
+</code></pre>
+<p>Don&rsquo;t misread this: if you think this is going to force your subclasses to
+implement <code>get_ingredients</code> as a class method, you are wrong. This simply
+implies that your implementation of <code>get_ingredients</code> in the <code>BasePizza</code> class
+is a class method.</p>
+<p>An implementation in an abstract method? Yes! In Python, contrary to methods
+in Java interfaces, you can have code in your abstract methods and call it via
+<code>super()</code>:</p>
+<pre><code>import abc
+
+class BasePizza(object):
+    __metaclass__  = abc.ABCMeta
+
+    default_ingredients = ['cheese']
+
+    @classmethod
+    @abc.abstractmethod
+    def get_ingredients(cls):
+         &quot;&quot;&quot;Returns the ingredient list.&quot;&quot;&quot;
+         return cls.default_ingredients
+
+class DietPizza(BasePizza):
+    def get_ingredients(self):
+        return ['egg'] + super(DietPizza, self).get_ingredients()
+</code></pre>
+<p>In such a case, every pizza you will build by inheriting from <code>BasePizza</code> will
+have to override the <code>get_ingredients</code> method, but will be able to use the
+default mechanism to get the ingredient list by using <code>super()</code>.</p>
+<p>If you&rsquo;re interested in knowing more, I&rsquo;ve covered this topic extensively in
+<a href="https://thehackerguidetopython.com/">The Hacker&rsquo;s Guide to Python</a>. Checkout
+it out!</p>
+
+        </div>
+        <div class="post-footer">
+            <div class="info">
+                
+                
+            </div>
+        </div>
+
+        
+            
+        
+    </div>
+
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript"
+        src="https://wxioi.github.io/js/jquery.min.86b1e8f819ee2d9099a783e50b49dff24282545fc40773861f9126b921532e4c.js"
+        integrity="sha256-hrHo&#43;BnuLZCZp4PlC0nf8kKCVF/EB3OGH5EmuSFTLkw="
+        crossorigin="anonymous"></script>
+
+
+
+
+<script type="text/javascript"
+        src="https://wxioi.github.io/js/bundle.min.0f9c74cb78f13d1f15f33daff4037c70354f98acfbb97a6f61708966675c3cae.js"
+        integrity="sha256-D5x0y3jxPR8V8z2v9AN8cDVPmKz7uXpvYXCJZmdcPK4="
+        crossorigin="anonymous"></script>
+
+<script type="text/javascript"
+        src="https://wxioi.github.io/js/medium-zoom.min.92f21c856129f84aeb719459b3e6ac621a3032fd7b180a18c04e1d12083f8aba.js"
+        integrity="sha256-kvIchWEp&#43;ErrcZRZs&#43;asYhowMv17GAoYwE4dEgg/iro="
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

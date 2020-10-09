@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en" data-theme=""><head>
+    <title> Xu | python解决排列组合 </title>
+
+    
+    <meta charset="utf-8"><meta name="generator" content="Hugo 0.76.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <meta name="description" content="Code more, Word less">
+    
+    <link rel="stylesheet"
+          href="https://wxioi.github.io/css/style.min.ec15cff0912041d0dce3a88999b9424990bd24473761645397583776684cdc3b.css"
+          integrity="sha256-7BXP8JEgQdDc46iJmblCSZC9JEc3YWRTl1g3dmhM3Ds="
+          crossorigin="anonymous"
+          type="text/css"><link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    
+    <link rel="shortcut icon" href="https://wxioi.github.io/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://wxioi.github.io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://wxioi.github.io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://wxioi.github.io/favicon-16x16.png">
+
+    <link rel="canonical" href="https://wxioi.github.io/post/article-56/">
+
+    
+    
+    
+    
+    <script type="text/javascript"
+            src="https://wxioi.github.io/js/anatole-header.min.e782db136ec18d105a4552702eac49f4620d6867da3fbf808bd53e806c96be6e.js"
+            integrity="sha256-54LbE27BjRBaRVJwLqxJ9GINaGfaP7&#43;Ai9U&#43;gGyWvm4="
+            crossorigin="anonymous"></script>
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="python解决排列组合"/>
+<meta name="twitter:description" content="笛卡尔积：itert"/>
+
+</head>
+<body><div class="sidebar animated fadeInDown">
+    <div class="logo-title">
+        <div class="title">
+            <img src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1601655446596&amp;di=c986d9fb7998db721d388b0ea6f62bb9&amp;imgtype=0&amp;src=http%3A%2F%2Fpic6.58cdn.com.cn%2Fzhuanzh%2Fn_v2ed4fc8bbfb3e4f5fa12ae084cb8a7864.jpg%3Fw%3D750%26h%3D0" alt="profile picture">
+            <h3 title=""><a href="/">Nothing</a></h3>
+            <div class="description">
+                <p>Code more, Word less</p>
+            </div>
+        </div>
+    </div>
+    <ul class="social-links">
+        
+            <li>
+                <a href="https://github.com/wxioi/" rel="me" aria-label="GitHub">
+                    <i class="fa fa-2x fa-github" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            <li>
+                <a href="mailto:wangxu627@gmail.com" rel="me" aria-label="e-mail">
+                    <i class="fa fa-2x fa-envelope" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+    </ul>
+    <div class="footer">
+        <div class="by_farbox">&copy; Xu 2020 </div>
+    </div>
+</div>
+<div class="main">
+    <div class="page-top animated fadeInDown">
+    <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+    </a>
+    <ul class="nav" id="navMenu">
+        
+        
+            
+            <li><a 
+                   href="/"
+                        
+                   title="">Home</a></li>
+        
+            
+            <li><a 
+                   href="/post/"
+                        
+                   title="">Posts</a></li>
+        
+            
+            <li><a 
+                   href="/tools/"
+                        
+                   title="">Tools</a></li>
+        
+        
+        <li class="theme-switch-item">
+            <a class="theme-switch" title="Switch Theme">
+                <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+    <div class="autopagerize_page_element">
+        <div class="content">
+    <div class="post animated fadeInDown">
+        <div class="post-content">
+
+            <div class="post-title">
+                <h3>python解决排列组合</h3>
+                
+                    <div class="info">
+                        <em class="fa fa-sun-o"></em>
+                        <span class="date">Fri, Nov 1, 2019</span>
+                        <em class="fa fa-clock-o"></em>
+                        <span class="reading-time">2-minute read</span>
+                    </div>
+                
+            </div>
+
+            <ol>
+<li>
+<p>笛卡尔积：itertools.product(*iterables[, repeat])</p>
+</li>
+<li>
+<p>排列：itertools.permutations(iterable[, r])</p>
+</li>
+<li>
+<p>组合：itertools.combinations(iterable, r)</p>
+</li>
+<li>
+<p>组合（包含自身重复）：itertools.combinations_with_replacement(iterable, r)</p>
+</li>
+<li>
+<p>举例</p>
+</li>
+</ol>
+<h3 id="笛卡尔积itertoolsproductiterables-repeat">笛卡尔积：itertools.product(*iterables[, repeat])</h3>
+<pre><code>import itertools  
+for i in itertools.product('BCDEF', repeat = 2):  
+    print(''.join(i),end=&quot;,&quot;)  
+print('\n')  
+   
+# 输出 BB BC BD BE BF CB CC CD CE CF DB DC DD DE DF EB EC ED EE EF FB FC FD FE FF  
+</code></pre>
+<p>两个元组进行笛卡尔积：</p>
+<pre><code>import itertools  
+a = (1, 2)  
+b = ('A', 'B', 'C')  
+c = itertools.product(a,b)  
+for i in c:  
+print(i,end=&quot;,&quot;)  
+  
+# 输出(1, 'A') (1, 'B') (1, 'C') (2, 'A') (2, 'B') (2, 'C')
+</code></pre>
+<h3 id="排列itertoolspermutationsiterable-r">排列：itertools.permutations(iterable[, r])</h3>
+<pre><code>import itertools  
+for i in itertools.permutations('BCD', 2):  
+    print(''.join(i),end=&quot;,&quot;)  
+# 输出 BC BD CB CD DB DC  
+print('\n')
+</code></pre>
+<h3 id="组合itertoolscombinationsiterable-r">组合：itertools.combinations(iterable, r)</h3>
+<pre><code>import itertools  
+for i in itertools.combinations('BCDEF', 2):  
+    print(''.join(i),end=&quot; &quot;)  
+# 输出 BC BD BE BF CD CE CF DE DF EF  
+print('\n')
+</code></pre>
+<h3 id="组合包含自身重复itertoolscombinations_with_replacementiterable-r">组合（包含自身重复）：itertools.combinations_with_replacement(iterable, r)</h3>
+<pre><code>import itertools  
+for i in itertools.combinations_with_replacement('ABC', 3):  
+    print (''.join(i),end=' ')  
+   
+# 输出 AAA AAB AAC ABB ABC ACC BBB BBC BCC CCC  
+print('\n')
+</code></pre>
+<h3 id="举例">举例</h3>
+<pre><code>'BCDEF五个字母组合问题'  
+import itertools  
+   
+print(&quot;1个组合：&quot;)  
+for i, val in enumerate(list(itertools.combinations('BCDEF', 1))):  
+    print(&quot;序号：%s   值：%s&quot; % (i + 1, ''.join(val)))  
+print(&quot;2个组合：&quot;)  
+for i, val in enumerate(list(itertools.combinations('BCDEF', 2))):  
+    print(&quot;序号：%s   值：%s&quot; % (i + 1, ''.join(val)))  
+print(&quot;3个组合：&quot;)  
+for i, val in enumerate(list(itertools.combinations('BCDEF', 3))):  
+    print(&quot;序号：%s   值：%s&quot; % (i + 1, ''.join(val)))  
+print(&quot;4个组合：&quot;)  
+for i, val in enumerate(list(itertools.combinations('BCDEF', 4))):  
+    print(&quot;序号：%s   值：%s&quot; % (i + 1, ''.join(val)))  
+print(&quot;5个组合：&quot;)  
+for i, val in enumerate(list(itertools.combinations('BCDEF', 5))):  
+    print(&quot;序号：%s   值：%s&quot; % (i + 1, ''.join(val)))
+</code></pre>
+
+        </div>
+        <div class="post-footer">
+            <div class="info">
+                
+                
+            </div>
+        </div>
+
+        
+            
+        
+    </div>
+
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript"
+        src="https://wxioi.github.io/js/jquery.min.86b1e8f819ee2d9099a783e50b49dff24282545fc40773861f9126b921532e4c.js"
+        integrity="sha256-hrHo&#43;BnuLZCZp4PlC0nf8kKCVF/EB3OGH5EmuSFTLkw="
+        crossorigin="anonymous"></script>
+
+
+
+
+<script type="text/javascript"
+        src="https://wxioi.github.io/js/bundle.min.0f9c74cb78f13d1f15f33daff4037c70354f98acfbb97a6f61708966675c3cae.js"
+        integrity="sha256-D5x0y3jxPR8V8z2v9AN8cDVPmKz7uXpvYXCJZmdcPK4="
+        crossorigin="anonymous"></script>
+
+<script type="text/javascript"
+        src="https://wxioi.github.io/js/medium-zoom.min.92f21c856129f84aeb719459b3e6ac621a3032fd7b180a18c04e1d12083f8aba.js"
+        integrity="sha256-kvIchWEp&#43;ErrcZRZs&#43;asYhowMv17GAoYwE4dEgg/iro="
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

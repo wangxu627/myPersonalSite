@@ -1,7 +1,7 @@
-baseURL = "https://wangxu627.github.io/"
 languageCode = "en-us"
 title = "Xu`s Blog"
 hasCJKLanguage = true
+publishDir = "../personal-web-public"
 
 theme = "anatole"
 summarylength = 10
@@ -36,7 +36,7 @@ url = "mailto:wangxu627@gmail.com"
   url = "/"
 
   [[menu.main]]
-  name = "Posts11111111"
+  name = "Posts"
   weight = 200
   identifier = "posts"
   url = "/post/"

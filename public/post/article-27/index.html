@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en" data-theme=""><head>
+    <title> Xu | 在Linux下搭建Git服务器 </title>
+
+    
+    <meta charset="utf-8"><meta name="generator" content="Hugo 0.76.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <meta name="description" content="Code more, Word less">
+    
+    <link rel="stylesheet"
+          href="https://wxioi.github.io/css/style.min.ec15cff0912041d0dce3a88999b9424990bd24473761645397583776684cdc3b.css"
+          integrity="sha256-7BXP8JEgQdDc46iJmblCSZC9JEc3YWRTl1g3dmhM3Ds="
+          crossorigin="anonymous"
+          type="text/css"><link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    
+    <link rel="shortcut icon" href="https://wxioi.github.io/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://wxioi.github.io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://wxioi.github.io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://wxioi.github.io/favicon-16x16.png">
+
+    <link rel="canonical" href="https://wxioi.github.io/post/article-27/">
+
+    
+    
+    
+    
+    <script type="text/javascript"
+            src="https://wxioi.github.io/js/anatole-header.min.e782db136ec18d105a4552702eac49f4620d6867da3fbf808bd53e806c96be6e.js"
+            integrity="sha256-54LbE27BjRBaRVJwLqxJ9GINaGfaP7&#43;Ai9U&#43;gGyWvm4="
+            crossorigin="anonymous"></script>
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="在Linux下搭建Git服务器"/>
+<meta name="twitter:description" content="目录 ① 安装 Git ② 服务器"/>
+
+</head>
+<body><div class="sidebar animated fadeInDown">
+    <div class="logo-title">
+        <div class="title">
+            <img src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1601655446596&amp;di=c986d9fb7998db721d388b0ea6f62bb9&amp;imgtype=0&amp;src=http%3A%2F%2Fpic6.58cdn.com.cn%2Fzhuanzh%2Fn_v2ed4fc8bbfb3e4f5fa12ae084cb8a7864.jpg%3Fw%3D750%26h%3D0" alt="profile picture">
+            <h3 title=""><a href="/">Nothing</a></h3>
+            <div class="description">
+                <p>Code more, Word less</p>
+            </div>
+        </div>
+    </div>
+    <ul class="social-links">
+        
+            <li>
+                <a href="https://github.com/wxioi/" rel="me" aria-label="GitHub">
+                    <i class="fa fa-2x fa-github" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            <li>
+                <a href="mailto:wangxu627@gmail.com" rel="me" aria-label="e-mail">
+                    <i class="fa fa-2x fa-envelope" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+    </ul>
+    <div class="footer">
+        <div class="by_farbox">&copy; Xu 2020 </div>
+    </div>
+</div>
+<div class="main">
+    <div class="page-top animated fadeInDown">
+    <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+    </a>
+    <ul class="nav" id="navMenu">
+        
+        
+            
+            <li><a 
+                   href="/"
+                        
+                   title="">Home</a></li>
+        
+            
+            <li><a 
+                   href="/post/"
+                        
+                   title="">Posts</a></li>
+        
+            
+            <li><a 
+                   href="/tools/"
+                        
+                   title="">Tools</a></li>
+        
+        
+        <li class="theme-switch-item">
+            <a class="theme-switch" title="Switch Theme">
+                <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+    <div class="autopagerize_page_element">
+        <div class="content">
+    <div class="post animated fadeInDown">
+        <div class="post-content">
+
+            <div class="post-title">
+                <h3>在Linux下搭建Git服务器</h3>
+                
+                    <div class="info">
+                        <em class="fa fa-sun-o"></em>
+                        <span class="date">Tue, Jul 23, 2019</span>
+                        <em class="fa fa-clock-o"></em>
+                        <span class="reading-time">4-minute read</span>
+                    </div>
+                
+            </div>
+
+            <p>目录</p>
+<ul>
+<li>
+<p>① 安装 Git</p>
+</li>
+<li>
+<p>② 服务器端创建 git 用户，用来管理 Git 服务，并为 git 用户设置密码</p>
+</li>
+<li>
+<p>③ 服务器端创建 Git 仓库</p>
+</li>
+<li>
+<p>④ 客户端 clone 远程仓库</p>
+</li>
+<li>
+<p>⑤ 客户端创建 SSH 公钥和私钥</p>
+</li>
+<li>
+<p>⑥ 服务器端 Git 打开 RSA 认证</p>
+</li>
+<li>
+<p>⑦ 将客户端公钥导入服务器端 /home/git/.ssh/authorized_keys 文件</p>
+</li>
+<li>
+<p>⑧ 客户端再次 clone 远程仓库</p>
+</li>
+<li>
+<p>⑨ 禁止 git 用户 ssh 登录服务器</p>
+</li>
+</ul>
+<p>正文</p>
+<p>环境： 服务器 CentOS6.6 + git（version 1.7.1）</p>
+<p>客户端 Windows10 + git（version 2.8.4.windows.1）</p>
+<p>① 安装 Git</p>
+<p>Linux 做为服务器端系统，Windows 作为客户端系统，分别安装 Git</p>
+<p>服务器端：</p>
+<pre><code>#yum install -y git
+</code></pre>
+<p>安装完后，查看 Git 版本</p>
+<pre><code>[root@localhost ~]# git --version git version 1.7.1
+</code></pre>
+<p>客户端：</p>
+<p>下载 [Git for Windows](<a href="https://github.com/git-for-">https://github.com/git-for-</a>
+windows/git/releases/download/v2.9.3.windows.2/Git-2.9.3.2-64-bit.exe)，地址：&lt;https://git-
+for-windows.github.io/&gt;</p>
+<p>安装完之后，可以使用 Git Bash 作为命令行客户端。</p>
+<p>安装完之后，查看 Git 版本</p>
+<pre><code>$ git --version git version 2.8.4.windows.1
+</code></pre>
+<p>② 服务器端创建 git 用户，用来管理 Git 服务，并为 git 用户设置密码</p>
+<pre><code>[root@localhost home]# id git id: git：无此用户   
+[root@localhost home]# useradd git   
+[root@localhost home]# passwd git
+</code></pre>
+<p>③ 服务器端创建 Git 仓库</p>
+<p>设置 /home/data/git/gittest.git 为 Git 仓库</p>
+<p>然后把 Git 仓库的 owner 修改为 git</p>
+<pre><code>[root@localhost home]# mkdir -p data/git/gittest.git   
+[root@localhost home]# git init --bare data/git/gittest.git   
+Initialized empty Git repository in /home/data/git/gittest.git/   
+[root@localhost home]# cd data/git/   
+[root@localhost git]# chown -R git:git gittest.git/
+</code></pre>
+<p>④ 客户端 clone 远程仓库</p>
+<p>进入 Git Bash 命令行客户端，创建项目地址（设置在 d:/wamp64/www/gittest_gitbash）并进入:</p>
+<pre><code>dee@Lenovo-PC MINGW64 /d   
+$ cd wamp64/www   
+  
+dee@Lenovo-PC MINGW64 /d/wamp64/www   
+$ mkdir gittest_gitbash   
+  
+dee@Lenovo-PC MINGW64 /d/wamp64/www   
+$ cd gittest_gitbash   
+  
+dee@Lenovo-PC MINGW64 /d/wamp64/www/gittest_gitbash   
+$
+</code></pre>
+<p>然后从 Linux Git 服务器上 clone 项目：</p>
+<pre><code>$ git clone git@192.168.56.101:/home/data/gittest.git
+</code></pre>
+<p>如果SSH用的不是默认的22端口，则需要使用以下的命令（假设SSH端口号是7700）：</p>
+<pre><code>$ git clone ssh://git@192.168.56.101:7700/home/data/gittest.git
+</code></pre>
+<p><img src="https://images2015.cnblogs.com/blog/534303/201608/534303-20160828224409166-1327160680.png" alt=""></p>
+<p>当第一次连接到目标 Git 服务器时会得到一个提示：</p>
+<pre><code>The authenticity of host '192.168.56.101 (192.168.56.101)' can't be established. RSA key fingerprint is SHA256:Ve6WV/SCA059EqoUOzbFoZdfmMh3B259nigfmvdadqQ. Are you sure you want to continue connecting (yes/no)?
+</code></pre>
+<p>选择 yes：</p>
+<pre><code>Warning: Permanently added '192.168.56.101' (RSA) to the list of known hosts.
+</code></pre>
+<p>此时 C:\Users\用户名\.ssh 下会多出一个文件 known_hosts，以后在这台电脑上再次连接目标 Git 服务器时不会再提示上面的语句。</p>
+<p><img src="https://images2015.cnblogs.com/blog/534303/201608/534303-20160828225138698-412131557.png" alt=""></p>
+<p>后面提示要输入密码，可以采用 SSH 公钥来进行验证。</p>
+<p>⑤ 客户端创建 SSH 公钥和私钥</p>
+<pre><code>$ ssh-keygen -t rsa -C &quot;472323087@qq.com&quot;
+</code></pre>
+<p><img src="https://images2015.cnblogs.com/blog/534303/201608/534303-20160828225309533-1152112221.png" alt=""></p>
+<p>此时 C:\Users\用户名\.ssh 下会多出两个文件 id_rsa 和 id_rsa.pub</p>
+<p>id_rsa 是私钥</p>
+<p>id_rsa.pub 是公钥</p>
+<p><img src="https://images2015.cnblogs.com/blog/534303/201608/534303-20160828225436257-770631205.png" alt=""></p>
+<p>⑥ 服务器端 Git 打开 RSA 认证</p>
+<p>进入 /etc/ssh 目录，编辑 sshd_config，打开以下三个配置的注释：</p>
+<pre><code>RSAAuthentication yes PubkeyAuthentication yes AuthorizedKeysFile .ssh/authorized_keys
+</code></pre>
+<p>保存并重启 sshd 服务：</p>
+<pre><code>[root@localhost ssh]# /etc/rc.d/init.d/sshd restart  
+</code></pre>
+<p>如果以上步骤无效，请看文末的PS</p>
+<p>由 AuthorizedKeysFile 得知公钥的存放路径是 .ssh/authorized_keys，实际上是
+$Home/.ssh/authorized_keys，由于管理 Git 服务的用户是 git，所以实际存放公钥的路径是
+/home/git/.ssh/authorized_keys</p>
+<p>在 /home/git/ 下创建目录 .ssh</p>
+<pre><code>[root@localhost git]# pwd /home/git  
+[root@localhost git]# mkdir .ssh  
+[root@localhost git]# ls -a  
+. .. .bash_logout .bash_profile .bashrc .gnome2 .mozilla .ssh
+</code></pre>
+<p>然后把 .ssh 文件夹的 owner 修改为 git</p>
+<pre><code>[root@localhost git]# chown -R git:git .ssh 
+
+[root@localhost git]# ll -a 
+总用量 32 
+drwx------. 5 git  git 4096 8月 28 20:04 . 
+drwxr-xr-x. 8 root root 4096 8月 28 19:32 .. 
+-rw-r--r--. 1 git git 18 10月 16 2014 .bash_logout 
+-rw-r--r--. 1 git git 176 10月 16 2014 .bash_profile 
+-rw-r--r--. 1 git git 124 10月 16 2014 .bashrc 
+drwxr-xr-x. 2 git git 4096 11月 12 2010 .gnome2 
+drwxr-xr-x. 4 git git 4096 5月   8 12:22 .mozilla 
+drwxr-xr-x. 2 git git 4096 8月 28 20:08 .ssh
+</code></pre>
+<p>⑦ 将客户端公钥导入服务器端 /home/git/.ssh/authorized_keys 文件</p>
+<p>回到 Git Bash 下，导入文件：</p>
+<pre><code>$ ssh git@192.168.56.101 'cat &gt;&gt; .ssh/authorized_keys' &lt; ~/.ssh/id_rsa.pub
+</code></pre>
+<p>需要输入服务器端 git 用户的密码</p>
+<p><img src="https://images2015.cnblogs.com/blog/534303/201608/534303-20160828230957010-2048402011.png" alt=""></p>
+<p>回到服务器端，查看 .ssh 下是否存在 authorized_keys 文件：</p>
+<pre><code>[root@localhost git]# cd .ssh   
+[root@localhost .ssh]# ll   
+总用量 4   
+-rw-rw-r--. 1 git git 398 8月 28 20:08 authorized_keys
+</code></pre>
+<p>可以查看一下是否是客户端生成的公钥。</p>
+<p>重要：</p>
+<p>修改 .ssh 目录的权限为 700</p>
+<p>修改 .ssh/authorized_keys 文件的权限为 600</p>
+<pre><code>[root@localhost git]# chmod 700 .ssh   
+[root@localhost git]# cd .ssh   
+[root@localhost .ssh]# chmod 600 authorized_keys
+</code></pre>
+<p>⑧ 客户端再次 clone 远程仓库</p>
+<pre><code>$ git clone git@192.168.56.101:/home/data/git/gittest.git
+</code></pre>
+<p><img src="https://images2015.cnblogs.com/blog/534303/201608/534303-20160828232005724-1805448371.png" alt=""></p>
+<p>查看客户端项目目录：</p>
+<p><img src="https://images2015.cnblogs.com/blog/534303/201608/534303-20160828232049743-1094594088.png" alt=""></p>
+<p>项目已经 clone 了。</p>
+<p>也可以使用 tortoiseGit 客户端来管理项目：</p>
+<p><img src="https://images2015.cnblogs.com/blog/534303/201608/534303-20160828232607719-1403152861.png" alt=""></p>
+<p>clone</p>
+<p><img src="https://images2015.cnblogs.com/blog/534303/201608/534303-20160828232757086-2087480963.png" alt=""></p>
+<p>⑨ 禁止 git 用户 ssh 登录服务器</p>
+<p>之前在服务器端创建的 git 用户不允许 ssh 登录服务器</p>
+<p>编辑 /etc/passwd</p>
+<p>找到：</p>
+<p>git❌502:504::/home/git:/bin/bash</p>
+<p>修改为</p>
+<p>git❌502:504::/home/git:/bin/git-shell</p>
+<p>此时 git 用户可以正常通过 ssh 使用 git，但无法通过 ssh 登录系统。</p>
+<p>PS:</p>
+<p>1.sshd路径可能和文章里面不一样，可能是/usr/bin/sshd</p>
+<p>可以用service sshd restart来启动</p>
+<p>2.PasswordAuthentication yes #打开密码验证模式</p>
+<p>这个选项也需要打开</p>
+<p>RSAAuthentication yes</p>
+<p>这个不用</p>
+
+        </div>
+        <div class="post-footer">
+            <div class="info">
+                
+                
+            </div>
+        </div>
+
+        
+            
+        
+    </div>
+
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript"
+        src="https://wxioi.github.io/js/jquery.min.86b1e8f819ee2d9099a783e50b49dff24282545fc40773861f9126b921532e4c.js"
+        integrity="sha256-hrHo&#43;BnuLZCZp4PlC0nf8kKCVF/EB3OGH5EmuSFTLkw="
+        crossorigin="anonymous"></script>
+
+
+
+
+<script type="text/javascript"
+        src="https://wxioi.github.io/js/bundle.min.0f9c74cb78f13d1f15f33daff4037c70354f98acfbb97a6f61708966675c3cae.js"
+        integrity="sha256-D5x0y3jxPR8V8z2v9AN8cDVPmKz7uXpvYXCJZmdcPK4="
+        crossorigin="anonymous"></script>
+
+<script type="text/javascript"
+        src="https://wxioi.github.io/js/medium-zoom.min.92f21c856129f84aeb719459b3e6ac621a3032fd7b180a18c04e1d12083f8aba.js"
+        integrity="sha256-kvIchWEp&#43;ErrcZRZs&#43;asYhowMv17GAoYwE4dEgg/iro="
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

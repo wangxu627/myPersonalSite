@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en" data-theme=""><head>
+    <title> Xu | Python PEP249 </title>
+
+    
+    <meta charset="utf-8"><meta name="generator" content="Hugo 0.76.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <meta name="description" content="Code more, Word less">
+    
+    <link rel="stylesheet"
+          href="https://wxioi.github.io/css/style.min.ec15cff0912041d0dce3a88999b9424990bd24473761645397583776684cdc3b.css"
+          integrity="sha256-7BXP8JEgQdDc46iJmblCSZC9JEc3YWRTl1g3dmhM3Ds="
+          crossorigin="anonymous"
+          type="text/css"><link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    
+    <link rel="shortcut icon" href="https://wxioi.github.io/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://wxioi.github.io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://wxioi.github.io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://wxioi.github.io/favicon-16x16.png">
+
+    <link rel="canonical" href="https://wxioi.github.io/post/article-51/">
+
+    
+    
+    
+    
+    <script type="text/javascript"
+            src="https://wxioi.github.io/js/anatole-header.min.e782db136ec18d105a4552702eac49f4620d6867da3fbf808bd53e806c96be6e.js"
+            integrity="sha256-54LbE27BjRBaRVJwLqxJ9GINaGfaP7&#43;Ai9U&#43;gGyWvm4="
+            crossorigin="anonymous"></script>
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Python PEP249"/>
+<meta name="twitter:description" content="在项目开发中，数据库"/>
+
+</head>
+<body><div class="sidebar animated fadeInDown">
+    <div class="logo-title">
+        <div class="title">
+            <img src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1601655446596&amp;di=c986d9fb7998db721d388b0ea6f62bb9&amp;imgtype=0&amp;src=http%3A%2F%2Fpic6.58cdn.com.cn%2Fzhuanzh%2Fn_v2ed4fc8bbfb3e4f5fa12ae084cb8a7864.jpg%3Fw%3D750%26h%3D0" alt="profile picture">
+            <h3 title=""><a href="/">Nothing</a></h3>
+            <div class="description">
+                <p>Code more, Word less</p>
+            </div>
+        </div>
+    </div>
+    <ul class="social-links">
+        
+            <li>
+                <a href="https://github.com/wxioi/" rel="me" aria-label="GitHub">
+                    <i class="fa fa-2x fa-github" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            <li>
+                <a href="mailto:wangxu627@gmail.com" rel="me" aria-label="e-mail">
+                    <i class="fa fa-2x fa-envelope" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+    </ul>
+    <div class="footer">
+        <div class="by_farbox">&copy; Xu 2020 </div>
+    </div>
+</div>
+<div class="main">
+    <div class="page-top animated fadeInDown">
+    <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+    </a>
+    <ul class="nav" id="navMenu">
+        
+        
+            
+            <li><a 
+                   href="/"
+                        
+                   title="">Home</a></li>
+        
+            
+            <li><a 
+                   href="/post/"
+                        
+                   title="">Posts</a></li>
+        
+            
+            <li><a 
+                   href="/tools/"
+                        
+                   title="">Tools</a></li>
+        
+        
+        <li class="theme-switch-item">
+            <a class="theme-switch" title="Switch Theme">
+                <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+    <div class="autopagerize_page_element">
+        <div class="content">
+    <div class="post animated fadeInDown">
+        <div class="post-content">
+
+            <div class="post-title">
+                <h3>Python PEP249</h3>
+                
+                    <div class="info">
+                        <em class="fa fa-sun-o"></em>
+                        <span class="date">Sat, Oct 26, 2019</span>
+                        <em class="fa fa-clock-o"></em>
+                        <span class="reading-time">5-minute read</span>
+                    </div>
+                
+            </div>
+
+            <p>在项目开发中，数据库应用必不可少。<a href="https://www.python.org/dev/peps/pep-0249/">PEP 249</a>
+即定义了使用Python访问数据库的一组通用规范，统一了不同数据库系统的访问模型。该规
+范使得数据库访问模块更易于理解，在提供广泛的数据库连接支持的同时，也增强了应用在 不同数据库之间的可移植性。</p>
+<p>在Python Database API 2.0规范中，定义了API接口的各个部分，如模块接口，连接对象， 游标对象，类型对象和构造器，DB
+API的可选扩展以及可选的错误处理机制等。</p>
+<h2 id="标准模块接口">标准模块接口</h2>
+<p>根据PEP 249规范，做了一个简单的示意图，根据不同类型做了简单的划分，并不一定与 Python对象一一对应。</p>
+<p><img src="http://dylanninin.com/assets/images/2012/pep249.jpg" alt="pep249"></p>
+<h2 id="1模块接口">1.模块接口</h2>
+<p>Module Interface Python代码与数据库交互的模块接口，必须提供获取数据库连接的构造方法。</p>
+<p>通过调用connect(parameters.. )即可返回数据库连接对象Connection Object，</p>
+<ul>
+<li>connect(parameters… )：获取数据库连接。其中parameters为数据源、用户、密码、数 据库等，根据不同数据库可选不同参数。</li>
+</ul>
+<h2 id="2数据库连接对象">2.数据库连接对象</h2>
+<p>Connection Object 数据库连接对象主要提供获取数据库游标对象、并提交/回滚事务的方法，以及关闭数据库 连接。</p>
+<ul>
+<li>close()：关闭数据库连接</li>
+<li>commit()：提交事务</li>
+<li>rollback()：回滚事务</li>
+<li>cursor()：获取游标对象，操作数据库，如执行DML操作，调用存储过程等</li>
+</ul>
+<h2 id="3全局常量">3.全局常量</h2>
+<p>Gobals Constants 定义一些DB API相关的全局常量，在标准接口中，主要如下：</p>
+<ul>
+<li>
+<p>apilevel：当前DB API版本，如”1.0”，或”2.0”</p>
+</li>
+<li>
+<p>threadsafety：整型常量，定义支持的线程安全类型，主要是是否可以在线程之间共享模块、连接对象以及游标对象。</p>
+<ul>
+<li>0 不可共享该模块</li>
+<li>1 可共享该模块，但不能共享连接对象</li>
+<li>2 可共享该模块和连接对象</li>
+<li>3 可共享该模块、连接对象和游标独享</li>
+</ul>
+</li>
+<li>
+<p>paramstyle：接口参数占位符所支持的样式。因易读性和灵活性，推荐使用numeric，named，pyformat</p>
+</li>
+<li>
+<p>qmark 问号符样式，如 …WHERE name=?</p>
+</li>
+<li>
+<p>numeric 数字序号样式，如 …WHERE name=:1</p>
+</li>
+<li>
+<p>named 命名参数样式，如 …WHERE name=:name</p>
+</li>
+<li>
+<p>format ANSI C语言printf格式化编码样式如 e.g. …WHERE name=%s</p>
+</li>
+<li>
+<p>pyformat Python扩展编码样式如 …WHERE name=%(name)s</p>
+</li>
+</ul>
+<h2 id="4异常体系">4.异常体系</h2>
+<p>Exceptions 异常体系主要用于定义DB API相关的异常，包括警告，错误，数据相关的异常，接口相关的 异常等等。</p>
+<ul>
+<li>Warning ：数据在执行插入操作时被截断，等等</li>
+<li>Error ：这里提到的除 Warning 外的所有异常的基类</li>
+<li>InterfaceError ： 数据库接口而非数据库本身故障</li>
+<li>DatabaseError ： 严格意义上的数据库问题</li>
+<li>DataError ： 包含如下结果数据的问题除数为 0，值超出范围等</li>
+<li>OperationalError ： 与编程人员无关的数据库错误：连接丢失、内存分配错误、事务处理错误等</li>
+<li>IntegrityError ： 数据库的关系完整性受到了影响，例如，外键约束失败</li>
+<li>InternalError ： 数据库遇到内部错误，例如，游标无效、事务不同步</li>
+<li>ProgrammingError ： 未找到表、SQL 语句中的语法错误、指定参数的数量错误等</li>
+<li>NotSupportedError ： 调用的 API 部件并不存在</li>
+</ul>
+<h2 id="5游标对象">5.游标对象</h2>
+<p>Cursor Object 游标对象代表数据库中的游标，用于指示抓取数据操作的上下文。主要提供执行SQL语句、 调用存储过程、获取查询结果等方法。</p>
+<ul>
+<li>description：数据库列类型和值的描述信息</li>
+<li>rowcount：回返结果的行数统计信息，如SELECT,UPDATE,CALLPROC等</li>
+<li>callproc(procname,[, parameters])：调用存储过程，需要数据库支持</li>
+<li>close()：关闭当前游标</li>
+<li>execute(operation[, parameters])：执行数据库操作，SQL语句或者数据库命令</li>
+<li>executemany(operation, seq_of_params)：用于批量操作，如批量更新</li>
+<li>fetchone()：获取查询结果集中的下一条记录</li>
+<li>fetchmany(size)：获取指定数量的记录</li>
+<li>fetchall()：获取结构集的所有记录</li>
+<li>arraysize：指定使用fetchmany()获取的行数，默认为1</li>
+<li>setinputsizes(sizes)：设置在调用<code>execute*()</code>方法时分配的内存区域大小</li>
+<li>setoutputsize(sizes)：设置列缓冲区大小，对大数据列入LONGS，BLOBS尤其有用</li>
+</ul>
+<h2 id="6数据类型和构造器">6.数据类型和构造器</h2>
+<p>Type and Constructor</p>
+<p>1）Type Type定义了Python的数据类型和数据库中表列类型的转换和对应关系。</p>
+<ul>
+<li>STRING： 对应数据库中基于字符串的数据类型，如char，varchar</li>
+<li>BINARY： 对应数据库中的二进制类型，如long, row, blob</li>
+<li>NUMBER： 对应数据库中的数字类型，如number</li>
+<li>DATETIME： 对应数据库中的时间类型，如date, time</li>
+<li>ROWID：对应数据库中的row id</li>
+<li>None：对应数据库中的NULL</li>
+</ul>
+<p>2）Constructor</p>
+<p>Constructor是一组用于构造特殊数据类型的构造器，可以通过指定参数构造并返回预期对 象。</p>
+<ul>
+<li>Date(year, month, day)：构造日期对象</li>
+<li>Time(hour, minute, second)：构造时间对象</li>
+<li>Timestamp(year, month, day, hour, minute, second)：构造时间戳对象</li>
+<li>DateFromTicks(ticks)：通过从计算机计时开始经过的秒数构造日期对象；即从1970年1月1日0时0分0秒起计算</li>
+<li>TimeFromTicks(ticks)：同上，用于构造时间对象</li>
+<li>TimestampFromTicks(ticks)：同上，用于构造时间戳对象</li>
+<li>Binary(string)：从字符串构造二进制对象 扩展模块接口</li>
+</ul>
+<p>扩展模块可以参考官方文档，这里暂不提及。</p>
+<h2 id="参考">参考</h2>
+<ul>
+<li><a href="https://www.python.org/dev/peps/pep-0249/">PEP 249</a></li>
+<li><a href="https://www.python.org/dev/peps/pep-0248">PEP 248</a></li>
+<li><a href="https://wiki.python.org/moin/DatabaseInterfaces">DatabaseInterfaces</a></li>
+</ul>
+
+        </div>
+        <div class="post-footer">
+            <div class="info">
+                
+                
+            </div>
+        </div>
+
+        
+            
+        
+    </div>
+
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript"
+        src="https://wxioi.github.io/js/jquery.min.86b1e8f819ee2d9099a783e50b49dff24282545fc40773861f9126b921532e4c.js"
+        integrity="sha256-hrHo&#43;BnuLZCZp4PlC0nf8kKCVF/EB3OGH5EmuSFTLkw="
+        crossorigin="anonymous"></script>
+
+
+
+
+<script type="text/javascript"
+        src="https://wxioi.github.io/js/bundle.min.0f9c74cb78f13d1f15f33daff4037c70354f98acfbb97a6f61708966675c3cae.js"
+        integrity="sha256-D5x0y3jxPR8V8z2v9AN8cDVPmKz7uXpvYXCJZmdcPK4="
+        crossorigin="anonymous"></script>
+
+<script type="text/javascript"
+        src="https://wxioi.github.io/js/medium-zoom.min.92f21c856129f84aeb719459b3e6ac621a3032fd7b180a18c04e1d12083f8aba.js"
+        integrity="sha256-kvIchWEp&#43;ErrcZRZs&#43;asYhowMv17GAoYwE4dEgg/iro="
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

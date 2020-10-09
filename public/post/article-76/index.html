@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en" data-theme=""><head>
+    <title> Xu | C语言实现Base64编码/解码 </title>
+
+    
+    <meta charset="utf-8"><meta name="generator" content="Hugo 0.76.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <meta name="description" content="Code more, Word less">
+    
+    <link rel="stylesheet"
+          href="https://wxioi.github.io/css/style.min.ec15cff0912041d0dce3a88999b9424990bd24473761645397583776684cdc3b.css"
+          integrity="sha256-7BXP8JEgQdDc46iJmblCSZC9JEc3YWRTl1g3dmhM3Ds="
+          crossorigin="anonymous"
+          type="text/css"><link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    
+    <link rel="shortcut icon" href="https://wxioi.github.io/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://wxioi.github.io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://wxioi.github.io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://wxioi.github.io/favicon-16x16.png">
+
+    <link rel="canonical" href="https://wxioi.github.io/post/article-76/">
+
+    
+    
+    
+    
+    <script type="text/javascript"
+            src="https://wxioi.github.io/js/anatole-header.min.e782db136ec18d105a4552702eac49f4620d6867da3fbf808bd53e806c96be6e.js"
+            integrity="sha256-54LbE27BjRBaRVJwLqxJ9GINaGfaP7&#43;Ai9U&#43;gGyWvm4="
+            crossorigin="anonymous"></script>
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="C语言实现Base64编码/解码"/>
+<meta name="twitter:description" content="Bse64是一种以6"/>
+
+</head>
+<body><div class="sidebar animated fadeInDown">
+    <div class="logo-title">
+        <div class="title">
+            <img src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1601655446596&amp;di=c986d9fb7998db721d388b0ea6f62bb9&amp;imgtype=0&amp;src=http%3A%2F%2Fpic6.58cdn.com.cn%2Fzhuanzh%2Fn_v2ed4fc8bbfb3e4f5fa12ae084cb8a7864.jpg%3Fw%3D750%26h%3D0" alt="profile picture">
+            <h3 title=""><a href="/">Nothing</a></h3>
+            <div class="description">
+                <p>Code more, Word less</p>
+            </div>
+        </div>
+    </div>
+    <ul class="social-links">
+        
+            <li>
+                <a href="https://github.com/wxioi/" rel="me" aria-label="GitHub">
+                    <i class="fa fa-2x fa-github" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            <li>
+                <a href="mailto:wangxu627@gmail.com" rel="me" aria-label="e-mail">
+                    <i class="fa fa-2x fa-envelope" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+    </ul>
+    <div class="footer">
+        <div class="by_farbox">&copy; Xu 2020 </div>
+    </div>
+</div>
+<div class="main">
+    <div class="page-top animated fadeInDown">
+    <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+    </a>
+    <ul class="nav" id="navMenu">
+        
+        
+            
+            <li><a 
+                   href="/"
+                        
+                   title="">Home</a></li>
+        
+            
+            <li><a 
+                   href="/post/"
+                        
+                   title="">Posts</a></li>
+        
+            
+            <li><a 
+                   href="/tools/"
+                        
+                   title="">Tools</a></li>
+        
+        
+        <li class="theme-switch-item">
+            <a class="theme-switch" title="Switch Theme">
+                <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+    <div class="autopagerize_page_element">
+        <div class="content">
+    <div class="post animated fadeInDown">
+        <div class="post-content">
+
+            <div class="post-title">
+                <h3>C语言实现Base64编码/解码</h3>
+                
+                    <div class="info">
+                        <em class="fa fa-sun-o"></em>
+                        <span class="date">Thu, Nov 21, 2019</span>
+                        <em class="fa fa-clock-o"></em>
+                        <span class="reading-time">4-minute read</span>
+                    </div>
+                
+            </div>
+
+            <p>Bse64是一种以64个可打印字符对二进制数据进行编码的编码算法。base64在对数据进行编码时以三个8位字符型数据为一组，取这三个字符型数据的ASCII码，然后以6位为一组组成4个新的数据，这4个新的数据有6位，所以它的最大值为2^6=64。我们以4个6位数据的十进制数从base64表中得到最终编码后的字符。</p>
+<p>Base64 编码表</p>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Char</th>
+<th>Value</th>
+<th>Char</th>
+<th>Value</th>
+<th>Char</th>
+<th>Value</th>
+<th>Char</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>A</td>
+<td>16</td>
+<td>Q</td>
+<td>32</td>
+<td>g</td>
+<td>48</td>
+<td>w</td>
+</tr>
+<tr>
+<td>1</td>
+<td>B</td>
+<td>17</td>
+<td>R</td>
+<td>33</td>
+<td>h</td>
+<td>49</td>
+<td>x</td>
+</tr>
+<tr>
+<td>2</td>
+<td>C</td>
+<td>18</td>
+<td>S</td>
+<td>34</td>
+<td>i</td>
+<td>50</td>
+<td>y</td>
+</tr>
+<tr>
+<td>3</td>
+<td>D</td>
+<td>19</td>
+<td>T</td>
+<td>35</td>
+<td>j</td>
+<td>51</td>
+<td>z</td>
+</tr>
+<tr>
+<td>4</td>
+<td>E</td>
+<td>20</td>
+<td>U</td>
+<td>36</td>
+<td>k</td>
+<td>52</td>
+<td>0</td>
+</tr>
+<tr>
+<td>5</td>
+<td>F</td>
+<td>21</td>
+<td>V</td>
+<td>37</td>
+<td>l</td>
+<td>53</td>
+<td>1</td>
+</tr>
+<tr>
+<td>6</td>
+<td>G</td>
+<td>22</td>
+<td>W</td>
+<td>38</td>
+<td>m</td>
+<td>54</td>
+<td>2</td>
+</tr>
+<tr>
+<td>7</td>
+<td>H</td>
+<td>23</td>
+<td>X</td>
+<td>39</td>
+<td>n</td>
+<td>55</td>
+<td>3</td>
+</tr>
+<tr>
+<td>8</td>
+<td>I</td>
+<td>24</td>
+<td>Y</td>
+<td>40</td>
+<td>o</td>
+<td>56</td>
+<td>4</td>
+</tr>
+<tr>
+<td>9</td>
+<td>J</td>
+<td>25</td>
+<td>Z</td>
+<td>41</td>
+<td>p</td>
+<td>57</td>
+<td>5</td>
+</tr>
+<tr>
+<td>10</td>
+<td>K</td>
+<td>26</td>
+<td>a</td>
+<td>42</td>
+<td>q</td>
+<td>58</td>
+<td>6</td>
+</tr>
+<tr>
+<td>11</td>
+<td>L</td>
+<td>27</td>
+<td>b</td>
+<td>43</td>
+<td>r</td>
+<td>59</td>
+<td>7</td>
+</tr>
+<tr>
+<td>12</td>
+<td>M</td>
+<td>28</td>
+<td>c</td>
+<td>44</td>
+<td>s</td>
+<td>60</td>
+<td>8</td>
+</tr>
+<tr>
+<td>13</td>
+<td>N</td>
+<td>29</td>
+<td>d</td>
+<td>45</td>
+<td>t</td>
+<td>61</td>
+<td>9</td>
+</tr>
+<tr>
+<td>14</td>
+<td>O</td>
+<td>30</td>
+<td>e</td>
+<td>46</td>
+<td>u</td>
+<td>62</td>
+<td>+</td>
+</tr>
+<tr>
+<td>15</td>
+<td>P</td>
+<td>31</td>
+<td>f</td>
+<td>47</td>
+<td>v</td>
+<td>63</td>
+<td>/</td>
+</tr>
+</tbody>
+</table>
+<pre><code>   由于base64编码是将编码前的3*8位数据，分解成4个6位的数据，所以经过base64编码后的字符串长度是4的倍数。但往往我们进行编码的数据长度并不是3的倍数，这就造成了“编码”后的位数不为4的倍数，比如Brisk共5×8=40位，以6位为一组可以分为7组，这样“编码”后就有7个字符，但base64编码后的字符长度应该是4的倍数，显然这里就出问题了，那么怎么办呢？前面的不可以抛弃掉，所以就只有“追加”了，所以Brisk经过base64编码后的长度应该是8个字符，而第8个编码后的字符是'='，再比如对单个字符a进行base64编码，由于它的长度不是3的倍数，以3个字节为一组它只能分一组，再以6位为一位它只能分两组，所以经过“编码”后它的长度是2，但base64编码后的个数应该是4的倍数，所以它的长度应该是4，所以在后面补上两个‘=’,由于一个数求余3后有三个不同的结果，0、1、2，所以在对一个数据进行base64进行编码后它的长度为：
+</code></pre>
+<p>（1）当进行编码的数据长度是3的倍数时，len=strlen(str_in)/3*4;<br>
+（2）当进行编码的数据长度不是3的倍数时，len=(strlen(str_in)/3+1)*4;</p>
+<pre><code>   我们以Brisk这个例子来说明一下base64编码的过程。首先我们以3个字符为一组将Brisk进行分组，Brisk被氛围两组：Bri 和 sk；然后我们取出这两个分组中每个字节的ASCII码，B:66 r:114 i:105 s:115 k:107。它们对应的二进制数为  B:01000010 r:01110010 i:01101001 s:01110011 k:01101011；
+
+   第一组，我们以6位为一组对每一个3字节分组进行再分组就变成了010000 100111 001001 101001。所对应的十进制数是16 39 9 41，对应base64表中的结果是 Q n J p；
+
+   第二组，011100 110110 101100(不够补0)，所以对应的十进制数是 28 54 44，对应base64表中的结果是 c 2 s，最终结果为QnJpc2s=（因为第二组“编码”后只有三个字节）。
+
+  解码的过程是一个逆过程，我们将经过编码后的字符按4个字符为一组，然后对照base64表得到相应的十进制数，再将其通过拆分和组合，组成3个8位数据，这个数据就是解码后的数据，下面给一个c语言实现编码和解码的代码。
+
+
+
+
+      1. /*base64.h*/  
+
+  2. #ifndef _BASE64_H  
+
+  3. #define _BASE64_H  
+
+  4.   
+
+  5. #include &lt;stdlib.h&gt;  
+
+  6. #include &lt;string.h&gt;  
+
+  7.   
+
+  8. unsigned char *base64_encode(unsigned char *str);  
+
+  9.   
+
+  10. unsigned char *bae64_decode(unsigned char *code);  
+
+  11.   
+
+  12. #endif  
+
+
+
+
+
+
+
+
+
+
+
+      1. /*base64.c*/  
+
+  2. #include &quot;base64.h&quot;  
+
+  3.   
+
+  4. unsigned char *base64_encode(unsigned char *str)  
+
+  5. {  
+
+  6.     long len;  
+
+  7.     long str_len;  
+
+  8.     unsigned char *res;  
+
+  9.     int i,j;  
+
+  10. //定义base64编码表  
+
+  11.     unsigned char *base64_table=&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/&quot;;  
+
+  12.   
+
+  13. //计算经过base64编码后的字符串长度  
+
+  14.     str_len=strlen(str);  
+
+  15.     if(str_len % 3 == 0)  
+
+  16.         len=str_len/3*4;  
+
+  17.     else  
+
+  18.         len=(str_len/3+1)*4;  
+
+  19.   
+
+  20.     res=malloc(sizeof(unsigned char)*len+1);  
+
+  21.     res[len]='\0';  
+
+  22.   
+
+  23. //以3个8位字符为一组进行编码  
+
+  24.     for(i=0,j=0;i&lt;len-2;j+=3,i+=4)  
+
+  25.     {  
+
+  26.         res[i]=base64_table[str[j]&gt;&gt;2]; //取出第一个字符的前6位并找出对应的结果字符  
+
+  27.         res[i+1]=base64_table[(str[j]&amp;0x3)&lt;&lt;4 | (str[j+1]&gt;&gt;4)]; //将第一个字符的后位与第二个字符的前4位进行组合并找到对应的结果字符  
+
+  28.         res[i+2]=base64_table[(str[j+1]&amp;0xf)&lt;&lt;2 | (str[j+2]&gt;&gt;6)]; //将第二个字符的后4位与第三个字符的前2位组合并找出对应的结果字符  
+
+  29.         res[i+3]=base64_table[str[j+2]&amp;0x3f]; //取出第三个字符的后6位并找出结果字符  
+
+  30.     }  
+
+  31.   
+
+  32.     switch(str_len % 3)  
+
+  33.     {  
+
+  34.         case 1:  
+
+  35.             res[i-2]='=';  
+
+  36.             res[i-1]='=';  
+
+  37.             break;  
+
+  38.         case 2:  
+
+  39.             res[i-1]='=';  
+
+  40.             break;  
+
+  41.     }  
+
+  42.   
+
+  43.     return res;  
+
+  44. }  
+
+  45.   
+
+  46. unsigned char *base64_decode(unsigned char *code)  
+
+  47. {  
+
+  48. //根据base64表，以字符找到对应的十进制数据  
+
+  49.     int table[]={0,0,0,0,0,0,0,0,0,0,0,0,
+
+  50.     		 0,0,0,0,0,0,0,0,0,0,0,0,
+
+  51.     		 0,0,0,0,0,0,0,0,0,0,0,0,
+
+  52.     		 0,0,0,0,0,0,0,62,0,0,0,
+
+  53.     		 63,52,53,54,55,56,57,58,
+
+  54.     		 59,60,61,0,0,0,0,0,0,0,0,
+
+  55.     		 1,2,3,4,5,6,7,8,9,10,11,12,
+
+  56.     		 13,14,15,16,17,18,19,20,21,
+
+  57.     		 22,23,24,25,0,0,0,0,0,0,26,
+
+  58.     		 27,28,29,30,31,32,33,34,35,
+
+  59.     		 36,37,38,39,40,41,42,43,44,
+
+  60.     		 45,46,47,48,49,50,51
+
+  61.     	       };  
+
+  62.     long len;  
+
+  63.     long str_len;  
+
+  64.     unsigned char *res;  
+
+  65.     int i,j;  
+
+  66.   
+
+  67. //计算解码后的字符串长度  
+
+  68.     len=strlen(code);  
+
+  69. //判断编码后的字符串后是否有=  
+
+  70.     if(strstr(code,&quot;==&quot;))  
+
+  71.         str_len=len/4*3-2;  
+
+  72.     else if(strstr(code,&quot;=&quot;))  
+
+  73.         str_len=len/4*3-1;  
+
+  74.     else  
+
+  75.         str_len=len/4*3;  
+
+  76.   
+
+  77.     res=malloc(sizeof(unsigned char)*str_len+1);  
+
+  78.     res[str_len]='\0';  
+
+  79.   
+
+  80. //以4个字符为一位进行解码  
+
+  81.     for(i=0,j=0;i &lt; len-2;j+=3,i+=4)  
+
+  82.     {  
+
+  83.         res[j]=((unsigned char)table[code[i]])&lt;&lt;2 | (((unsigned char)table[code[i+1]])&gt;&gt;4); //取出第一个字符对应base64表的十进制数的前6位与第二个字符对应base64表的十进制数的后2位进行组合  
+
+  84.         res[j+1]=(((unsigned char)table[code[i+1]])&lt;&lt;4) | (((unsigned char)table[code[i+2]])&gt;&gt;2); //取出第二个字符对应base64表的十进制数的后4位与第三个字符对应bas464表的十进制数的后4位进行组合  
+
+  85.         res[j+2]=(((unsigned char)table[code[i+2]])&lt;&lt;6) | ((unsigned char)table[code[i+3]]); //取出第三个字符对应base64表的十进制数的后2位与第4个字符进行组合  
+
+  86.     }  
+
+  87.   
+
+  88.     return res;  
+
+  89.   
+
+  90. }  
+
+
+
+
+
+
+
+      1. /*一个测试程序*/  
+
+  2. #include &quot;base64.h&quot;  
+
+  3. #include &lt;stdio.h&gt; 
+
+  4. #include &lt;string.h&gt;   
+
+  5.   
+
+  6. int main(int argc,char **argv)  
+
+  7. {  
+
+  8.     unsigned char *buf =NULL;
+
+  9.     if(strcmp(argv[1],&quot;-d&quot;) == 0) 
+
+  10.     { 
+
+  11. 	buf = base64_decode(argv[2]);
+
+  12.         printf(&quot;%s\n&quot;,buf);  
+
+  13.     }
+
+  14.     else  
+
+  15.     {
+
+  16. 	buf = base64_encode(argv[1]);
+
+  17.         printf(&quot;%s\n&quot;,buf);   
+
+  18.     }
+
+  19.  
+
+  20.     free(buf);
+
+  21.   
+
+  22.     return 0;  
+
+  23. } 
+</code></pre>
+<p>编译<br>
+gcc -o test test.c base64.c</p>
+<p>./test a123456<br>
+YTEyMzQ1Ng==</p>
+<p>./test -d YTEyMzQ1Ng==<br>
+a123456</p>
+
+        </div>
+        <div class="post-footer">
+            <div class="info">
+                
+                
+            </div>
+        </div>
+
+        
+            
+        
+    </div>
+
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript"
+        src="https://wxioi.github.io/js/jquery.min.86b1e8f819ee2d9099a783e50b49dff24282545fc40773861f9126b921532e4c.js"
+        integrity="sha256-hrHo&#43;BnuLZCZp4PlC0nf8kKCVF/EB3OGH5EmuSFTLkw="
+        crossorigin="anonymous"></script>
+
+
+
+
+<script type="text/javascript"
+        src="https://wxioi.github.io/js/bundle.min.0f9c74cb78f13d1f15f33daff4037c70354f98acfbb97a6f61708966675c3cae.js"
+        integrity="sha256-D5x0y3jxPR8V8z2v9AN8cDVPmKz7uXpvYXCJZmdcPK4="
+        crossorigin="anonymous"></script>
+
+<script type="text/javascript"
+        src="https://wxioi.github.io/js/medium-zoom.min.92f21c856129f84aeb719459b3e6ac621a3032fd7b180a18c04e1d12083f8aba.js"
+        integrity="sha256-kvIchWEp&#43;ErrcZRZs&#43;asYhowMv17GAoYwE4dEgg/iro="
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

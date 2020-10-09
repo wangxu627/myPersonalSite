@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en" data-theme=""><head>
+    <title> Xu | centos 解决python3.7 安装时No module named _ssl </title>
+
+    
+    <meta charset="utf-8"><meta name="generator" content="Hugo 0.76.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <meta name="description" content="Code more, Word less">
+    
+    <link rel="stylesheet"
+          href="https://wxioi.github.io/css/style.min.ec15cff0912041d0dce3a88999b9424990bd24473761645397583776684cdc3b.css"
+          integrity="sha256-7BXP8JEgQdDc46iJmblCSZC9JEc3YWRTl1g3dmhM3Ds="
+          crossorigin="anonymous"
+          type="text/css"><link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    
+    <link rel="shortcut icon" href="https://wxioi.github.io/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://wxioi.github.io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://wxioi.github.io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://wxioi.github.io/favicon-16x16.png">
+
+    <link rel="canonical" href="https://wxioi.github.io/post/article-98/">
+
+    
+    
+    
+    
+    <script type="text/javascript"
+            src="https://wxioi.github.io/js/anatole-header.min.e782db136ec18d105a4552702eac49f4620d6867da3fbf808bd53e806c96be6e.js"
+            integrity="sha256-54LbE27BjRBaRVJwLqxJ9GINaGfaP7&#43;Ai9U&#43;gGyWvm4="
+            crossorigin="anonymous"></script>
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="centos 解决python3.7 安装时No module named _ssl"/>
+<meta name="twitter:description" content="centos安装py"/>
+
+</head>
+<body><div class="sidebar animated fadeInDown">
+    <div class="logo-title">
+        <div class="title">
+            <img src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1601655446596&amp;di=c986d9fb7998db721d388b0ea6f62bb9&amp;imgtype=0&amp;src=http%3A%2F%2Fpic6.58cdn.com.cn%2Fzhuanzh%2Fn_v2ed4fc8bbfb3e4f5fa12ae084cb8a7864.jpg%3Fw%3D750%26h%3D0" alt="profile picture">
+            <h3 title=""><a href="/">Nothing</a></h3>
+            <div class="description">
+                <p>Code more, Word less</p>
+            </div>
+        </div>
+    </div>
+    <ul class="social-links">
+        
+            <li>
+                <a href="https://github.com/wxioi/" rel="me" aria-label="GitHub">
+                    <i class="fa fa-2x fa-github" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            <li>
+                <a href="mailto:wangxu627@gmail.com" rel="me" aria-label="e-mail">
+                    <i class="fa fa-2x fa-envelope" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+    </ul>
+    <div class="footer">
+        <div class="by_farbox">&copy; Xu 2020 </div>
+    </div>
+</div>
+<div class="main">
+    <div class="page-top animated fadeInDown">
+    <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+    </a>
+    <ul class="nav" id="navMenu">
+        
+        
+            
+            <li><a 
+                   href="/"
+                        
+                   title="">Home</a></li>
+        
+            
+            <li><a 
+                   href="/post/"
+                        
+                   title="">Posts</a></li>
+        
+            
+            <li><a 
+                   href="/tools/"
+                        
+                   title="">Tools</a></li>
+        
+        
+        <li class="theme-switch-item">
+            <a class="theme-switch" title="Switch Theme">
+                <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+    <div class="autopagerize_page_element">
+        <div class="content">
+    <div class="post animated fadeInDown">
+        <div class="post-content">
+
+            <div class="post-title">
+                <h3>centos 解决python3.7 安装时No module named _ssl</h3>
+                
+                    <div class="info">
+                        <em class="fa fa-sun-o"></em>
+                        <span class="date">Wed, Dec 25, 2019</span>
+                        <em class="fa fa-clock-o"></em>
+                        <span class="reading-time">2-minute read</span>
+                    </div>
+                
+            </div>
+
+            <p>centos安装python3.7时遇到如下问题，查阅知需要的openssl版本最低为1.0.2，但是centos
+默认的为1.0.1，所以需要重新更新openssl</p>
+<pre><code>import _ssl       # if we can't import it, let the error propagate  
+ImportError: No module named _ssl
+</code></pre>
+<p>1、安装依赖库：</p>
+<pre><code>yum install -y zlib zlib-dev openssl-devel sqlite-devel bzip2-devel libffi libffi-devel gcc gcc-c++
+</code></pre>
+<p>2、安装最新版本的openssl<br>
+注意！openssl配置是用config，而不是configure，另外openssl编译安装依赖zlib动态库，所以一定要shared zlib<br>
+自行到官网查阅最新版本~</p>
+<pre><code>wget http://www.openssl.org/source/openssl-1.1.1.tar.gz
+tar -zxvf openssl-1.1.1.tar.gz
+cd openssl-1.1.1
+./config --prefix=$HOME/openssl shared zlib
+make &amp;&amp; make install
+</code></pre>
+<p>3、设置环境变量LD_LIBRARY_PATH</p>
+<pre><code>echo &quot;export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/openssl/lib&quot; &gt;&gt; $HOME/.bash_profile
+source $HOME/.bash_profile
+</code></pre>
+<p>这一步一定要有！！LD_LIBRARY_PATH环境变量主要用于指定查找共享库（动态链接库）时除了默认路径之外的其他路径。当执行函数动态链接.so时，如果此文件不在缺省目录下‘/lib'
+and ‘/usr/lib'，那么就需要指定环境变量LD_LIBRARY_PATH<br>
+4、解压python3.7，并安装，一定要指定刚才安装的1.1.1版本的openssl！！！</p>
+<pre><code>tar -zxvf Python-3.7.0.tgz
+./configure --prefix=$HOME/Py37 --with-openssl=$HOME/openssl
+make &amp;&amp; make install
+echo $HOME
+</code></pre>
+<p>5、至此python3.7就安装完了，来检验下ssl模块能否被导入吧：</p>
+<pre><code>[root@izbp12am8wqrn7t6wzgmydz Python-3.7.0]# echo $HOME
+/root
+[root@izbp12am8wqrn7t6wzgmydz Python-3.7.0]# cd /root/Py37/
+[root@izbp12am8wqrn7t6wzgmydz bin]# ./python3
+Python 3.7.0 (default, Sep 16 2018, 14:12:43)
+[GCC 4.4.7 20120313 (Red Hat 4.4.7-23)] on linux
+Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+&gt;&gt;&gt; import ssl
+&gt;&gt;&gt; import _ssl
+&gt;&gt;&gt;
+</code></pre>
+<p>6.更新python软链接<br>
+你要知道系统现在的python的位置在哪儿</p>
+<pre><code>[root@izbp12am8wqrn7t6wzgmydz bin]# whereis python
+python: /usr/bin/python /usr/bin/python2.7 /usr/bin/python.bak /usr/lib/python2.7 /usr/lib64/python2.7 /etc/python /usr/include/python2.7 /usr/local/python /usr/share/man/man1/python.1.gz
+
+
+
+[root@root ~]# cd /usr/bin/
+[root@root bin]# ll python*
+lrwxrwxrwx. 1 root root    7 2月   7 09:30 python -&gt; python2
+lrwxrwxrwx. 1 root root    9 2月   7 09:30 python2 -&gt; python2.7
+-rwxr-xr-x. 1 root root 7136 8月   4 2017 python2.7
+</code></pre>
+<p>可以看到，python指向的是python2，python2指向的是python2.7，因此我们可以装个python3，然后将python指向python3，然后python2指向python2.7，那么两个版本的python就能共存了。</p>
+<p>7.添加软链接</p>
+<pre><code>将原来的链接备份
+mv /usr/bin/python /usr/bin/python.bak
+
+添加python3的软链接
+ln -s /root/Py37/bin/python3.7 /usr/bin/python
+
+测试是否安装成功了
+python -V
+</code></pre>
+
+        </div>
+        <div class="post-footer">
+            <div class="info">
+                
+                
+            </div>
+        </div>
+
+        
+            
+        
+    </div>
+
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript"
+        src="https://wxioi.github.io/js/jquery.min.86b1e8f819ee2d9099a783e50b49dff24282545fc40773861f9126b921532e4c.js"
+        integrity="sha256-hrHo&#43;BnuLZCZp4PlC0nf8kKCVF/EB3OGH5EmuSFTLkw="
+        crossorigin="anonymous"></script>
+
+
+
+
+<script type="text/javascript"
+        src="https://wxioi.github.io/js/bundle.min.0f9c74cb78f13d1f15f33daff4037c70354f98acfbb97a6f61708966675c3cae.js"
+        integrity="sha256-D5x0y3jxPR8V8z2v9AN8cDVPmKz7uXpvYXCJZmdcPK4="
+        crossorigin="anonymous"></script>
+
+<script type="text/javascript"
+        src="https://wxioi.github.io/js/medium-zoom.min.92f21c856129f84aeb719459b3e6ac621a3032fd7b180a18c04e1d12083f8aba.js"
+        integrity="sha256-kvIchWEp&#43;ErrcZRZs&#43;asYhowMv17GAoYwE4dEgg/iro="
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

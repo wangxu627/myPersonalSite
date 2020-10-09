@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en" data-theme=""><head>
+    <title> Xu | Python select IO多路复用 </title>
+
+    
+    <meta charset="utf-8"><meta name="generator" content="Hugo 0.76.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <meta name="description" content="Code more, Word less">
+    
+    <link rel="stylesheet"
+          href="https://wxioi.github.io/css/style.min.ec15cff0912041d0dce3a88999b9424990bd24473761645397583776684cdc3b.css"
+          integrity="sha256-7BXP8JEgQdDc46iJmblCSZC9JEc3YWRTl1g3dmhM3Ds="
+          crossorigin="anonymous"
+          type="text/css"><link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    
+    <link rel="shortcut icon" href="https://wxioi.github.io/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://wxioi.github.io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://wxioi.github.io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://wxioi.github.io/favicon-16x16.png">
+
+    <link rel="canonical" href="https://wxioi.github.io/post/article-67/">
+
+    
+    
+    
+    
+    <script type="text/javascript"
+            src="https://wxioi.github.io/js/anatole-header.min.e782db136ec18d105a4552702eac49f4620d6867da3fbf808bd53e806c96be6e.js"
+            integrity="sha256-54LbE27BjRBaRVJwLqxJ9GINaGfaP7&#43;Ai9U&#43;gGyWvm4="
+            crossorigin="anonymous"></script>
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Python select IO多路复用"/>
+<meta name="twitter:description" content="一、select介绍"/>
+
+</head>
+<body><div class="sidebar animated fadeInDown">
+    <div class="logo-title">
+        <div class="title">
+            <img src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1601655446596&amp;di=c986d9fb7998db721d388b0ea6f62bb9&amp;imgtype=0&amp;src=http%3A%2F%2Fpic6.58cdn.com.cn%2Fzhuanzh%2Fn_v2ed4fc8bbfb3e4f5fa12ae084cb8a7864.jpg%3Fw%3D750%26h%3D0" alt="profile picture">
+            <h3 title=""><a href="/">Nothing</a></h3>
+            <div class="description">
+                <p>Code more, Word less</p>
+            </div>
+        </div>
+    </div>
+    <ul class="social-links">
+        
+            <li>
+                <a href="https://github.com/wxioi/" rel="me" aria-label="GitHub">
+                    <i class="fa fa-2x fa-github" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            <li>
+                <a href="mailto:wangxu627@gmail.com" rel="me" aria-label="e-mail">
+                    <i class="fa fa-2x fa-envelope" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+    </ul>
+    <div class="footer">
+        <div class="by_farbox">&copy; Xu 2020 </div>
+    </div>
+</div>
+<div class="main">
+    <div class="page-top animated fadeInDown">
+    <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+    </a>
+    <ul class="nav" id="navMenu">
+        
+        
+            
+            <li><a 
+                   href="/"
+                        
+                   title="">Home</a></li>
+        
+            
+            <li><a 
+                   href="/post/"
+                        
+                   title="">Posts</a></li>
+        
+            
+            <li><a 
+                   href="/tools/"
+                        
+                   title="">Tools</a></li>
+        
+        
+        <li class="theme-switch-item">
+            <a class="theme-switch" title="Switch Theme">
+                <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+    <div class="autopagerize_page_element">
+        <div class="content">
+    <div class="post animated fadeInDown">
+        <div class="post-content">
+
+            <div class="post-title">
+                <h3>Python select IO多路复用</h3>
+                
+                    <div class="info">
+                        <em class="fa fa-sun-o"></em>
+                        <span class="date">Tue, Nov 12, 2019</span>
+                        <em class="fa fa-clock-o"></em>
+                        <span class="reading-time">6-minute read</span>
+                    </div>
+                
+            </div>
+
+            <h2 id="一select介绍">一、select介绍</h2>
+<p>Python的 <strong>select()</strong>
+函数是底层操作系统实现的直接接口。它监视套接字，打开文件和管道（任何带有返回有效文件描述符的<code>fileno（）</code>方法），直到它们变得可读或可写，或者发生通信错误。
+<strong>select()</strong> 使得更容易同时监视多个连接，并且比使用套接字超时在Python中编写轮询循环更有效，因为监视发生在操作系统网络层而不是解释器。</p>
+<h2 id="二使用select编写socketserver">二、使用select编写SocketServer</h2>
+<p>接下来通过socket server例子要以了解select 是如何通过单进程实现同时处理多个非阻塞的socket连接的</p>
+<h4 id="首先我们建立一个服务器端socket">首先我们建立一个服务器端socket</h4>
+<pre><code>import select
+import socket
+import sys
+from queue import Queue
+import queue
+
+
+# 创建套接字
+server = socket.socket()
+server.setblocking(False)
+server.bind(('localhost',8800))
+# 监听传入的连接
+server.listen(5)
+</code></pre>
+<p><strong>select()</strong>
+的参数是三个包含要监视的通信通道的列表。第一个是要检查要读取的传入数据的对象列表，第二个包含在缓冲区中有空间时将接收传出数据的对象，第三个包含可能有错误的对象（通常是错误的组合输入和输出通道对象）。服务器的下一步是设置包含要传递给
+<strong>select()</strong> 输入源和输出目标的列表。</p>
+<pre><code>input = [server] 
+output = [] 
+select.select(input,output,input)
+</code></pre>
+<p>所有客户端的进来的连接和数据将会被server的主循环程序放在上面的list中处理，我们现在的server端需要等待连接可写（writable)之后才能过来，然后接收数据并返回(因此不是在接收到数据之后就立刻返回)，因为每个连接要把输入或输出的数据先缓存到queue里，然后再由select取出来再发出去。</p>
+<pre><code># 对外发送数据的队列，记录到字典中
+message_queues = {}
+</code></pre>
+<p>服务器程序的主要部分循环，调用 <strong>select</strong> <strong><code>()</code></strong> 来阻止并等待网络活动。</p>
+<pre><code>while 1:
+    #等待至少一个套接字准备好处理
+    print(sys.stderr, '\nwaiting for the next event')
+    &quot;&quot;&quot;
+    readable中的socket连接代表有数据可接受，可读取
+    writable list中存放着你可以对其进行发送(send)操作
+    exceptional 当连接通信出现error时会把error写到exceptional列表中
+    &quot;&quot;&quot;
+    readable, writable, exceptional = select.select(input, output, input)
+
+
+
+
+
+  
+readable列表中的socket可能会有3种可能状态，  
+    1. 如果这个socket是server(它负责监听客户端的连接)，那就表示server端已经收到一个新的连接  
+    2. 客户端把数据发送过来了  
+    3. 客户端和服务器端断开了连接，将客户端对象从 列表和队列中删除
+
+
+
+
+
+    for s in readable:
+        if s is server: # 第1种情况，表示有新的连接进来
+            connection,add = s.accept() # 接受新的连接
+            connection.setblocking(0)
+
+            &quot;&quot;&quot;
+            这个时候，为了不阻塞整个程序的运行，我们先将它放入input列表中。
+            下一次loop时，就会被select去监听，如果这个连接的客户端发来了数据
+            那么这个连接的fd在server端就会变成就绪的，select就会把这个连接返回到readable列表中
+            然后在 for s in readable中取出这个连接，开始接受数据
+            &quot;&quot;&quot;
+            input.append(connection)
+            message_queue[connection] = Queue()
+
+        else: # 第2种情况就是，客户端把数据发送了过来
+            data = s.recv(1024) # 通过recv去接受数据
+            if data:
+                print(sys.stderr, 'received &quot;%s&quot; from %s' % (data, s.getpeername()))
+                message_queue[s].put(data) # 接受到的数据先放到队列中
+                if s not in output:
+                    output.append(s) # 为了不影响处理与其他客户端的连接，这里不立刻返回数据给客户端
+            else: # 第3种情况 就是客户端断开了连接，这个时候recv()数据就是空，这个时候就可以跟客户端断开连接
+                if s in output:
+                    &quot;&quot;&quot;
+                    既然断开了连接，就没有必要给客户端发送数据了
+                    如果客户端连接对象还在output中，就把他删除
+                    &quot;&quot;&quot;
+                    output.remove(s)
+                input.remove(s) # 在input列表中也删除掉
+                # 关闭连接，在队列中也删除
+                s.close()
+                del message_queue[s]
+</code></pre>
+<p>对于writable
+list中的socket，也有几种状态，如果这个客户端连接在跟它对应的queue里有数据，就把这个数据取出来再发回给这个客户端，否则就把这个连接从output
+list中移除，这样下一次循环select()调用时检测到outputs list中没有这个连接，那就会认为这个连接还处于非活动状态</p>
+<pre><code>    for s in writable:
+        try:
+            next_msg = message_queue[s].get_nowait()
+        except queue.Empty as e:
+            output.remove(s)
+        else:
+            s.send(next_msg)
+</code></pre>
+<p>最后，exceptional
+有异常产生。如果在跟某个socket连接通信过程中出了错误，就把这个连接对象在inputs\outputs\message_queue中都删除，再把连接关闭掉</p>
+<h2 id="三完整代码">三、完整代码</h2>
+<p>server端：</p>
+<pre><code># 通过非阻塞io实现http请求
+# select + 回调 + 事件循环
+
+# 使用单线程完成高并发
+
+import select
+import socket
+import sys
+from queue import Queue
+import queue
+
+
+# 创建套接字
+server = socket.socket()
+server.setblocking(False)
+server.bind(('localhost',8800))
+# 监听传入的连接
+server.listen(5)
+
+&quot;&quot;&quot;
+第一个是要检查要读取的传入数据的对象列表，
+第二个包含在缓冲区中有空间时将接收传出数据的对象，
+第三个包含可能有错误的对象（通常是错误的组合输入和输出通道对象）。
+&quot;&quot;&quot;
+input = [server] # 从中读取数据
+output = [] # 将数据发送出去
+select.select(input,output,input)
+
+message_queue = {} # 消息队列
+
+while input:
+    #等待至少一个套接字准备好处理
+    print(sys.stderr, '\nwaiting for the next event')
+    &quot;&quot;&quot;
+    readable中的socket连接代表有数据可接受，可读取
+    writable list中存放着你可以对其进行发送(send)操作
+    exceptional 当连接通信出现error时会把error写到exceptional列表中
+    &quot;&quot;&quot;
+    readable, writable, exceptional = select.select(input, output, input)
+
+
+    &quot;&quot;&quot;
+    readable列表中的socket可能会有3种可能状态，
+        1. 如果这个socket是server(它负责监听客户端的连接)，那就表示server端已经收到一个新的连接
+        2. 客户端把数据发送过来了
+        3. 客户端和服务器端断开了连接，将客户端对象从 列表和队列中删除
+    &quot;&quot;&quot;
+    for s in readable:
+        if s is server: # 第一种情况，表示有新的连接进来
+            connection,add = s.accept() # 接受新的连接
+            connection.setblocking(0)
+
+            &quot;&quot;&quot;
+            这个时候，为了不阻塞整个程序的运行，我们先将它放入input列表中。
+            下一次loop时，就会被select去监听，如果这个连接的客户端发来了数据
+            那么这个连接的fd在server端就会变成就绪的，select就会把这个连接返回到readable列表中
+            然后在 for s in readable中取出这个连接，开始接受数据
+            &quot;&quot;&quot;
+            input.append(connection)
+            message_queue[connection] = Queue()
+
+        else: # 第2种情况就是，客户端把数据发送了过来
+            data = s.recv(1024) # 通过recv去接受数据
+            if data:
+                print(sys.stderr, 'received &quot;%s&quot; from %s' % (data, s.getpeername()))
+                message_queue[s].put(data) # 接受到的数据先放到队列中
+                if s not in output:
+                    output.append(s) # 为了不影响处理与其他客户端的连接，这里不立刻返回数据给客户端
+            else: # 第3种情况 就是客户端断开了连接，这个时候recv()数据就是空，这个时候就可以跟客户端断开连接
+                if s in output:
+                    &quot;&quot;&quot;
+                    既然断开了连接，就没有必要给客户端发送数据了
+                    如果客户端连接对象还在output中，就把他删除
+                    &quot;&quot;&quot;
+                    output.remove(s)
+                input.remove(s) # 在input列表中也删除掉
+                # 关闭连接，在队列中也删除
+                s.close()
+                del message_queue[s]
+
+
+    &quot;&quot;&quot;
+    writable list也有几种状态，如果客户端连接在跟它对应的queue里有数据时，就把这个数据取出来再发给用户
+    否则就把这个连接从output中移除，这样下一次，select调用时检测到output列表中没有这个连接，就会认为这个连接处于非活动状态
+    &quot;&quot;&quot;
+    for s in writable:
+        try:
+            next_msg = message_queue[s].get_nowait()
+        except queue.Empty as e:
+            output.remove(s)
+        else:
+            s.send(next_msg)
+
+
+    &quot;&quot;&quot;
+    如果跟某个socket连接通信失败出现错误，就把这个连接对象从 各个列表中删除，再关闭连接
+    &quot;&quot;&quot;
+    for s in exceptional:
+        input.remove(s)
+        for s in output:
+            output.remove(s)
+        s.close()
+        del message_queue[s]
+</code></pre>
+<p>client端：</p>
+<pre><code>import socket
+
+
+client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+client.connect(('localhost',8800))
+
+while True:
+    msg = bytes(input(&quot;&lt;&lt;&lt;&quot;),encoding='utf-8')
+    client.sendall(msg)
+
+    data = client.recv(1024)
+
+    print(&quot;{}&quot;.format(data))
+</code></pre>
+
+        </div>
+        <div class="post-footer">
+            <div class="info">
+                
+                
+            </div>
+        </div>
+
+        
+            
+        
+    </div>
+
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript"
+        src="https://wxioi.github.io/js/jquery.min.86b1e8f819ee2d9099a783e50b49dff24282545fc40773861f9126b921532e4c.js"
+        integrity="sha256-hrHo&#43;BnuLZCZp4PlC0nf8kKCVF/EB3OGH5EmuSFTLkw="
+        crossorigin="anonymous"></script>
+
+
+
+
+<script type="text/javascript"
+        src="https://wxioi.github.io/js/bundle.min.0f9c74cb78f13d1f15f33daff4037c70354f98acfbb97a6f61708966675c3cae.js"
+        integrity="sha256-D5x0y3jxPR8V8z2v9AN8cDVPmKz7uXpvYXCJZmdcPK4="
+        crossorigin="anonymous"></script>
+
+<script type="text/javascript"
+        src="https://wxioi.github.io/js/medium-zoom.min.92f21c856129f84aeb719459b3e6ac621a3032fd7b180a18c04e1d12083f8aba.js"
+        integrity="sha256-kvIchWEp&#43;ErrcZRZs&#43;asYhowMv17GAoYwE4dEgg/iro="
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

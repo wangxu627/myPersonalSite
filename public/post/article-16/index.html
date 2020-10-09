@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en" data-theme=""><head>
+    <title> Xu | Python中的所有特殊方法 </title>
+
+    
+    <meta charset="utf-8"><meta name="generator" content="Hugo 0.76.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <meta name="description" content="Code more, Word less">
+    
+    <link rel="stylesheet"
+          href="https://wxioi.github.io/css/style.min.ec15cff0912041d0dce3a88999b9424990bd24473761645397583776684cdc3b.css"
+          integrity="sha256-7BXP8JEgQdDc46iJmblCSZC9JEc3YWRTl1g3dmhM3Ds="
+          crossorigin="anonymous"
+          type="text/css"><link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    
+    <link rel="shortcut icon" href="https://wxioi.github.io/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://wxioi.github.io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://wxioi.github.io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://wxioi.github.io/favicon-16x16.png">
+
+    <link rel="canonical" href="https://wxioi.github.io/post/article-16/">
+
+    
+    
+    
+    
+    <script type="text/javascript"
+            src="https://wxioi.github.io/js/anatole-header.min.e782db136ec18d105a4552702eac49f4620d6867da3fbf808bd53e806c96be6e.js"
+            integrity="sha256-54LbE27BjRBaRVJwLqxJ9GINaGfaP7&#43;Ai9U&#43;gGyWvm4="
+            crossorigin="anonymous"></script>
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Python中的所有特殊方法"/>
+<meta name="twitter:description" content="方法 介绍 object.``__new__( cls [, &hellip; ]) 一"/>
+
+</head>
+<body><div class="sidebar animated fadeInDown">
+    <div class="logo-title">
+        <div class="title">
+            <img src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1601655446596&amp;di=c986d9fb7998db721d388b0ea6f62bb9&amp;imgtype=0&amp;src=http%3A%2F%2Fpic6.58cdn.com.cn%2Fzhuanzh%2Fn_v2ed4fc8bbfb3e4f5fa12ae084cb8a7864.jpg%3Fw%3D750%26h%3D0" alt="profile picture">
+            <h3 title=""><a href="/">Nothing</a></h3>
+            <div class="description">
+                <p>Code more, Word less</p>
+            </div>
+        </div>
+    </div>
+    <ul class="social-links">
+        
+            <li>
+                <a href="https://github.com/wxioi/" rel="me" aria-label="GitHub">
+                    <i class="fa fa-2x fa-github" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            <li>
+                <a href="mailto:wangxu627@gmail.com" rel="me" aria-label="e-mail">
+                    <i class="fa fa-2x fa-envelope" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+    </ul>
+    <div class="footer">
+        <div class="by_farbox">&copy; Xu 2020 </div>
+    </div>
+</div>
+<div class="main">
+    <div class="page-top animated fadeInDown">
+    <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+    </a>
+    <ul class="nav" id="navMenu">
+        
+        
+            
+            <li><a 
+                   href="/"
+                        
+                   title="">Home</a></li>
+        
+            
+            <li><a 
+                   href="/post/"
+                        
+                   title="">Posts</a></li>
+        
+            
+            <li><a 
+                   href="/tools/"
+                        
+                   title="">Tools</a></li>
+        
+        
+        <li class="theme-switch-item">
+            <a class="theme-switch" title="Switch Theme">
+                <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+    <div class="autopagerize_page_element">
+        <div class="content">
+    <div class="post animated fadeInDown">
+        <div class="post-content">
+
+            <div class="post-title">
+                <h3>Python中的所有特殊方法</h3>
+                
+                    <div class="info">
+                        <em class="fa fa-sun-o"></em>
+                        <span class="date">Thu, Jul 11, 2019</span>
+                        <em class="fa fa-clock-o"></em>
+                        <span class="reading-time">4-minute read</span>
+                    </div>
+                
+            </div>
+
+            <table>
+<thead>
+<tr>
+<th>方法</th>
+<th>介绍</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>object.``__new__</code>( <em>cls</em> [,  <em>&hellip;</em> ])</td>
+<td>一个静态方法，主要用来定制不可变的子类类型</td>
+</tr>
+<tr>
+<td><code>object.``__init__</code>( <em>self</em> [,  <em>&hellip;</em> ])</td>
+<td>在对象被创建时调用，类似于C++或Java中的构造函数，</td>
+</tr>
+<tr>
+<td>但[<code>__init__()</code>](<a href="https://docs.python.org/zh-">https://docs.python.org/zh-</a></td>
+<td></td>
+</tr>
+<tr>
+<td>cn/3/reference/datamodel.html#object.<strong>init</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>&ldquo;object.<strong>init</strong>&quot;)返回的值只能是<code>None</code>，否则会在运行时引发</td>
+<td></td>
+</tr>
+<tr>
+<td>[<code>TypeError</code>](<a href="https://docs.python.org/zh-">https://docs.python.org/zh-</a></td>
+<td></td>
+</tr>
+<tr>
+<td>cn/3/library/exceptions.html#TypeError &ldquo;TypeError&rdquo;)。</td>
+<td></td>
+</tr>
+<tr>
+<td><code>object.``__del__</code>( <em>self</em> )</td>
+<td>在对象被销毁是调用类似于C++中的析构函数（ java则是finalize ）,</td>
+</tr>
+<tr>
+<td>[<code>__del__()</code>](<a href="https://docs.python.org/zh-">https://docs.python.org/zh-</a></td>
+<td></td>
+</tr>
+<tr>
+<td>cn/3/reference/datamodel.html#object.<strong>del</strong> &ldquo;object.<strong>del</strong>&quot;) 方法可以 (但不推荐!)</td>
+<td></td>
+</tr>
+<tr>
+<td>通过创建一个该实例的新引用来推迟其销毁 。这被称为对象  <em>重生</em></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><code>object.``__repr__</code>( <em>self</em> )|  在调用repr(obj)方法时被调用，用于生成对象的调试字符串<br>
+<code>object.``__str__</code>( <em>self</em> )|
+在调用str(obj)，format(),print()方法时被调用，用于生成对象的显示字符串，该方法和 <code>object.``__repr__</code>(
+<em>self</em>
+)类似，具体区别可以查看<a href="http://www.wxioi.com/article/14">Python中__repr__和__str__区别</a><br>
+<code>object.``__bytes__</code>( <em>self</em> )  |   通过 [bytes](<a href="https://docs.python.org/zh-">https://docs.python.org/zh-</a>
+cn/3/library/functions.html#func-bytes) 调用以生成一个对象的字节串表示。这应该返回一个
+<a href="https://docs.python.org/zh-cn/3/library/stdtypes.html#bytes" title="bytes"><code>bytes</code></a>
+对象<br>
+<code>object.``__format__</code>( <em>self</em> ,  <em>format_spec</em> )| 在调用内置函数format()的时候被调用<br>
+<code>object.``__lt__</code>( <em>self</em> ,  <em>other</em> )[](<a href="https://docs.python.org/zh-">https://docs.python.org/zh-</a>
+cn/3/reference/datamodel.html#object.<strong>lt</strong> &ldquo;永久链接至目标&rdquo;)</p>
+<p><code>object.``__le__</code>( <em>self</em> ,  <em>other</em> )[](<a href="https://docs.python.org/zh-">https://docs.python.org/zh-</a>
+cn/3/reference/datamodel.html#object.<strong>le</strong> &ldquo;永久链接至目标&rdquo;)</p>
+<p><code>object.``__eq__</code>( <em>self</em> ,  <em>other</em> )[](<a href="https://docs.python.org/zh-">https://docs.python.org/zh-</a>
+cn/3/reference/datamodel.html#object.<strong>eq</strong> &ldquo;永久链接至目标&rdquo;)</p>
+<p><code>object.``__ne__</code>( <em>self</em> ,  <em>other</em> )[](<a href="https://docs.python.org/zh-">https://docs.python.org/zh-</a>
+cn/3/reference/datamodel.html#object.<strong>ne</strong> &ldquo;永久链接至目标&rdquo;)</p>
+<p><code>object.``__gt__</code>( <em>self</em> ,  <em>other</em> )[](<a href="https://docs.python.org/zh-">https://docs.python.org/zh-</a>
+cn/3/reference/datamodel.html#object.<strong>gt</strong> &ldquo;永久链接至目标&rdquo;)</p>
+<p><code>object.``__ge__</code>( <em>self</em> ,  <em>other</em> )</p>
+<p>|   这些被称为“富比较”方法。运算符号与方法名称的对应关系如下：<code>x&lt;y</code> 调用 <code>x.__lt__(y)</code>、<code>x&lt;=y</code> 调用
+<code>x.__le__(y)</code>、<code>x==y</code> 调用 <code>x.__eq__(y)</code>、<code>x!=y</code> 调用 <code>x.__ne__(y)</code>、<code>x&gt;y</code> 调用
+<code>x.__gt__(y)</code>、<code>x&gt;=y</code> 调用 <code>x.__ge__(y)</code><br>
+<code>object.``__hash__</code>( <em>self</em> )|   内置函数 [<code>hash()</code>](<a href="https://docs.python.org/zh-">https://docs.python.org/zh-</a>
+cn/3/library/functions.html#hash &ldquo;hash&rdquo;) 调用时被调用;应该返回一个整数<br>
+<code>object.``__bool__</code>( <em>self</em> )|   内置的 <code>bool()</code> 操作执行时被调用；应该返回 <code>False</code> 或 <code>True</code><br>
+<code>object.``__getattr__</code>( <em>self</em> ,  <em>name</em> )|   当默认属性访问因引发
+[<code>AttributeError</code>](<a href="https://docs.python.org/zh-">https://docs.python.org/zh-</a>
+cn/3/library/exceptions.html#AttributeError &ldquo;AttributeError&rdquo;) 而失败时被调用，
+请注意如果属性是通过正常机制找到的，[<code>__getattr__()</code>](<a href="https://docs.python.org/zh-">https://docs.python.org/zh-</a>
+cn/3/reference/datamodel.html#object.<strong>getattr</strong> &ldquo;object.<strong>getattr</strong>&quot;) 就不会被调用</p>
+<p><code>object.``__getattribute__</code>( <em>self</em> ,  <em>name</em> )|
+此方法会无条件地被调用以实现对类实例属性的访问。如果类还定义了 [<code>__getattr__()</code>](<a href="https://docs.python.org/zh-">https://docs.python.org/zh-</a>
+cn/3/reference/datamodel.html#object.<strong>getattr</strong>
+&ldquo;object.<strong>getattr</strong>&quot;)，则后者不会被调用，除非
+[<code>__getattribute__()</code>](<a href="https://docs.python.org/zh-">https://docs.python.org/zh-</a>
+cn/3/reference/datamodel.html#object.<strong>getattribute</strong>
+&ldquo;object.<strong>getattribute</strong>&quot;) 显式地调用它或是引发了
+<code>[AttributeError](https://docs.python.org/zh- cn/3/library/exceptions.html#AttributeError &quot;AttributeError&quot;)。简单理解就是</code>__getattribute__的优先级比 __getattr__高<br>
+<code>object.``__setattr__</code>( <em>self</em> ,  <em>name</em> ,  <em>value</em> )  |   此方法在一个属性被尝试赋值时被调用<br>
+<code>object.``__delattr__</code>( <em>self</em> ,  <em>name</em> )|   此方法应该仅在 <code>del obj.name</code>
+对于该对象有意义时才被实现<br>
+<code>object.``__dir__</code>( <em>self</em> )|   此方法会在对相应对象调用
+<a href="https://docs.python.org/zh-cn/3/library/functions.html#dir" title="dir"><code>dir()</code></a>
+时被调用。返回值必须为一个序列。 [<code>dir()</code>](<a href="https://docs.python.org/zh-">https://docs.python.org/zh-</a>
+cn/3/library/functions.html#dir &ldquo;dir&rdquo;) 会把返回的序列转换为列表并对其排序。<br>
+<code>object.``__get__</code>( <em>self</em> ,  <em>instance</em> ,  <em>owner</em> )  |<br>
+<code>object.``__set__</code>( <em>self</em> ,  <em>instance</em> ,  <em>value</em> )|<br>
+<code>object.``__delete__</code>( <em>self</em> ,  <em>instance</em> )|<br>
+<code>object.``__set_name__</code>( <em>self</em> ,  <em>owner</em> ,  <em>name</em> )|<br>
+<code>object.``__slots__</code>|   这个类变量可赋值为字符串、可迭代对象或由实例使用的变量名构成的字符串序列。  <em><strong>slots</strong></em>
+会为已声明的变量保留空间，并阻止自动为每个实例创建  <em><strong>dict</strong></em>  和  <em><strong>weakref</strong></em> 。<br>
+<code>object.``__call__</code>( <em>self</em> [,  <em>args&hellip;</em> ])|
+此方法会在实例作为一个函数被“调用”时被调用；如果定义了此方法，则 <code>x(arg1, arg2, ...)</code> 就相当于 <code>x.__call__(arg1, arg2, ...)</code> 的快捷方式。<br>
+<code>object.``__len__</code>( <em>self</em> )  |   调用此方法以实现内置函数
+<a href="https://docs.python.org/zh-cn/3/library/functions.html#len" title="len"><code>len()</code></a></p>
+<p><code>object.``__getitem__</code>( <em>self</em> ,  <em>key</em> )|   调用此方法以实现 <code>self[key]</code> 的求值<br>
+<code>object.``__setitem__</code>( <em>self</em> ,  <em>key</em> ,  <em>value</em> )|   调用此方法以实现向
+<code>self[key]</code> 赋值<br>
+<code>object.``__delitem__</code>( <em>self</em> ,  <em>key</em> )|   调用此方法以实现 <code>self[key]</code> 的删除<br>
+<code>object.``__missing__</code>( <em>self</em> ,  <em>key</em> )|   此方法由
+<a href="https://docs.python.org/zh-cn/3/library/stdtypes.html#dict" title="dict"><code>dict</code></a>.[<code>__getitem__()</code>](<a href="https://docs.python.org/zh-">https://docs.python.org/zh-</a>
+cn/3/reference/datamodel.html#object.<strong>getitem</strong> &ldquo;object.<strong>getitem</strong>&quot;)
+在找不到字典中的键时调用以实现 dict 子类的 <code>self[key]</code>。<br>
+<code>object.``__iter__</code>( <em>self</em> )|   此方法在需要为容器创建迭代器时被调用<br>
+<code>object.``__reversed__</code>( <em>self</em> )|   此方法（如果存在）会被
+<a href="https://docs.python.org/zh-cn/3/library/functions.html#reversed" title="reversed"><code>reversed()</code></a> 内置函数调用以实现逆向迭代。它应当返回一个新的以逆序逐个迭代容器内所有对象的迭代器对象。<br>
+<code>object.``__contains__</code>( <em>self</em> ,  <em>item</em> )|   调用此方法以实现成员检测运算符<br>
+<code>object.``__add__</code>( <em>self</em> ,  <em>other</em> )[](<a href="https://docs.python.org/zh-">https://docs.python.org/zh-</a>
+cn/3/reference/datamodel.html#object.<strong>add</strong> &ldquo;永久链接至目标&rdquo;)</p>
+<p><code>object.``__sub__</code>( <em>self</em> ,  <em>other</em> )[](<a href="https://docs.python.org/zh-">https://docs.python.org/zh-</a>
+cn/3/reference/datamodel.html#object.<strong>sub</strong> &ldquo;永久链接至目标&rdquo;)</p>
+<p><code>object.``__mul__</code>( <em>self</em> ,  <em>other</em> )[](<a href="https://docs.python.org/zh-">https://docs.python.org/zh-</a>
+cn/3/reference/datamodel.html#object.<strong>mul</strong> &ldquo;永久链接至目标&rdquo;)</p>
+<p><code>object.``__matmul__</code>( <em>self</em> ,  <em>other</em> )[](<a href="https://docs.python.org/zh-">https://docs.python.org/zh-</a>
+cn/3/reference/datamodel.html#object.<strong>matmul</strong> &ldquo;永久链接至目标&rdquo;)</p>
+<p><code>object.``__truediv__</code>( <em>self</em> ,  <em>other</em> )[](<a href="https://docs.python.org/zh-">https://docs.python.org/zh-</a>
+cn/3/reference/datamodel.html#object.<strong>truediv</strong> &ldquo;永久链接至目标&rdquo;)</p>
+<p><code>object.``__floordiv__</code>( <em>self</em> ,  <em>other</em> )[](<a href="https://docs.python.org/zh-">https://docs.python.org/zh-</a>
+cn/3/reference/datamodel.html#object.<strong>floordiv</strong> &ldquo;永久链接至目标&rdquo;)</p>
+<p><code>object.``__mod__</code>( <em>self</em> ,  <em>other</em> )[](<a href="https://docs.python.org/zh-">https://docs.python.org/zh-</a>
+cn/3/reference/datamodel.html#object.<strong>mod</strong> &ldquo;永久链接至目标&rdquo;)</p>
+<p><code>object.``__divmod__</code>( <em>self</em> ,  <em>other</em> )[](<a href="https://docs.python.org/zh-">https://docs.python.org/zh-</a>
+cn/3/reference/datamodel.html#object.<strong>divmod</strong> &ldquo;永久链接至目标&rdquo;)</p>
+<p><code>object.``__pow__</code>( <em>self</em> ,  <em>other</em> [,  <em>modulo</em>
+])<a href="https://docs.python.org/zh-cn/3/reference/datamodel.html#object.__pow__" title="永久链接至目标"></a></p>
+<p><code>object.``__lshift__</code>( <em>self</em> ,  <em>other</em> )[](<a href="https://docs.python.org/zh-">https://docs.python.org/zh-</a>
+cn/3/reference/datamodel.html#object.<strong>lshift</strong> &ldquo;永久链接至目标&rdquo;)</p>
+<p><code>object.``__rshift__</code>( <em>self</em> ,  <em>other</em> )[](<a href="https://docs.python.org/zh-">https://docs.python.org/zh-</a>
+cn/3/reference/datamodel.html#object.<strong>rshift</strong> &ldquo;永久链接至目标&rdquo;)</p>
+<p><code>object.``__and__</code>( <em>self</em> ,  <em>other</em> )[](<a href="https://docs.python.org/zh-">https://docs.python.org/zh-</a>
+cn/3/reference/datamodel.html#object.<strong>and</strong> &ldquo;永久链接至目标&rdquo;)</p>
+<p><code>object.``__xor__</code>( <em>self</em> ,  <em>other</em> )[](<a href="https://docs.python.org/zh-">https://docs.python.org/zh-</a>
+cn/3/reference/datamodel.html#object.<strong>xor</strong> &ldquo;永久链接至目标&rdquo;)</p>
+<p><code>object.``__or__</code>( <em>self</em> ,  <em>other</em> )</p>
+<p>|   调用这些方法来实现二进制算术运算 (<code>+</code>, <code>-</code>, <code>*</code>, <code>@</code>, <code>/</code>, <code>//</code>, <code>%</code>,
+<a href="https://docs.python.org/zh-cn/3/library/functions.html#divmod" title="divmod"><code>divmod()</code></a>, [<code>pow()</code>](<a href="https://docs.python.org/zh-">https://docs.python.org/zh-</a>
+cn/3/library/functions.html#pow &ldquo;pow&rdquo;), <code>**</code>, <code>&lt;&lt;</code>, <code>&gt;&gt;</code>, <code>&amp;</code>, <code>^</code>, <code>|</code>)</p>
+
+        </div>
+        <div class="post-footer">
+            <div class="info">
+                
+                
+            </div>
+        </div>
+
+        
+            
+        
+    </div>
+
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript"
+        src="https://wxioi.github.io/js/jquery.min.86b1e8f819ee2d9099a783e50b49dff24282545fc40773861f9126b921532e4c.js"
+        integrity="sha256-hrHo&#43;BnuLZCZp4PlC0nf8kKCVF/EB3OGH5EmuSFTLkw="
+        crossorigin="anonymous"></script>
+
+
+
+
+<script type="text/javascript"
+        src="https://wxioi.github.io/js/bundle.min.0f9c74cb78f13d1f15f33daff4037c70354f98acfbb97a6f61708966675c3cae.js"
+        integrity="sha256-D5x0y3jxPR8V8z2v9AN8cDVPmKz7uXpvYXCJZmdcPK4="
+        crossorigin="anonymous"></script>
+
+<script type="text/javascript"
+        src="https://wxioi.github.io/js/medium-zoom.min.92f21c856129f84aeb719459b3e6ac621a3032fd7b180a18c04e1d12083f8aba.js"
+        integrity="sha256-kvIchWEp&#43;ErrcZRZs&#43;asYhowMv17GAoYwE4dEgg/iro="
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

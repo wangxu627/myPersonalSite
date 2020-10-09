@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en" data-theme=""><head>
+    <title> Xu | Python 调试器之pdb </title>
+
+    
+    <meta charset="utf-8"><meta name="generator" content="Hugo 0.76.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <meta name="description" content="Code more, Word less">
+    
+    <link rel="stylesheet"
+          href="https://wxioi.github.io/css/style.min.ec15cff0912041d0dce3a88999b9424990bd24473761645397583776684cdc3b.css"
+          integrity="sha256-7BXP8JEgQdDc46iJmblCSZC9JEc3YWRTl1g3dmhM3Ds="
+          crossorigin="anonymous"
+          type="text/css"><link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    
+    <link rel="shortcut icon" href="https://wxioi.github.io/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://wxioi.github.io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://wxioi.github.io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://wxioi.github.io/favicon-16x16.png">
+
+    <link rel="canonical" href="https://wxioi.github.io/post/article-39/">
+
+    
+    
+    
+    
+    <script type="text/javascript"
+            src="https://wxioi.github.io/js/anatole-header.min.e782db136ec18d105a4552702eac49f4620d6867da3fbf808bd53e806c96be6e.js"
+            integrity="sha256-54LbE27BjRBaRVJwLqxJ9GINaGfaP7&#43;Ai9U&#43;gGyWvm4="
+            crossorigin="anonymous"></script>
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Python 调试器之pdb"/>
+<meta name="twitter:description" content="使用PDB的方式有两"/>
+
+</head>
+<body><div class="sidebar animated fadeInDown">
+    <div class="logo-title">
+        <div class="title">
+            <img src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1601655446596&amp;di=c986d9fb7998db721d388b0ea6f62bb9&amp;imgtype=0&amp;src=http%3A%2F%2Fpic6.58cdn.com.cn%2Fzhuanzh%2Fn_v2ed4fc8bbfb3e4f5fa12ae084cb8a7864.jpg%3Fw%3D750%26h%3D0" alt="profile picture">
+            <h3 title=""><a href="/">Nothing</a></h3>
+            <div class="description">
+                <p>Code more, Word less</p>
+            </div>
+        </div>
+    </div>
+    <ul class="social-links">
+        
+            <li>
+                <a href="https://github.com/wxioi/" rel="me" aria-label="GitHub">
+                    <i class="fa fa-2x fa-github" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            <li>
+                <a href="mailto:wangxu627@gmail.com" rel="me" aria-label="e-mail">
+                    <i class="fa fa-2x fa-envelope" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+    </ul>
+    <div class="footer">
+        <div class="by_farbox">&copy; Xu 2020 </div>
+    </div>
+</div>
+<div class="main">
+    <div class="page-top animated fadeInDown">
+    <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+    </a>
+    <ul class="nav" id="navMenu">
+        
+        
+            
+            <li><a 
+                   href="/"
+                        
+                   title="">Home</a></li>
+        
+            
+            <li><a 
+                   href="/post/"
+                        
+                   title="">Posts</a></li>
+        
+            
+            <li><a 
+                   href="/tools/"
+                        
+                   title="">Tools</a></li>
+        
+        
+        <li class="theme-switch-item">
+            <a class="theme-switch" title="Switch Theme">
+                <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+    <div class="autopagerize_page_element">
+        <div class="content">
+    <div class="post animated fadeInDown">
+        <div class="post-content">
+
+            <div class="post-title">
+                <h3>Python 调试器之pdb</h3>
+                
+                    <div class="info">
+                        <em class="fa fa-sun-o"></em>
+                        <span class="date">Wed, Aug 21, 2019</span>
+                        <em class="fa fa-clock-o"></em>
+                        <span class="reading-time">4-minute read</span>
+                    </div>
+                
+            </div>
+
+            <p>使用PDB的方式有两种:</p>
+<p>1. 单步执行代码,通过命令 python -m pdb xxx.py 启动脚本，进入单步执行模式</p>
+<p>pdb命令行：</p>
+<pre><code>1）进入命令行Debug模式，python -m pdb xxx.py
+
+2）h：（help）帮助
+
+3）w：（where）打印当前执行堆栈
+
+4）d：（down）执行跳转到在当前堆栈的深一层（个人没觉得有什么用处）
+
+5）u：（up）执行跳转到当前堆栈的上一层
+
+6）b：（break）添加断点
+
+             b 列出当前所有断点，和断点执行到统计次数
+
+             b line_no：当前脚本的line_no行添加断点
+
+             b filename:line_no：脚本filename的line_no行添加断点
+
+             b function：在函数function的第一条可执行语句处添加断点
+
+7）tbreak：（temporary break）临时断点
+
+             在第一次执行到这个断点之后，就自动删除这个断点，用法和b一样
+
+8）cl：（clear）清除断点
+
+            cl 清除所有断点
+
+            cl bpnumber1 bpnumber2... 清除断点号为bpnumber1,bpnumber2...的断点
+
+            cl lineno 清除当前脚本lineno行的断点
+
+            cl filename:line_no 清除脚本filename的line_no行的断点
+
+9）disable：停用断点，参数为bpnumber，和cl的区别是，断点依然存在，只是不启用
+
+10）enable：激活断点，参数为bpnumber
+
+11）s：（step）执行下一条命令
+
+            如果本句是函数调用，则s会执行到函数的第一句
+
+12）n：（next）执行下一条语句
+
+            如果本句是函数调用，则执行函数，接着执行当前执行语句的下一条。
+
+13）r：（return）执行当前运行函数到结束
+
+14）c：（continue）继续执行，直到遇到下一条断点
+
+15）l：（list）列出源码
+
+             l 列出当前执行语句周围11条代码
+
+             l first 列出first行周围11条代码
+
+             l first second 列出first--second范围的代码，如果second&lt;first，second将被解析为行数
+
+16）a：（args）列出当前执行函数的函数
+
+17）p expression：（print）输出expression的值
+
+18）pp expression：好看一点的p expression
+
+19）run：重新启动debug，相当于restart
+
+20）q：（quit）退出debug
+
+21）j lineno：（jump）设置下条执行的语句函数
+
+            只能在堆栈的最底层跳转，向后重新执行，向前可直接执行到行号
+
+22）unt：（until）执行到下一行（跳出循环），或者当前堆栈结束
+
+23）condition bpnumber conditon，给断点设置条件，当参数condition返回True的时候bpnumber断点有效，否则bpnumber断点无效
+</code></pre>
+<p>注意：</p>
+<pre><code>1：直接输入Enter，会执行上一条命令；
+
+2：输入PDB不认识的命令，PDB会把他当做Python语句在当前环境下执行；
+</code></pre>
+<p>实例：</p>
+<p>#test1.py</p>
+<p>s = &lsquo;0&rsquo;<br>
+n = int(s)<br>
+print(10/n)</p>
+<p>打开命令行运行test1.py</p>
+<p>python -m pdb test1.py</p>
+<p><img src="https://images2018.cnblogs.com/blog/319359/201803/319359-20180309163354386-1614433168.png" alt=""></p>
+<p>pdm定位到下一步要执行的代码-&gt; s = &lsquo;0&rsquo;,输入命令l，就是上面的第15个命令l(list)来查看下代码：</p>
+<p><img src="https://images2018.cnblogs.com/blog/319359/201803/319359-20180309163621591-1980237421.png" alt=""></p>
+<p>输入命令n可以单步执行代码</p>
+<p><img src="https://images2018.cnblogs.com/blog/319359/201803/319359-20180309163653740-593951858.png" alt=""></p>
+<p>还可以输入  p 变量名   来查看变量</p>
+<p><img src="https://images2018.cnblogs.com/blog/319359/201803/319359-20180309163813156-1165344911.png" alt=""></p>
+<p>但是这个变量所在的代码必须是运行过之后才能查看，否则，会出现找不到变量的情况，如下</p>
+<p><img src="https://images2018.cnblogs.com/blog/319359/201803/319359-20180309163932447-2075309546.png" alt=""></p>
+<p>刚开始运行test.py，到第一行代码s = &lsquo;0&rsquo;,这行代码实际还未执行。此时查看变量s会提示找不到变量</p>
+<p>输入命令q结束调试，退出程序</p>
+<p><img src="https://images2018.cnblogs.com/blog/319359/201803/319359-20180309164118781-2139918220.png" alt=""></p>
+<p>2. pdb单步执行太麻烦了，所以第二种方法是import pdb
+之后，直接在代码里需要调试的地方放一个pdb.set_trace()，就可以设置一个断点，
+程序会在pdb.set_trace()暂停并进入pdb调试环境，可以用pdb 变量名查看变量，或者c继续运行</p>
+<p>修改下上面的实例如下，import pdb, 添加了pdb.set_trace()到可能出错的代码前面</p>
+<h1 id="test1py">test1.py</h1>
+<p>import pdb</p>
+<p>s = &lsquo;0&rsquo;<br>
+n = int(s)<br>
+pdb.set_trace() #运行到这里会自动暂停<br>
+print(10/n)</p>
+<p>运行之后，程序到断电的下一行代码就暂停了</p>
+<p><img src="https://images2018.cnblogs.com/blog/319359/201803/319359-20180309165146483-932831565.png" alt=""></p>
+
+        </div>
+        <div class="post-footer">
+            <div class="info">
+                
+                
+            </div>
+        </div>
+
+        
+            
+        
+    </div>
+
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript"
+        src="https://wxioi.github.io/js/jquery.min.86b1e8f819ee2d9099a783e50b49dff24282545fc40773861f9126b921532e4c.js"
+        integrity="sha256-hrHo&#43;BnuLZCZp4PlC0nf8kKCVF/EB3OGH5EmuSFTLkw="
+        crossorigin="anonymous"></script>
+
+
+
+
+<script type="text/javascript"
+        src="https://wxioi.github.io/js/bundle.min.0f9c74cb78f13d1f15f33daff4037c70354f98acfbb97a6f61708966675c3cae.js"
+        integrity="sha256-D5x0y3jxPR8V8z2v9AN8cDVPmKz7uXpvYXCJZmdcPK4="
+        crossorigin="anonymous"></script>
+
+<script type="text/javascript"
+        src="https://wxioi.github.io/js/medium-zoom.min.92f21c856129f84aeb719459b3e6ac621a3032fd7b180a18c04e1d12083f8aba.js"
+        integrity="sha256-kvIchWEp&#43;ErrcZRZs&#43;asYhowMv17GAoYwE4dEgg/iro="
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

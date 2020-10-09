@@ -2,160 +2,1158 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Xu`s Blog</title>
-    <link>https://wangxu627.github.io/post/</link>
+    <link>https://wxioi.github.io/post/</link>
     <description>Recent content in Posts on Xu`s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 03 Oct 2020 17:20:30 +0800</lastBuildDate><atom:link href="https://wangxu627.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 28 May 2020 06:43:43 +0000</lastBuildDate><atom:link href="https://wxioi.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Aaaaaf Aaa Bbb</title>
-      <link>https://wangxu627.github.io/post/aaaaaf-aaa-bbb/</link>
-      <pubDate>Sat, 03 Oct 2020 17:20:30 +0800</pubDate>
+      <title>Git每次都要求输入密码</title>
+      <link>https://wxioi.github.io/post/article-130/</link>
+      <pubDate>Thu, 28 May 2020 06:43:43 +0000</pubDate>
       
-      <guid>https://wangxu627.github.io/post/aaaaaf-aaa-bbb/</guid>
-      <description>Insert Lead paragraph here.
-New Cool Posts aaaaaf-aaa-bbb</description>
+      <guid>https://wxioi.github.io/post/article-130/</guid>
+      <description>&amp;lt;https://stackoverflow.com/questions/11403407/git-asks-for-username-every- time-i-push&amp;gt; Edit (by @dk14 as suggested by moderators and</description>
     </item>
     
     <item>
-      <title>Aaaaaf</title>
-      <link>https://wangxu627.github.io/post/aaaaaf/</link>
-      <pubDate>Sat, 03 Oct 2020 17:20:11 +0800</pubDate>
+      <title>flex布局中某个元素右对齐</title>
+      <link>https://wxioi.github.io/post/article-129/</link>
+      <pubDate>Wed, 20 May 2020 08:07:18 +0000</pubDate>
       
-      <guid>https://wangxu627.github.io/post/aaaaaf/</guid>
-      <description>Insert Lead paragraph here.
-New Cool Posts aaaaaf</description>
+      <guid>https://wxioi.github.io/post/article-129/</guid>
+      <description>To align one flex child to the right set it</description>
     </item>
     
     <item>
-      <title>Aaaaae</title>
-      <link>https://wangxu627.github.io/post/aaaaae/</link>
-      <pubDate>Sat, 03 Oct 2020 17:18:46 +0800</pubDate>
+      <title>Redis清空数据库</title>
+      <link>https://wxioi.github.io/post/article-128/</link>
+      <pubDate>Tue, 19 May 2020 00:02:52 +0000</pubDate>
       
-      <guid>https://wangxu627.github.io/post/aaaaae/</guid>
-      <description>Insert Lead paragraph here.
-New Cool Posts </description>
+      <guid>https://wxioi.github.io/post/article-128/</guid>
+      <description>1.flushall</description>
     </item>
     
     <item>
-      <title>Aaaaad</title>
-      <link>https://wangxu627.github.io/post/aaaaad/</link>
-      <pubDate>Sat, 03 Oct 2020 17:18:15 +0800</pubDate>
+      <title>Python Advanced Book</title>
+      <link>https://wxioi.github.io/post/article-127/</link>
+      <pubDate>Tue, 14 Apr 2020 01:47:28 +0000</pubDate>
       
-      <guid>https://wangxu627.github.io/post/aaaaad/</guid>
+      <guid>https://wxioi.github.io/post/article-127/</guid>
+      <description>https://www.quora.com/What-are-good-books-on-advanced-topics-in-Python
+https://wiki.python.org/moin/AdvancedBooks
+&amp;lt;https://realpython.com/best-python-books/#best-intermediate-and-advanced- python-books&amp;gt;
+&amp;lt;https://hackr.io/blog/best-python-books-for-beginners-and-advanced- programmers&amp;gt;
+https://baijiahao.baidu.com/s?id=1601513200373576360&amp;amp;wfr=spider&amp;amp;for=pc</description>
+    </item>
+    
+    <item>
+      <title>Python的矩阵乘法</title>
+      <link>https://wxioi.github.io/post/article-126/</link>
+      <pubDate>Tue, 31 Mar 2020 09:12:37 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-126/</guid>
+      <description>Matrix multiplication mathutils now uses the PEP 465 binary operator</description>
+    </item>
+    
+    <item>
+      <title>pip换源相关操作</title>
+      <link>https://wxioi.github.io/post/article-125/</link>
+      <pubDate>Tue, 31 Mar 2020 03:33:46 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-125/</guid>
+      <description>为pip换个国内源还</description>
+    </item>
+    
+    <item>
+      <title>chrome中调试dropdown技巧</title>
+      <link>https://wxioi.github.io/post/article-124/</link>
+      <pubDate>Wed, 25 Mar 2020 07:42:44 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-124/</guid>
+      <description>1. 在console中</description>
+    </item>
+    
+    <item>
+      <title>JS代码给element发送事件</title>
+      <link>https://wxioi.github.io/post/article-123/</link>
+      <pubDate>Mon, 23 Mar 2020 07:04:49 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-123/</guid>
+      <description>var elem = document.getElementById(&amp;quot;add_tag&amp;quot;); var event = new MouseEvent(&amp;quot;mousedown&amp;quot;, {view:</description>
+    </item>
+    
+    <item>
+      <title>讲长数字格式化成带逗号的字符串</title>
+      <link>https://wxioi.github.io/post/article-122/</link>
+      <pubDate>Mon, 23 Mar 2020 06:59:59 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-122/</guid>
+      <description>python: Locale unaware &#39;{:,}&#39;.format(value) # For Python ≥2.</description>
+    </item>
+    
+    <item>
+      <title>parseInt, parseFloat 和 &#43;</title>
+      <link>https://wxioi.github.io/post/article-121/</link>
+      <pubDate>Mon, 23 Mar 2020 06:29:55 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-121/</guid>
+      <description>+,parseInt</description>
+    </item>
+    
+    <item>
+      <title>ES6的Number.isNaN和isNaN的区别</title>
+      <link>https://wxioi.github.io/post/article-120/</link>
+      <pubDate>Mon, 23 Mar 2020 05:52:52 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-120/</guid>
+      <description>To quote from a ponyfoo article on numbers in ES6:</description>
+    </item>
+    
+    <item>
+      <title>vscode的一些使用技巧</title>
+      <link>https://wxioi.github.io/post/article-119/</link>
+      <pubDate>Mon, 09 Mar 2020 05:50:24 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-119/</guid>
+      <description>选中所有行，并将cu</description>
+    </item>
+    
+    <item>
+      <title>Vscode调试python代码时进入library function的设置</title>
+      <link>https://wxioi.github.io/post/article-118/</link>
+      <pubDate>Wed, 26 Feb 2020 00:43:12 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-118/</guid>
+      <description>&amp;lt;https://stackoverflow.com/questions/53594900/visual-studio-code-python- debugging-step-into-the-code-of-external-functions&amp;gt; { // Use IntelliSense to learn about possible</description>
+    </item>
+    
+    <item>
+      <title>HTML显示本地或者网络二进制图片方法</title>
+      <link>https://wxioi.github.io/post/article-117/</link>
+      <pubDate>Mon, 17 Feb 2020 22:36:09 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-117/</guid>
+      <description>&amp;lt;html&amp;gt; &amp;lt;head&amp;gt; &amp;lt;title&amp;gt;Hello&amp;lt;/title&amp;gt; &amp;lt;/head&amp;gt; &amp;lt;body&amp;gt; &amp;lt;img id=&amp;quot;imgobj&amp;quot; style=&amp;quot;width:300px;height:300px&amp;quot; &amp;gt;&amp;lt;/img&amp;gt; &amp;lt;div</description>
+    </item>
+    
+    <item>
+      <title>youku</title>
+      <link>https://wxioi.github.io/post/article-116/</link>
+      <pubDate>Mon, 17 Feb 2020 22:31:50 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-116/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Aaaaac</title>
-      <link>https://wangxu627.github.io/post/aaaaac/</link>
-      <pubDate>Sat, 03 Oct 2020 17:06:06 +0800</pubDate>
+      <title>JS之==运算符算法</title>
+      <link>https://wxioi.github.io/post/article-115/</link>
+      <pubDate>Thu, 13 Feb 2020 01:12:08 +0000</pubDate>
       
-      <guid>https://wangxu627.github.io/post/aaaaac/</guid>
-      <description>Insert Lead paragraph here.
-New Cool Posts {{ .Title }}</description>
+      <guid>https://wxioi.github.io/post/article-115/</guid>
+      <description>ReturnIfAbrupt(x). ReturnIfAbrupt(y). If Type(x) is the same as Type(y), then</description>
     </item>
     
     <item>
-      <title>Aaaaab</title>
-      <link>https://wangxu627.github.io/post/aaaaab/</link>
-      <pubDate>Sat, 03 Oct 2020 14:33:29 +0800</pubDate>
+      <title>Python之asyncio并发运行多个task</title>
+      <link>https://wxioi.github.io/post/article-114/</link>
+      <pubDate>Tue, 11 Feb 2020 15:49:46 +0000</pubDate>
       
-      <guid>https://wangxu627.github.io/post/aaaaab/</guid>
+      <guid>https://wxioi.github.io/post/article-114/</guid>
+      <description>import asyncio async def f1(): print(&amp;quot;f1 start&amp;quot;) await asyncio.sleep(1) print(&amp;quot;f1</description>
+    </item>
+    
+    <item>
+      <title>tampermonkey匹配所有网站,自定义按键</title>
+      <link>https://wxioi.github.io/post/article-113/</link>
+      <pubDate>Tue, 11 Feb 2020 04:16:55 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-113/</guid>
+      <description>最重要的一行 // @include /^https?://..\../.$/ 参</description>
+    </item>
+    
+    <item>
+      <title>pypi 镜像使用帮助</title>
+      <link>https://wxioi.github.io/post/article-112/</link>
+      <pubDate>Mon, 10 Feb 2020 09:55:46 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-112/</guid>
+      <description>pypi 镜像使用帮助 pypi 镜像</description>
+    </item>
+    
+    <item>
+      <title>img标签src引用网络图片，响应403的解决方法</title>
+      <link>https://wxioi.github.io/post/article-111/</link>
+      <pubDate>Sun, 09 Feb 2020 11:39:33 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-111/</guid>
+      <description>在html页面加入标</description>
+    </item>
+    
+    <item>
+      <title>Python functools之cmp_to_key</title>
+      <link>https://wxioi.github.io/post/article-110/</link>
+      <pubDate>Sun, 09 Feb 2020 06:51:53 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-110/</guid>
+      <description>from functools import cmp_to_key def cmp_new(x,y): sx = str(x) sy</description>
+    </item>
+    
+    <item>
+      <title>Python获取ip地址</title>
+      <link>https://wxioi.github.io/post/article-109/</link>
+      <pubDate>Fri, 07 Feb 2020 06:10:06 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-109/</guid>
+      <description>import socket import fcntl import struct def get_ip_address(ifname): s =</description>
+    </item>
+    
+    <item>
+      <title>Python描述符入门</title>
+      <link>https://wxioi.github.io/post/article-108/</link>
+      <pubDate>Fri, 07 Feb 2020 06:02:42 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-108/</guid>
+      <description>class Desc(object): def __get__(self, instance, owner): print(&amp;quot;get!!!!&amp;quot;) print(&amp;quot;self=&amp;quot;, self, type(self))</description>
+    </item>
+    
+    <item>
+      <title>python补码转换</title>
+      <link>https://wxioi.github.io/post/article-107/</link>
+      <pubDate>Mon, 03 Feb 2020 03:50:59 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-107/</guid>
+      <description>def convert2bin(val, bits): if val &amp;lt; 0: return bin(((1 &amp;lt;&amp;lt;</description>
+    </item>
+    
+    <item>
+      <title>使用python编码解码html特殊符号</title>
+      <link>https://wxioi.github.io/post/article-106/</link>
+      <pubDate>Mon, 27 Jan 2020 14:30:43 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-106/</guid>
+      <description>比如,+,&amp;lt;,</description>
+    </item>
+    
+    <item>
+      <title>使用dpgk安装deb时的依赖问题</title>
+      <link>https://wxioi.github.io/post/article-105/</link>
+      <pubDate>Mon, 27 Jan 2020 14:29:13 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-105/</guid>
+      <description>1. sudo apt-get update 2.sudo apt-get -f -y install 3.sudo</description>
+    </item>
+    
+    <item>
+      <title>PyCharm Community和Vscode配置flask调试</title>
+      <link>https://wxioi.github.io/post/article-104/</link>
+      <pubDate>Mon, 20 Jan 2020 05:10:25 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-104/</guid>
+      <description>PyCharm Community 1. Templat</description>
+    </item>
+    
+    <item>
+      <title>Git忽略文件mode</title>
+      <link>https://wxioi.github.io/post/article-103/</link>
+      <pubDate>Tue, 14 Jan 2020 01:19:59 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-103/</guid>
+      <description>git config --add core.filemode false</description>
+    </item>
+    
+    <item>
+      <title>白话debounce和throttle</title>
+      <link>https://wxioi.github.io/post/article-102/</link>
+      <pubDate>Sun, 12 Jan 2020 05:39:29 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-102/</guid>
+      <description>遇到的问题 在开发过程</description>
+    </item>
+    
+    <item>
+      <title>sql</title>
+      <link>https://wxioi.github.io/post/article-101/</link>
+      <pubDate>Wed, 08 Jan 2020 15:35:47 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-101/</guid>
+      <description>select fs.code, sum(fs.fx_per) from (select fs.*, row_number() over (partition by fs.</description>
+    </item>
+    
+    <item>
+      <title>Angular项目集成eslint</title>
+      <link>https://wxioi.github.io/post/article-100/</link>
+      <pubDate>Mon, 06 Jan 2020 06:35:37 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-100/</guid>
+      <description>1.安装插件 $ npm i -D</description>
+    </item>
+    
+    <item>
+      <title>gunicorn &#43; flask &#43; factory mode &#43; create_app</title>
+      <link>https://wxioi.github.io/post/article-99/</link>
+      <pubDate>Sun, 29 Dec 2019 18:25:49 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-99/</guid>
+      <description>I wrote a flask app using the application factory pattern. That means it doesn&amp;rsquo;t create an app instance automatically when you import it.</description>
+    </item>
+    
+    <item>
+      <title>centos 解决python3.7 安装时No module named _ssl</title>
+      <link>https://wxioi.github.io/post/article-98/</link>
+      <pubDate>Wed, 25 Dec 2019 20:34:19 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-98/</guid>
+      <description>centos安装py</description>
+    </item>
+    
+    <item>
+      <title>CSS笔记</title>
+      <link>https://wxioi.github.io/post/article-97/</link>
+      <pubDate>Sun, 22 Dec 2019 14:28:31 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-97/</guid>
+      <description>prop |= &amp;ldquo;text&amp;rdquo; 以text或者</description>
+    </item>
+    
+    <item>
+      <title>redis暴露公网导致被挖矿病毒感染</title>
+      <link>https://wxioi.github.io/post/article-96/</link>
+      <pubDate>Sun, 22 Dec 2019 14:28:10 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-96/</guid>
+      <description>原因： 1.redis</description>
+    </item>
+    
+    <item>
+      <title>linux私钥id_rsa转换成ppk</title>
+      <link>https://wxioi.github.io/post/article-95/</link>
+      <pubDate>Thu, 19 Dec 2019 07:46:51 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-95/</guid>
+      <description>大家都知道在linu</description>
+    </item>
+    
+    <item>
+      <title>alpine运行apk update卡住</title>
+      <link>https://wxioi.github.io/post/article-94/</link>
+      <pubDate>Wed, 18 Dec 2019 17:21:27 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-94/</guid>
+      <description>https://www.wanghaiqing.com/article/d72e5407-f67d-4325-8fc9-08c9f2a97539/</description>
+    </item>
+    
+    <item>
+      <title>ubuntu 容器安装ping ifconfig ip命令</title>
+      <link>https://wxioi.github.io/post/article-93/</link>
+      <pubDate>Tue, 17 Dec 2019 20:03:35 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-93/</guid>
+      <description>进入容器测试ifco</description>
+    </item>
+    
+    <item>
+      <title>正则表达式匹配所有字符包括换行符\n -正则表达式(1)</title>
+      <link>https://wxioi.github.io/post/article-92/</link>
+      <pubDate>Mon, 16 Dec 2019 06:37:38 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-92/</guid>
+      <description>https://blog.csdn.net/babybabyup/article/details/81078742 前言 遇到问题记录下</description>
+    </item>
+    
+    <item>
+      <title>How to mount remote directory on Windows using SSHFS-Win</title>
+      <link>https://wxioi.github.io/post/article-91/</link>
+      <pubDate>Wed, 11 Dec 2019 01:12:32 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-91/</guid>
+      <description>&amp;lt;https://codeyarns.com/2018/05/03/how-to-mount-remote-directory-on-windows- using-sshfs-win/&amp;gt;
+[ sshfs](https://codeyarns.com/2014/09/10/how-to-mount-remote-directory- using-sshfs/) makes it convenient to mount a directory from a remote Linux computer on a local Linux computer.</description>
+    </item>
+    
+    <item>
+      <title>elasticsearch常见报错</title>
+      <link>https://wxioi.github.io/post/article-90/</link>
+      <pubDate>Sat, 07 Dec 2019 06:34:23 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-90/</guid>
+      <description>[1]: max file descriptors [4096] for elasticsearch process is too</description>
+    </item>
+    
+    <item>
+      <title>linux修改ulimit的几种方法总结</title>
+      <link>https://wxioi.github.io/post/article-89/</link>
+      <pubDate>Sat, 07 Dec 2019 06:33:31 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-89/</guid>
+      <description>https://blog.csdn.net/leshami/article/details/8749773 https://blog.csdn.net/qq_37049496/article/details/86638102 主要是/etc/</description>
+    </item>
+    
+    <item>
+      <title>ubuntu配置samba</title>
+      <link>https://wxioi.github.io/post/article-88/</link>
+      <pubDate>Sat, 07 Dec 2019 04:53:52 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-88/</guid>
+      <description>使用的是正常用户，没</description>
+    </item>
+    
+    <item>
+      <title>redis url 格式</title>
+      <link>https://wxioi.github.io/post/article-87/</link>
+      <pubDate>Fri, 06 Dec 2019 05:39:42 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-87/</guid>
+      <description>Connections to a Redis Standalone, Sentinel, or Cluster require a</description>
+    </item>
+    
+    <item>
+      <title>ln -s 创建软链接的路径问题</title>
+      <link>https://wxioi.github.io/post/article-86/</link>
+      <pubDate>Thu, 05 Dec 2019 23:03:57 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-86/</guid>
+      <description>创建软连接，是非常简</description>
+    </item>
+    
+    <item>
+      <title>使用python检测命令是否存在</title>
+      <link>https://wxioi.github.io/post/article-85/</link>
+      <pubDate>Mon, 02 Dec 2019 16:35:13 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-85/</guid>
+      <description>import os def check_cmd_avail(cmd): f = os.popen(&amp;quot;command -v &amp;quot; +</description>
+    </item>
+    
+    <item>
+      <title>sudo不需要输入密码</title>
+      <link>https://wxioi.github.io/post/article-84/</link>
+      <pubDate>Mon, 02 Dec 2019 16:19:28 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-84/</guid>
+      <description>先进入root： ch</description>
+    </item>
+    
+    <item>
+      <title>Python监控文件变化</title>
+      <link>https://wxioi.github.io/post/article-83/</link>
+      <pubDate>Sun, 01 Dec 2019 13:48:27 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-83/</guid>
+      <description>Watch a Directory for Changes http://timgolden.me.uk/python/win32_how_do_i/watch_directory_for_changes.html</description>
+    </item>
+    
+    <item>
+      <title>百度云盘分享链接密码获取</title>
+      <link>https://wxioi.github.io/post/article-82/</link>
+      <pubDate>Mon, 25 Nov 2019 10:23:17 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-82/</guid>
+      <description>1.安装云盘万能钥匙</description>
+    </item>
+    
+    <item>
+      <title>源码安装python</title>
+      <link>https://wxioi.github.io/post/article-81/</link>
+      <pubDate>Sat, 23 Nov 2019 19:57:41 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-81/</guid>
+      <description>1,安装Python</description>
+    </item>
+    
+    <item>
+      <title>SSH 上传下载文件</title>
+      <link>https://wxioi.github.io/post/article-80/</link>
+      <pubDate>Sat, 23 Nov 2019 18:01:07 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-80/</guid>
+      <description>以前一直在windo</description>
+    </item>
+    
+    <item>
+      <title>unix下用signal&#43;python实现setTimeout和setInterval</title>
+      <link>https://wxioi.github.io/post/article-79/</link>
+      <pubDate>Fri, 22 Nov 2019 17:44:22 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-79/</guid>
+      <description>windows下由于</description>
+    </item>
+    
+    <item>
+      <title>base64的纯python实现</title>
+      <link>https://wxioi.github.io/post/article-78/</link>
+      <pubDate>Thu, 21 Nov 2019 15:42:11 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-78/</guid>
+      <description>import unittest import base64 def b64encode_sp(s): base64_table=&amp;quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/&amp;quot;; b = []</description>
+    </item>
+    
+    <item>
+      <title>差不多2011年时候写的一个iocp服务器，简化了一下，还能看：）</title>
+      <link>https://wxioi.github.io/post/article-77/</link>
+      <pubDate>Thu, 21 Nov 2019 13:44:16 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-77/</guid>
+      <description>#include &amp;lt;stdio.h&amp;gt; #include &amp;lt;time.h&amp;gt; #include &amp;lt;errno.h&amp;gt; #include &amp;quot;socket_hdr.h&amp;quot; #define IP_ADDRESS</description>
+    </item>
+    
+    <item>
+      <title>C语言实现Base64编码/解码</title>
+      <link>https://wxioi.github.io/post/article-76/</link>
+      <pubDate>Thu, 21 Nov 2019 13:42:44 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-76/</guid>
+      <description>Bse64是一种以6</description>
+    </item>
+    
+    <item>
+      <title>select、poll、epoll之间的区别</title>
+      <link>https://wxioi.github.io/post/article-75/</link>
+      <pubDate>Tue, 19 Nov 2019 16:08:32 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-75/</guid>
+      <description>(1)select=</description>
+    </item>
+    
+    <item>
+      <title>iso c/python中和时间相关的函数</title>
+      <link>https://wxioi.github.io/post/article-74/</link>
+      <pubDate>Mon, 18 Nov 2019 04:10:06 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-74/</guid>
+      <description>一些计时函数： tim</description>
+    </item>
+    
+    <item>
+      <title>unix下查看文件二进制内容</title>
+      <link>https://wxioi.github.io/post/article-73/</link>
+      <pubDate>Mon, 18 Nov 2019 03:07:36 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-73/</guid>
+      <description>hexdump | hd 命令</description>
+    </item>
+    
+    <item>
+      <title>python和c&#43;&#43;关系运算符区别</title>
+      <link>https://wxioi.github.io/post/article-72/</link>
+      <pubDate>Sun, 17 Nov 2019 07:27:19 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-72/</guid>
+      <description>python: a = 4 &amp;gt; 3 &amp;gt; 2 &amp;gt; 1</description>
+    </item>
+    
+    <item>
+      <title>二叉树遍历的几种递归和非递归方式</title>
+      <link>https://wxioi.github.io/post/article-71/</link>
+      <pubDate>Fri, 15 Nov 2019 14:05:35 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-71/</guid>
+      <description>from collections import namedtuple Node = namedtuple(&amp;quot;Node&amp;quot;, [&amp;quot;value&amp;quot;, &amp;quot;left&amp;quot;, &amp;quot;right&amp;quot;])</description>
+    </item>
+    
+    <item>
+      <title>git rebase 还是 merge的使用场景最通俗的解释</title>
+      <link>https://wxioi.github.io/post/article-70/</link>
+      <pubDate>Wed, 13 Nov 2019 07:34:03 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-70/</guid>
+      <description>这篇文章说的更好， https://www.cnblogs.com/dieFreiheit/p/11603711.html</description>
+    </item>
+    
+    <item>
+      <title>HTTP 304状态码的详细讲解</title>
+      <link>https://wxioi.github.io/post/article-69/</link>
+      <pubDate>Wed, 13 Nov 2019 07:30:17 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-69/</guid>
+      <description>304状态码或许不应</description>
+    </item>
+    
+    <item>
+      <title>Python poll IO多路复用</title>
+      <link>https://wxioi.github.io/post/article-68/</link>
+      <pubDate>Tue, 12 Nov 2019 18:39:09 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-68/</guid>
+      <description>一、poll介绍 po</description>
+    </item>
+    
+    <item>
+      <title>Python select IO多路复用</title>
+      <link>https://wxioi.github.io/post/article-67/</link>
+      <pubDate>Tue, 12 Nov 2019 18:36:57 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-67/</guid>
+      <description>一、select介绍</description>
+    </item>
+    
+    <item>
+      <title>贝尔曼-福德算法</title>
+      <link>https://wxioi.github.io/post/article-66/</link>
+      <pubDate>Tue, 12 Nov 2019 01:50:55 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-66/</guid>
+      <description>如上图使用Dijks</description>
+    </item>
+    
+    <item>
+      <title>Python中几种实现单例模式方法汇总</title>
+      <link>https://wxioi.github.io/post/article-65/</link>
+      <pubDate>Sat, 09 Nov 2019 07:24:31 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-65/</guid>
+      <description>单例模式 单例模式（S</description>
+    </item>
+    
+    <item>
+      <title>一个基于asyncio的文件传输工具</title>
+      <link>https://wxioi.github.io/post/article-64/</link>
+      <pubDate>Fri, 08 Nov 2019 14:46:42 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-64/</guid>
+      <description>import sys import asyncio import os import struct PORT =</description>
+    </item>
+    
+    <item>
+      <title>Navicat连接MySQL8.0亲测有效</title>
+      <link>https://wxioi.github.io/post/article-63/</link>
+      <pubDate>Thu, 07 Nov 2019 01:44:03 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-63/</guid>
+      <description>原文地址:https</description>
+    </item>
+    
+    <item>
+      <title>All It Ebooks</title>
+      <link>https://wxioi.github.io/post/article-62/</link>
+      <pubDate>Tue, 05 Nov 2019 16:56:00 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-62/</guid>
+      <description>http://www.allitebooks.org/</description>
+    </item>
+    
+    <item>
+      <title>Introduction to Tornado</title>
+      <link>https://wxioi.github.io/post/article-61/</link>
+      <pubDate>Tue, 05 Nov 2019 16:53:15 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-61/</guid>
+      <description>http://shouce.jb51.net/tornado/</description>
+    </item>
+    
+    <item>
+      <title>同步与异步，阻塞与非阻塞</title>
+      <link>https://wxioi.github.io/post/article-60/</link>
+      <pubDate>Tue, 05 Nov 2019 05:21:54 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-60/</guid>
+      <description>用了很久的异步IO库</description>
+    </item>
+    
+    <item>
+      <title>Python动态规划计算背包问题</title>
+      <link>https://wxioi.github.io/post/article-59/</link>
+      <pubDate>Tue, 05 Nov 2019 02:51:12 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-59/</guid>
+      <description>&#39;&#39;&#39;假设你去伦敦度</description>
+    </item>
+    
+    <item>
+      <title>快排简单实现</title>
+      <link>https://wxioi.github.io/post/article-58/</link>
+      <pubDate>Tue, 05 Nov 2019 02:34:47 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-58/</guid>
+      <description>版本1： def partition(arr, l, r): pivot =</description>
+    </item>
+    
+    <item>
+      <title>Python中iter的惯用法</title>
+      <link>https://wxioi.github.io/post/article-57/</link>
+      <pubDate>Tue, 05 Nov 2019 02:27:06 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-57/</guid>
+      <description># prototype # def iter(__function: Callable[[], _T], __sentinel: _T) -&amp;gt;</description>
+    </item>
+    
+    <item>
+      <title>python解决排列组合</title>
+      <link>https://wxioi.github.io/post/article-56/</link>
+      <pubDate>Fri, 01 Nov 2019 03:39:24 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-56/</guid>
+      <description>笛卡尔积：itert</description>
+    </item>
+    
+    <item>
+      <title>Python包的相对导入时出现错误的解决方法</title>
+      <link>https://wxioi.github.io/post/article-55/</link>
+      <pubDate>Wed, 30 Oct 2019 04:36:36 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-55/</guid>
+      <description>转载地址：https</description>
+    </item>
+    
+    <item>
+      <title>Git Push错误&amp;无法查看push后的git中文件</title>
+      <link>https://wxioi.github.io/post/article-54/</link>
+      <pubDate>Mon, 28 Oct 2019 17:31:39 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-54/</guid>
+      <description>原文链接地址： http://blog.csdn.net/wby0322/archive/2010/10/14/5940018.aspx 在使</description>
+    </item>
+    
+    <item>
+      <title>Python几个处理二进制数据的官网文档库</title>
+      <link>https://wxioi.github.io/post/article-53/</link>
+      <pubDate>Mon, 28 Oct 2019 17:00:48 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-53/</guid>
+      <description>https://docs.python.org/3/library/struct.html https://docs.python.org/3/library/stdtypes.html#memory-views https://docs.python.org/3/library/mmap.html</description>
+    </item>
+    
+    <item>
+      <title>Python和js执行可视化工具</title>
+      <link>https://wxioi.github.io/post/article-52/</link>
+      <pubDate>Sat, 26 Oct 2019 15:19:16 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-52/</guid>
+      <description>http://www.pythontutor.com/</description>
+    </item>
+    
+    <item>
+      <title>Python PEP249</title>
+      <link>https://wxioi.github.io/post/article-51/</link>
+      <pubDate>Sat, 26 Oct 2019 00:35:24 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-51/</guid>
+      <description>在项目开发中，数据库</description>
+    </item>
+    
+    <item>
+      <title>浮点数比较</title>
+      <link>https://wxioi.github.io/post/article-50/</link>
+      <pubDate>Sat, 19 Oct 2019 02:28:19 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-50/</guid>
+      <description>读书都时候都学过浮点</description>
+    </item>
+    
+    <item>
+      <title>深度剖析凭什么python中整型不会溢出</title>
+      <link>https://wxioi.github.io/post/article-49/</link>
+      <pubDate>Sat, 19 Oct 2019 01:58:11 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-49/</guid>
+      <description>前言 本次分析基于 CPython 解</description>
+    </item>
+    
+    <item>
+      <title>使用functools.lru_cache做备忘</title>
+      <link>https://wxioi.github.io/post/article-48/</link>
+      <pubDate>Wed, 16 Oct 2019 15:14:30 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-48/</guid>
+      <description>functools.lru_cache 是非常实用的装饰器</description>
+    </item>
+    
+    <item>
+      <title>二叉查找树和堆</title>
+      <link>https://wxioi.github.io/post/article-47/</link>
+      <pubDate>Wed, 16 Oct 2019 09:04:15 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-47/</guid>
+      <description>以前经常弄混淆的两个</description>
+    </item>
+    
+    <item>
+      <title>linux之ftp命令</title>
+      <link>https://wxioi.github.io/post/article-46/</link>
+      <pubDate>Tue, 15 Oct 2019 08:37:26 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-46/</guid>
+      <description>常用命令 ftp&amp;gt; ascii # 设定以</description>
+    </item>
+    
+    <item>
+      <title>Python 描述符 (descriptor) 详解</title>
+      <link>https://wxioi.github.io/post/article-45/</link>
+      <pubDate>Thu, 10 Oct 2019 11:12:28 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-45/</guid>
+      <description>什么是描述符 pyth</description>
+    </item>
+    
+    <item>
+      <title>一些文章和网站2</title>
+      <link>https://wxioi.github.io/post/article-44/</link>
+      <pubDate>Wed, 28 Aug 2019 16:07:56 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-44/</guid>
+      <description>[Keynote - What Makes Python Awesome](https://pyvideo.org/pycon- us-2013/keynote-3.html &amp;ldquo;Permalink to Keynote</description>
+    </item>
+    
+    <item>
+      <title>Python Async/Await入门指南</title>
+      <link>https://wxioi.github.io/post/article-43/</link>
+      <pubDate>Wed, 28 Aug 2019 01:29:30 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-43/</guid>
+      <description>本文将会讲述Pyth</description>
+    </item>
+    
+    <item>
+      <title>multiprocessing模块之Process</title>
+      <link>https://wxioi.github.io/post/article-42/</link>
+      <pubDate>Wed, 28 Aug 2019 01:11:35 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-42/</guid>
+      <description>用法很简单，和thr</description>
+    </item>
+    
+    <item>
+      <title>EAFP and LBYL</title>
+      <link>https://wxioi.github.io/post/article-41/</link>
+      <pubDate>Fri, 23 Aug 2019 06:36:43 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-41/</guid>
+      <description>EAFP 取得原谅比获得许可</description>
+    </item>
+    
+    <item>
+      <title>一些文章和网站</title>
+      <link>https://wxioi.github.io/post/article-40/</link>
+      <pubDate>Wed, 21 Aug 2019 17:13:54 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-40/</guid>
+      <description>Django类视图 http://ccbv.co.uk/</description>
+    </item>
+    
+    <item>
+      <title>Python 调试器之pdb</title>
+      <link>https://wxioi.github.io/post/article-39/</link>
+      <pubDate>Wed, 21 Aug 2019 16:09:00 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-39/</guid>
+      <description>使用PDB的方式有两</description>
+    </item>
+    
+    <item>
+      <title>Python之for else</title>
+      <link>https://wxioi.github.io/post/article-38/</link>
+      <pubDate>Wed, 21 Aug 2019 13:33:24 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-38/</guid>
+      <description>Effective Python里面有</description>
+    </item>
+    
+    <item>
+      <title>Guide on how to use static, class or abstract methods in Python</title>
+      <link>https://wxioi.github.io/post/article-37/</link>
+      <pubDate>Tue, 20 Aug 2019 12:24:43 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-37/</guid>
+      <description>Doing code reviews is a great way to discover things that people might struggle to comprehend.</description>
+    </item>
+    
+    <item>
+      <title>Tools website</title>
+      <link>https://wxioi.github.io/post/article-36/</link>
+      <pubDate>Mon, 19 Aug 2019 23:39:35 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-36/</guid>
+      <description>浮点数二进制转换 http://www.binaryconvert.com/ 在</description>
+    </item>
+    
+    <item>
+      <title>As we may think,思维之际</title>
+      <link>https://wxioi.github.io/post/article-35/</link>
+      <pubDate>Mon, 19 Aug 2019 09:51:08 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-35/</guid>
+      <description>《大西洋周刊》194</description>
+    </item>
+    
+    <item>
+      <title>Python和JS中yield的一些高级使用</title>
+      <link>https://wxioi.github.io/post/article-34/</link>
+      <pubDate>Wed, 14 Aug 2019 14:13:27 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-34/</guid>
+      <description>常规用法谁都懂，不多</description>
+    </item>
+    
+    <item>
+      <title>ubuntu上配置ssr</title>
+      <link>https://wxioi.github.io/post/article-33/</link>
+      <pubDate>Wed, 14 Aug 2019 03:06:27 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-33/</guid>
+      <description>ubuntu 18.04 LTS &amp;amp; firefox 1.https://alanlee.fun/2018/05/18/ubuntu-ssr/ 2.&amp;lt;https://mystery00.github.io/2018/08/23/Ubuntu%20Server%2018.04%20LTS%20%E4%BD%BF%E7%94%A8Shadowsocks- ShadowsocksR%E8%AE%BF%E9%97%AE%E4%BA%92%E8%81%94%E7%BD%91/&amp;gt; 通过</description>
+    </item>
+    
+    <item>
+      <title>分布式大白话讲解</title>
+      <link>https://wxioi.github.io/post/article-32/</link>
+      <pubDate>Tue, 13 Aug 2019 04:58:03 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-32/</guid>
+      <description>https://blog.csdn.net/jiangyu1013/article/details/80417961</description>
+    </item>
+    
+    <item>
+      <title>一些经典书籍</title>
+      <link>https://wxioi.github.io/post/article-31/</link>
+      <pubDate>Tue, 06 Aug 2019 02:52:26 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-31/</guid>
+      <description>https://www.douban.com/doulist/1259081/</description>
+    </item>
+    
+    <item>
+      <title>centos7 安装scrapy的一些问题</title>
+      <link>https://wxioi.github.io/post/article-30/</link>
+      <pubDate>Tue, 30 Jul 2019 17:04:31 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-30/</guid>
+      <description>centos7目前官</description>
+    </item>
+    
+    <item>
+      <title>7月读书和代码</title>
+      <link>https://wxioi.github.io/post/article-29/</link>
+      <pubDate>Mon, 29 Jul 2019 15:09:08 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-29/</guid>
+      <description>读书： Effective Python</description>
+    </item>
+    
+    <item>
+      <title>python的os.system函数</title>
+      <link>https://wxioi.github.io/post/article-28/</link>
+      <pubDate>Sun, 28 Jul 2019 15:31:42 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-28/</guid>
+      <description>1.阻塞模式 os.s</description>
+    </item>
+    
+    <item>
+      <title>在Linux下搭建Git服务器</title>
+      <link>https://wxioi.github.io/post/article-27/</link>
+      <pubDate>Tue, 23 Jul 2019 11:26:14 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-27/</guid>
+      <description>目录 ① 安装 Git ② 服务器</description>
+    </item>
+    
+    <item>
+      <title>PEP8</title>
+      <link>https://wxioi.github.io/post/article-26/</link>
+      <pubDate>Mon, 22 Jul 2019 04:49:27 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-26/</guid>
+      <description>原文链接：https</description>
+    </item>
+    
+    <item>
+      <title>使用JS的blob对象异步加载图片</title>
+      <link>https://wxioi.github.io/post/article-25/</link>
+      <pubDate>Mon, 22 Jul 2019 02:02:04 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-25/</guid>
+      <description>这个问题是两年前在公</description>
+    </item>
+    
+    <item>
+      <title>使用flask或nginx实现动态反向代理</title>
+      <link>https://wxioi.github.io/post/article-24/</link>
+      <pubDate>Sun, 21 Jul 2019 12:01:10 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-24/</guid>
+      <description>之前做小程序有一个需</description>
+    </item>
+    
+    <item>
+      <title>redis和memcached的区别（总结）</title>
+      <link>https://wxioi.github.io/post/article-23/</link>
+      <pubDate>Wed, 17 Jul 2019 02:43:16 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-23/</guid>
+      <description>转载:https:/</description>
+    </item>
+    
+    <item>
+      <title>常见的http和https面试题</title>
+      <link>https://wxioi.github.io/post/article-22/</link>
+      <pubDate>Tue, 16 Jul 2019 13:40:56 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-22/</guid>
+      <description>常见的http和ht</description>
+    </item>
+    
+    <item>
+      <title>HTTPS的连接过程</title>
+      <link>https://wxioi.github.io/post/article-21/</link>
+      <pubDate>Tue, 16 Jul 2019 13:31:07 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-21/</guid>
+      <description>1.客户端发送Cli</description>
+    </item>
+    
+    <item>
+      <title>Javascript中的bind,call和apply</title>
+      <link>https://wxioi.github.io/post/article-20/</link>
+      <pubDate>Tue, 16 Jul 2019 12:59:44 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-20/</guid>
+      <description>可以将call()和</description>
+    </item>
+    
+    <item>
+      <title>nginx与Apache的对比以及优缺点</title>
+      <link>https://wxioi.github.io/post/article-19/</link>
+      <pubDate>Tue, 16 Jul 2019 09:18:08 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-19/</guid>
+      <description>本文来自其他文章。如</description>
+    </item>
+    
+    <item>
+      <title>python使用一行代码搭建http服务器</title>
+      <link>https://wxioi.github.io/post/article-18/</link>
+      <pubDate>Mon, 15 Jul 2019 03:05:35 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-18/</guid>
+      <description>python3 python -m http.server 80 python2 python -m SimpleHTTPServer 80</description>
+    </item>
+    
+    <item>
+      <title>Python中用requests上传文件</title>
+      <link>https://wxioi.github.io/post/article-17/</link>
+      <pubDate>Sun, 14 Jul 2019 03:30:42 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-17/</guid>
+      <description>files = { &amp;quot;file&amp;quot;:open(path,&amp;quot;rb&amp;quot;) } param = { &amp;quot;enctype&amp;quot;:&amp;quot;multipart/form-data&amp;quot;, &amp;quot;key&amp;quot;:</description>
+    </item>
+    
+    <item>
+      <title>Python中的所有特殊方法</title>
+      <link>https://wxioi.github.io/post/article-16/</link>
+      <pubDate>Thu, 11 Jul 2019 08:32:28 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-16/</guid>
+      <description>方法 介绍 object.``__new__( cls [, &amp;hellip; ]) 一</description>
+    </item>
+    
+    <item>
+      <title>import this</title>
+      <link>https://wxioi.github.io/post/article-15/</link>
+      <pubDate>Wed, 10 Jul 2019 16:05:28 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-15/</guid>
+      <description>The Zen of Python, by Tim Peters
+Beautiful is better than ugly.</description>
+    </item>
+    
+    <item>
+      <title>Python中__repr__和__str__区别</title>
+      <link>https://wxioi.github.io/post/article-14/</link>
+      <pubDate>Wed, 10 Jul 2019 15:59:38 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-14/</guid>
+      <description>原文：https:/</description>
+    </item>
+    
+    <item>
+      <title>你真的会使用XMLHttpRequest吗？</title>
+      <link>https://wxioi.github.io/post/article-13/</link>
+      <pubDate>Mon, 08 Jul 2019 15:33:03 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-13/</guid>
+      <description>看到标题时，有些同学</description>
+    </item>
+    
+    <item>
+      <title>Scrapy利用多进程启动spider分段处理任务</title>
+      <link>https://wxioi.github.io/post/article-12/</link>
+      <pubDate>Thu, 04 Jul 2019 01:39:04 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-12/</guid>
+      <description>_run.py(launcher) from scrapy.cmdline import execute from multiprocessing import Process import</description>
+    </item>
+    
+    <item>
+      <title>Python的一些内置数字，字符转换函数</title>
+      <link>https://wxioi.github.io/post/article-11/</link>
+      <pubDate>Wed, 03 Jul 2019 23:58:09 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-11/</guid>
+      <description>函数 描述 long(x[,base ]) 将x转换</description>
+    </item>
+    
+    <item>
+      <title>scrapy中向spider传入一个到多个参数</title>
+      <link>https://wxioi.github.io/post/article-10/</link>
+      <pubDate>Wed, 03 Jul 2019 23:39:28 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-10/</guid>
+      <description>如果希望spider</description>
+    </item>
+    
+    <item>
+      <title>朝鲜之行</title>
+      <link>https://wxioi.github.io/post/article-9/</link>
+      <pubDate>Tue, 02 Jul 2019 17:52:10 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-9/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Aaaaa</title>
-      <link>https://wangxu627.github.io/post/aaaaa/</link>
-      <pubDate>Sat, 03 Oct 2020 14:32:34 +0800</pubDate>
+      <title>gunicorn导入报错No module named</title>
+      <link>https://wxioi.github.io/post/article-8/</link>
+      <pubDate>Tue, 02 Jul 2019 15:13:28 +0000</pubDate>
       
-      <guid>https://wangxu627.github.io/post/aaaaa/</guid>
+      <guid>https://wxioi.github.io/post/article-8/</guid>
+      <description>用python -m flask r</description>
+    </item>
+    
+    <item>
+      <title>fish shell激活venv命令</title>
+      <link>https://wxioi.github.io/post/article-7/</link>
+      <pubDate>Tue, 02 Jul 2019 14:49:37 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-7/</guid>
+      <description>source bin/activate.fish</description>
+    </item>
+    
+    <item>
+      <title>生成和应用requirements.txt文件</title>
+      <link>https://wxioi.github.io/post/article-6/</link>
+      <pubDate>Tue, 02 Jul 2019 14:48:47 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-6/</guid>
+      <description>在源工程中，先进入虚</description>
+    </item>
+    
+    <item>
+      <title>SourceTree跳过注册安装使用</title>
+      <link>https://wxioi.github.io/post/article-5/</link>
+      <pubDate>Wed, 19 Jun 2019 10:32:08 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-5/</guid>
+      <description>下载链接 https://www.sourcetreeapp.com/ ![](https://img- blog.csdn.net/20180618013031557?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NodXl1ZWEz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70) ![](https://img- blog.csdn.net/20180618013057594?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NodXl1ZWEz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70) 这</description>
+    </item>
+    
+    <item>
+      <title>欢迎关注</title>
+      <link>https://wxioi.github.io/post/article-4/</link>
+      <pubDate>Wed, 19 Jun 2019 10:19:55 +0000</pubDate>
+      
+      <guid>https://wxioi.github.io/post/article-4/</guid>
       <description></description>
-    </item>
-    
-    <item>
-      <title>Test</title>
-      <link>https://wangxu627.github.io/post/test/</link>
-      <pubDate>Sat, 03 Oct 2020 13:17:07 +0800</pubDate>
-      
-      <guid>https://wangxu627.github.io/post/test/</guid>
-      <description>
-11111111111
-&lt;ol&gt;
-    &lt;li&gt;11111111111&lt;/li&gt;
-    &lt;li&gt;11111111111&lt;/li&gt;
-    &lt;li&gt;11111111111&lt;/li&gt;
-    &lt;li&gt;11111111111&lt;/li&gt;
-    &lt;li&gt;11111111111&lt;/li&gt;
-&lt;/ol&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Hello World 2</title>
-      <link>https://wangxu627.github.io/post/hello-world-2/</link>
-      <pubDate>Fri, 02 Oct 2020 09:59:07 +0800</pubDate>
-      
-      <guid>https://wangxu627.github.io/post/hello-world-2/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Hello World</title>
-      <link>https://wangxu627.github.io/post/hello-world/</link>
-      <pubDate>Fri, 02 Oct 2020 08:42:50 +0800</pubDate>
-      
-      <guid>https://wangxu627.github.io/post/hello-world/</guid>
-      <description>&lt;h1 id=&#34;111111&#34;&gt;111111&lt;/h1&gt;
-&lt;h2 id=&#34;222222&#34;&gt;222222&lt;/h2&gt;
-&lt;h3 id=&#34;33333333333&#34;&gt;33333333333&lt;/h3&gt;</description>
-    </item>
-    
-    <item>
-      <title>Hugo_intro</title>
-      <link>https://wangxu627.github.io/post/hugo_intro/</link>
-      <pubDate>Thu, 01 Oct 2020 22:44:49 +0800</pubDate>
-      
-      <guid>https://wangxu627.github.io/post/hugo_intro/</guid>
-      <description>11111 232323 fsfsdfsdf </description>
-    </item>
-    
-    <item>
-      <title>Markdown Syntax Guide</title>
-      <link>https://wangxu627.github.io/post/markdown-syntax/</link>
-      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://wangxu627.github.io/post/markdown-syntax/</guid>
-      <description>&lt;p&gt;This article offers a sample of basic Markdown syntax that can be used in Hugo content files, also it shows whether basic HTML elements are decorated with CSS in a Hugo theme.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Placeholder Text</title>
-      <link>https://wangxu627.github.io/post/placeholder-text/</link>
-      <pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://wangxu627.github.io/post/placeholder-text/</guid>
-      <description>&lt;p&gt;Lorem est tota propiore conpellat pectoribus de
-pectora summo.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Math Typesetting</title>
-      <link>https://wangxu627.github.io/post/math-typesetting/</link>
-      <pubDate>Fri, 08 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://wangxu627.github.io/post/math-typesetting/</guid>
-      <description>&lt;p&gt;Mathematical notation in a Hugo project can be enabled by using third party JavaScript libraries.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Emoji Support</title>
-      <link>https://wangxu627.github.io/post/emoji-support/</link>
-      <pubDate>Tue, 05 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://wangxu627.github.io/post/emoji-support/</guid>
-      <description>&lt;p&gt;Emoji can be enabled in a Hugo project in a number of ways.&lt;/p&gt;</description>
     </item>
     
   </channel>

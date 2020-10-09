@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en" data-theme=""><head>
+    <title> Xu | Python 描述符 (descriptor) 详解 </title>
+
+    
+    <meta charset="utf-8"><meta name="generator" content="Hugo 0.76.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <meta name="description" content="Code more, Word less">
+    
+    <link rel="stylesheet"
+          href="https://wxioi.github.io/css/style.min.ec15cff0912041d0dce3a88999b9424990bd24473761645397583776684cdc3b.css"
+          integrity="sha256-7BXP8JEgQdDc46iJmblCSZC9JEc3YWRTl1g3dmhM3Ds="
+          crossorigin="anonymous"
+          type="text/css"><link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    
+    <link rel="shortcut icon" href="https://wxioi.github.io/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://wxioi.github.io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://wxioi.github.io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://wxioi.github.io/favicon-16x16.png">
+
+    <link rel="canonical" href="https://wxioi.github.io/post/article-45/">
+
+    
+    
+    
+    
+    <script type="text/javascript"
+            src="https://wxioi.github.io/js/anatole-header.min.e782db136ec18d105a4552702eac49f4620d6867da3fbf808bd53e806c96be6e.js"
+            integrity="sha256-54LbE27BjRBaRVJwLqxJ9GINaGfaP7&#43;Ai9U&#43;gGyWvm4="
+            crossorigin="anonymous"></script>
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Python 描述符 (descriptor) 详解"/>
+<meta name="twitter:description" content="什么是描述符 pyth"/>
+
+</head>
+<body><div class="sidebar animated fadeInDown">
+    <div class="logo-title">
+        <div class="title">
+            <img src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1601655446596&amp;di=c986d9fb7998db721d388b0ea6f62bb9&amp;imgtype=0&amp;src=http%3A%2F%2Fpic6.58cdn.com.cn%2Fzhuanzh%2Fn_v2ed4fc8bbfb3e4f5fa12ae084cb8a7864.jpg%3Fw%3D750%26h%3D0" alt="profile picture">
+            <h3 title=""><a href="/">Nothing</a></h3>
+            <div class="description">
+                <p>Code more, Word less</p>
+            </div>
+        </div>
+    </div>
+    <ul class="social-links">
+        
+            <li>
+                <a href="https://github.com/wxioi/" rel="me" aria-label="GitHub">
+                    <i class="fa fa-2x fa-github" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            <li>
+                <a href="mailto:wangxu627@gmail.com" rel="me" aria-label="e-mail">
+                    <i class="fa fa-2x fa-envelope" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+    </ul>
+    <div class="footer">
+        <div class="by_farbox">&copy; Xu 2020 </div>
+    </div>
+</div>
+<div class="main">
+    <div class="page-top animated fadeInDown">
+    <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+    </a>
+    <ul class="nav" id="navMenu">
+        
+        
+            
+            <li><a 
+                   href="/"
+                        
+                   title="">Home</a></li>
+        
+            
+            <li><a 
+                   href="/post/"
+                        
+                   title="">Posts</a></li>
+        
+            
+            <li><a 
+                   href="/tools/"
+                        
+                   title="">Tools</a></li>
+        
+        
+        <li class="theme-switch-item">
+            <a class="theme-switch" title="Switch Theme">
+                <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+    <div class="autopagerize_page_element">
+        <div class="content">
+    <div class="post animated fadeInDown">
+        <div class="post-content">
+
+            <div class="post-title">
+                <h3>Python 描述符 (descriptor) 详解</h3>
+                
+                    <div class="info">
+                        <em class="fa fa-sun-o"></em>
+                        <span class="date">Thu, Oct 10, 2019</span>
+                        <em class="fa fa-clock-o"></em>
+                        <span class="reading-time">4-minute read</span>
+                    </div>
+                
+            </div>
+
+            <h2 id="什么是描述符">什么是描述符</h2>
+<p>python描述符是一个“绑定行为”的对象属性，在描述符协议中，它可以通过方法重写属性的访问。这些方法有  <strong>get</strong> (),  <strong>set</strong> (),
+和 <strong>delete</strong> ()。如果这些方法中的任何一个被定义在一个对象中，这个对象就是一个描述符。</p>
+<h2 id="讲解描述符前先看一下属性-dict--每个对象均具备该属性">讲解描述符前，先看一下属性： <strong>dict</strong>  （每个对象均具备该属性）</h2>
+<p>作用：字典类型，存放本对象的属性，key(键)即为属性名，value(值)即为属性的值，形式为{attr_key : attr_value}。</p>
+<p>对象属性的访问顺序：<br>
+1. 实例属性<br>
+2. 类属性<br>
+3. 父类属性<br>
+4. <strong>getattr</strong>()方法</p>
+<pre><code>class Test(object):  
+    cls_val = 1  
+    def __init__(self):  
+        self.ins_val = 10  
+  
+t = Test()  
+  
+print(Test.__dict__)  
+print('*'*100)  
+print(t.__dict__)  
+&quot;&quot;  
+{'__dict__': &lt;attribute '__dict__' of 'Test' objects&gt;, '__doc__': None, '__module__': '__main__', '__weakref__': &lt;attribute '__weakref__' of 'Test' objects&gt;, '__init__': &lt;function Test.__init__ at 0x7fa91afb0ea0&gt;, 'cls_val': 1}  
+****************************************************************************************************  
+{'ins_val': 10}  
+&quot;&quot;
+</code></pre>
+<p>从以上代码可以看出，实例t的属性并不包含cls_val，cls_val是属于类Test的。</p>
+<h2 id="魔法方法__get__-__set__-__delete__">魔法方法：<strong>get</strong>(), <strong>set</strong>(), <strong>delete</strong>()</h2>
+<p>方法的原型为：<br>
+1. <strong>get</strong>(self, instance, owner)<br>
+2. <strong>set</strong>(self, instance, value)<br>
+3. <strong>delete</strong>(self, instance)</p>
+<p>首先我们先看一段代码：</p>
+<pre><code>class Desc(object):  
+  
+    def __get__(self, instance, owner):  
+        print(&quot;get!!!!&quot;)  
+        print(&quot;self=&quot;, self)  
+        print(&quot;instance=&quot;, instance)  
+        print(&quot;owner=&quot;, owner)  
+        print('*'*50, &quot;\n&quot;)  
+  
+    def __set__(self, instance, value):  
+        print(&quot;set!!!!&quot;)  
+        print(&quot;self=&quot;, self)  
+        print(&quot;instance=&quot;, instance)  
+        print(&quot;value=&quot;, value)  
+        print('*'*50, &quot;\n&quot;)  
+  
+  
+class TestDesc(object):  
+    x = Desc()  
+  
+t = TestDesc()  
+t.x  
+  
+print(t.__dict__)  
+print(TestDesc.__dict__)  
+&quot;&quot;  
+get!!!!  
+self= &lt;__main__.Desc object at 0x7fa91a756978&gt;  
+instance= &lt;__main__.TestDesc object at 0x7fa91a756a20&gt;  
+owner= &lt;class '__main__.TestDesc'&gt;  
+**************************************************   
+  
+{}  
+{'__dict__': &lt;attribute '__dict__' of 'TestDesc' objects&gt;, '__doc__': None, '__module__': '__main__', 'x': &lt;__main__.Desc object at 0x7fa91a756e80&gt;, '__weakref__': &lt;attribute '__weakref__' of 'TestDesc' objects&gt;}  
+&quot;&quot;
+</code></pre>
+<p>可以看到，实例化类TestDesc后，调用对象t访问其属性x，会自动调用类Desc的 __get__方法，由输出信息可以看出：<br>
+1. self: 是Desc的实例对象，也是TestDesc的属性x<br>
+2. instance: 是TestDesc的实例对象，在上面的例子是实例化后的变量t<br>
+3. owner: 是TestDesc这个类，因为Desc是包含在它的内部，所以TestDesc拥有所属权</p>
+<p>其实Desc类就是是一个描述符（描述符是一个类），因为类Desc定义了方法 <strong>get</strong>, <strong>set</strong>。所以，只要是内部定义了方法
+<strong>get</strong>(), <strong>set</strong>(), <strong>delete</strong>()中的一个或多个，就可以称为描述符。</p>
+<h2 id="访问tx的时候为什么会直接去调用描述符的-__get__-方法">访问t.x的时候，为什么会直接去调用描述符的 <strong>get</strong>() 方法</h2>
+<p>t为实例，访问t.x时，顺序如下：<br>
+1. 先访问实例属性；其次访问类属性<br>
+2. 判断属性 x 为一个描述符，则将 TestDesc.x 转化为TestDesc.<strong>dict</strong>[‘x’].<strong>get</strong>(t, TestDesc)
+来访问<br>
+3. 进入类Desc的 <strong>get</strong>()方法，进行相应的操作</p>
+<h2 id="描述符的对象-x-其实是类-testdesc-的类属性那么可不可以把它变成实例属性呢">描述符的对象 x 其实是类 TestDesc 的类属性，那么可不可以把它变成实例属性呢</h2>
+<pre><code>class Desc(object):  
+    def __init__(self, name):  
+        self.name = name  
+  
+    def __get__(self, instance, owner):  
+        print(&quot;get&quot;)  
+        print('name=',self.name)   
+        print('*'*50, &quot;\n&quot;)  
+  
+class TestDesc(object):  
+    x = Desc('x')  
+  
+    def __init__(self):  
+        self.y = Desc('y')  
+  
+#以下为测试代码  
+t = TestDesc()  
+t.x  
+t.y  
+  
+print(t.__dict__)  
+print(TestDesc.__dict__)  
+  
+&quot;&quot;  
+get  
+name= x  
+**************************************************   
+  
+{'y': &lt;__main__.Desc object at 0x7fa91a6ee7b8&gt;}  
+{'__dict__': &lt;attribute '__dict__' of 'TestDesc' objects&gt;, '__doc__': None, '__module__': '__main__', 'x': &lt;__main__.Desc object at 0x7fa91a6ee6d8&gt;, '__weakref__': &lt;attribute '__weakref__' of 'TestDesc' objects&gt;, '__init__': &lt;function TestDesc.__init__ at 0x7fa91a732620&gt;}  
+&quot;&quot;
+</code></pre>
+<p>从上面可以看到如果是实例属性，则没有调用__get__()方法，这是因为调用 t.y 时，首先会去调用TestDesc的
+__getattribute__() 方法。而y是一个描述符类，所以解释器将该方法转化为TestDesc.__dict__[‘y’].__get__(t,
+TestDesc)， 但是TestDesc 并没有 y这个属性，y 是属于实例对象的，所以，只能忽略了。</p>
+<h2 id="如果-类属性的描述符对象-和-实例属性描述符的对象-同名时">如果 类属性的描述符对象 和 实例属性描述符的对象 同名时</h2>
+<pre><code>class Desc(object):  
+    def __init__(self, name):  
+        self.name = name  
+        print(&quot;__init__(): name = &quot;,self.name)  
+  
+    def __get__(self, instance, owner):  
+        print(&quot;__get__() ...&quot;)  
+        return self.name  
+  
+    def __set__(self, instance, value):  
+        self.value = value  
+  
+class TestDesc(object):  
+    _x = Desc('x')  
+    def __init__(self, x):  
+        self._x = x  
+  
+  
+#以下为测试代码  
+t = TestDesc(10)  
+t._x  
+  
+&quot;&quot;  
+__init__(): name =  x  
+__get__() ...  
+'x'  
+&quot;&quot;
+</code></pre>
+<p>上面结果表明有与描述符同名的属性时，描述符优先，会覆盖掉实例属性。如果去掉 <strong>set</strong> 方法呢？</p>
+<pre><code>class Desc(object):  
+    def __init__(self, name):  
+        self.name = name  
+        print(&quot;__init__(): name = &quot;,self.name)  
+  
+    def __get__(self, instance, owner):  
+        print(&quot;__get__() ...&quot;)  
+        return self.name  
+  
+  
+class TestDesc(object):  
+    _x = Desc('x')  
+    def __init__(self, x):  
+        self._x = x  
+  
+  
+#以下为测试代码  
+t = TestDesc(10)  
+t._x  
+&quot;&quot;  
+__init__(): name =  x  
+10  
+&quot;&quot;
+</code></pre>
+<p>可以看到并没有覆盖掉实例属性，这个原因如下：</p>
+<p>只要是内部定义了方法 <strong>get</strong> ， <strong>set</strong> ， <strong>delete</strong> 中的一个或多个，就可以称为描述符。如果实现了 <strong>set</strong> 和
+<strong>get</strong> ，则称为数据描述符；如果只实现了 <strong>get</strong> ，则称为非数据描述符。</p>
+<p>每次属性查找，这个协议的方法实际上是由对象的特殊方法 <strong>getattribute</strong>
+()调用。每次通过点号（ins.attribute）或者getattr(ins, ‘attribute’)函数调用都会隐式的调用
+<strong>getattribute</strong> ()，它的属性查找的顺序如下：<br>
+1. 验证属性是否为实例的类对象的数据描述符<br>
+2. 查看该属性是否能在实例对象的 <strong>dict</strong> 中找到<br>
+3. 查看该属性是否为实例的类对象的非数据描述符</p>
+<p>换句话说：数据描述符优先于 <strong>dict</strong> ，而 <strong>dict</strong> 查找优先于非数据描述符。</p>
+
+        </div>
+        <div class="post-footer">
+            <div class="info">
+                
+                
+            </div>
+        </div>
+
+        
+            
+        
+    </div>
+
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript"
+        src="https://wxioi.github.io/js/jquery.min.86b1e8f819ee2d9099a783e50b49dff24282545fc40773861f9126b921532e4c.js"
+        integrity="sha256-hrHo&#43;BnuLZCZp4PlC0nf8kKCVF/EB3OGH5EmuSFTLkw="
+        crossorigin="anonymous"></script>
+
+
+
+
+<script type="text/javascript"
+        src="https://wxioi.github.io/js/bundle.min.0f9c74cb78f13d1f15f33daff4037c70354f98acfbb97a6f61708966675c3cae.js"
+        integrity="sha256-D5x0y3jxPR8V8z2v9AN8cDVPmKz7uXpvYXCJZmdcPK4="
+        crossorigin="anonymous"></script>
+
+<script type="text/javascript"
+        src="https://wxioi.github.io/js/medium-zoom.min.92f21c856129f84aeb719459b3e6ac621a3032fd7b180a18c04e1d12083f8aba.js"
+        integrity="sha256-kvIchWEp&#43;ErrcZRZs&#43;asYhowMv17GAoYwE4dEgg/iro="
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
