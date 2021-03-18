@@ -1,7 +1,7 @@
 languageCode = "en-us"
 title = "Xu`s Blog"
 hasCJKLanguage = true
-publishDir = "../personal-web-public"
+publishDir = "../wxioi.github.io"
 
 theme = "anatole"
 summarylength = 10
