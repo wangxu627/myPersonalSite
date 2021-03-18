@@ -13,7 +13,7 @@ enableRobotsTXT = true
   title = "Nothing"
   author = "Xu"
   description = "Code more, Word less"
-  profilePicture = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1601655446596&di=c986d9fb7998db721d388b0ea6f62bb9&imgtype=0&src=http%3A%2F%2Fpic6.58cdn.com.cn%2Fzhuanzh%2Fn_v2ed4fc8bbfb3e4f5fa12ae084cb8a7864.jpg%3Fw%3D750%26h%3D0"
+  profilePicture = "/images/avatar.jpg"
   mainSections = ["post"]
 
 [[params.socialIcons]]
